@@ -46,7 +46,38 @@ class ABeatEmUpCharacter : public ACharacter
 
 public:
 	ABeatEmUpCharacter();
-	
+
+	UPROPERTY(EditAnywhere)
+		int MaxHealth = 100;
+
+	UPROPERTY(EditAnywhere)
+		int CurrentHealth = MaxHealth;
+
+	UPROPERTY(EditAnywhere)
+		UInputAction* PunchAction;
+
+	UPROPERTY(EditAnywhere)
+		float PunchDistance = 250;
+
+	UPROPERTY(EditAnywhere)
+		float PunchForce = 50000;
+
+	UPROPERTY(EditAnywhere)
+		float PunchDamage = 50;
+
+	UPROPERTY(EditAnywhere)
+		float PunchCooldown = 1;
+
+	bool bPunchReady = true;
+	FTimerHandle PunchTimerHandle;
+
+	UFUNCTION()
+		void Punch();
+
+	UFUNCTION()
+		void ResetPunch();
+
+	void DealDamage(float Damage);
 
 protected:
 

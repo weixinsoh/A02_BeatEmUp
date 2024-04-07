@@ -1,6 +1,8 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "BeatEmUpCharacter.h"
+
+#include "Enemy.h"
 #include "Engine/LocalPlayer.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -20,7 +22,7 @@ ABeatEmUpCharacter::ABeatEmUpCharacter()
 {
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
-		
+
 	// Don't rotate when the controller rotates. Let that just affect the camera.
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = false;
@@ -47,7 +49,8 @@ ABeatEmUpCharacter::ABeatEmUpCharacter()
 
 	// Create a follow camera
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
-	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
+	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
+	// Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
 	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
@@ -62,7 +65,8 @@ void ABeatEmUpCharacter::BeginPlay()
 	//Add Input Mapping Context
 	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
 	{
-		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
+		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<
+			UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
 		{
 			Subsystem->AddMappingContext(DefaultMappingContext, 0);
 		}
@@ -75,8 +79,8 @@ void ABeatEmUpCharacter::BeginPlay()
 void ABeatEmUpCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	// Set up action bindings
-	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent)) {
-		
+	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent))
+	{
 		// Jumping
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
@@ -86,11 +90,61 @@ void ABeatEmUpCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ABeatEmUpCharacter::Look);
+
+		EnhancedInputComponent->BindAction(PunchAction, ETriggerEvent::Started, this, &ABeatEmUpCharacter::Punch);
 	}
 	else
 	{
-		UE_LOG(LogTemplateCharacter, Error, TEXT("'%s' Failed to find an Enhanced Input component! This template is built to use the Enhanced Input system. If you intend to use the legacy system, then you will need to update this C++ file."), *GetNameSafe(this));
+		UE_LOG(LogTemplateCharacter, Error,
+		       TEXT(
+			       "'%s' Failed to find an Enhanced Input component! This template is built to use the Enhanced Input system. If you intend to use the legacy system, then you will need to update this C++ file."
+		       ), *GetNameSafe(this));
 	}
+}
+
+void ABeatEmUpCharacter::Punch()
+{
+	if (bPunchReady)
+	{
+		bPunchReady = false;
+		GetWorld()->GetTimerManager().SetTimer(PunchTimerHandle, this, &ABeatEmUpCharacter::ResetPunch, PunchCooldown,
+		                                       false);
+		TArray<FHitResult> HitResults;
+		const FVector Start = GetActorLocation();
+		const FVector End = Start + GetActorForwardVector() * PunchDistance;
+		const FCollisionShape CubeShape = FCollisionShape::MakeBox(FVector(PunchDistance));
+		const bool bSweep = GetWorld()->SweepMultiByChannel(HitResults, End, End, GetActorQuat(), ECC_WorldDynamic, CubeShape);
+
+		TArray<AActor*> HitThisPunch;
+		for(FHitResult HitResult : HitResults)
+		{
+			if (HitResult.GetActor() != this && !HitThisPunch.Contains(HitResult.GetActor()))
+			{
+				HitThisPunch.Add(HitResult.GetActor());
+				AEnemy* HitEnemy = Cast<AEnemy>(HitResult.GetActor());
+				if (HitEnemy)
+				{
+					HitEnemy->Ragdoll();
+					FVector LaunchDirection = HitEnemy->GetActorLocation() - GetActorLocation();
+					LaunchDirection.Normalize();
+					LaunchDirection *= 3;
+					LaunchDirection += FVector::UpVector;
+					HitEnemy->GetMesh()->AddImpulse(LaunchDirection * PunchForce);
+					HitEnemy->DealDamage(PunchDamage);
+				}
+			}
+		}
+	}
+}
+
+void ABeatEmUpCharacter::ResetPunch()
+{
+	bPunchReady = true;
+}
+
+void ABeatEmUpCharacter::DealDamage(float Damage)
+{
+	CurrentHealth = FMath::Clamp(CurrentHealth - Damage, 0, MaxHealth);
 }
 
 void ABeatEmUpCharacter::Move(const FInputActionValue& Value)
@@ -106,7 +160,7 @@ void ABeatEmUpCharacter::Move(const FInputActionValue& Value)
 
 		// get forward vector
 		const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
-	
+
 		// get right vector 
 		const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 
