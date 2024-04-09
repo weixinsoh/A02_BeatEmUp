@@ -40,6 +40,27 @@ void AGravityWell::Activate()
 				{
 					HitMesh = Cast<UMeshComponent>(Hit.GetActor()->GetRootComponent());
 				}
+				
+				if (HitMesh)
+				{
+					switch(GravityType)
+					{
+					case EGravityType::GE_PULL:
+						HitMesh->AddRadialImpulse(GetActorLocation(), SweepSize, Force, RIF_Linear, true);
+						break;
+					case EGravityType::GE_PUSH:
+						HitMesh->AddRadialImpulse(GetActorLocation(), SweepSize, -Force, RIF_Linear, true);
+						break;
+					case EGravityType::GE_ON:
+						if(!HitEnemy)
+						{
+							HitMesh->SetEnableGravity(false);
+						}
+						break;
+					default:
+						UE_LOG(LogTemp, Warning, TEXT("No Gravity Type! How did this happen!?"));
+					}
+				}
 			}
 		}
 	}
