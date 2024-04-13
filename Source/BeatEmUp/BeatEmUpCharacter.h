@@ -110,12 +110,6 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		AEnemy* GrabbedEnemy;
-
-	UPROPERTY(EditAnywhere)
-		float GrabbingTime = 1;
-
-	FTimerHandle GrabbingTimerHandle;
-
 	bool IsGrabbingObject;
 	
 protected:
