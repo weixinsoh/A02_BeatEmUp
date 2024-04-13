@@ -58,8 +58,8 @@ ABeatEmUpCharacter::ABeatEmUpCharacter()
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 
-	//IsGrabbingObject = false;
-	PhysicsHandle = CreateDefaultSubobject<UPhysicsHandleComponent>(TEXT("PhysicsHandle"));
+	// Initialise the boolean of grabbing an enemy
+	IsGrabbingObject = false;
 }
 
 void ABeatEmUpCharacter::BeginPlay()
@@ -82,6 +82,7 @@ void ABeatEmUpCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	// Set the enemy being grabbed always locating at the Player's forward vector
 	if (IsGrabbingObject)
 	{
 		FVector NewLocation = GetActorLocation() + GetActorForwardVector() * GrabDistance;
@@ -109,10 +110,13 @@ void ABeatEmUpCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ABeatEmUpCharacter::Look);
 
+		// Punching
 		EnhancedInputComponent->BindAction(PunchAction, ETriggerEvent::Started, this, &ABeatEmUpCharacter::Punch);
 
+		// Using Gravity Well
 		EnhancedInputComponent->BindAction(UseAction, ETriggerEvent::Started, this, &ABeatEmUpCharacter::Use);
 
+		// Grab and throw
 		EnhancedInputComponent->BindAction(GrabAction, ETriggerEvent::Started, this, &ABeatEmUpCharacter::Grab);
 		EnhancedInputComponent->BindAction(GrabAction, ETriggerEvent::Completed, this, &ABeatEmUpCharacter::Throw);
 
@@ -217,8 +221,10 @@ void ABeatEmUpCharacter::Use()
 
 void ABeatEmUpCharacter::Grab()
 {
+	// Check the Player is already grabbing an enemy
 	if (!IsGrabbingObject)
 	{
+		// Raycasting
 		FHitResult HitResult;
 		const FVector Start = GetActorLocation();
 		const FVector End = Start + GetActorForwardVector() * GrabDistance;
@@ -237,20 +243,18 @@ void ABeatEmUpCharacter::Grab()
 	
 		if (bSweep)
 		{
-			UE_LOG(LogTemp,Warning, TEXT("bsweep"));
 			if (HitResult.GetActor() != this)
 			{
-				UE_LOG(LogTemp,Warning, TEXT("getactor: %s"), *HitResult.GetActor()->GetClass()->GetName());
 				AEnemy* HitEnemy = Cast<AEnemy>(HitResult.GetActor());
-				if (HitEnemy && PhysicsHandle)
+				if (HitEnemy)
 				{
-					UE_LOG(LogTemp,Warning, TEXT("hitenemy"));
+					// Set the hit enemy as grabbed enemy
 					GrabbedEnemy = HitEnemy;
+
+					// Disable the enemy's movement
 					HitEnemy->GetCharacterMovement()->SetMovementMode(MOVE_None);
-					UCapsuleComponent* EnemyCapsuleComponent = HitEnemy->GetCapsuleComponent();
-					PhysicsHandle->GrabComponentAtLocation(EnemyCapsuleComponent, NAME_None, EnemyCapsuleComponent->GetComponentLocation());
+					
 					IsGrabbingObject = true;
-				
 				}
 			}
 		}	
@@ -261,15 +265,19 @@ void ABeatEmUpCharacter::Throw()
 {
 	if (IsGrabbingObject)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("throw"));
+		// Calculate the direction of throwing
 		FVector LaunchDirection = GetFollowCamera()->GetForwardVector();
 		LaunchDirection.Normalize();
 		LaunchDirection *= 3;
 		LaunchDirection += FVector::UpVector;
+
+		// Apply the throwing on grabbed enemy
 		GrabbedEnemy->Ragdoll();
 		GrabbedEnemy->GetMesh()->AddImpulse(LaunchDirection * ThrowForce);
+
+		// Enable the enemy's movement
 		GrabbedEnemy->GetCharacterMovement()->SetMovementMode(MOVE_Walking);
-		PhysicsHandle->ReleaseComponent();
+
 		IsGrabbingObject = false;
 	}
 }
