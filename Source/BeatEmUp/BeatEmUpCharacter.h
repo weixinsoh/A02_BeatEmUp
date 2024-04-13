@@ -5,8 +5,10 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
+#include "PhysicsEngine/PhysicsHandleComponent.h"
 #include "BeatEmUpCharacter.generated.h"
 
+class AEnemy;
 class USpringArmComponent;
 class UCameraComponent;
 class UInputMappingContext;
@@ -88,6 +90,34 @@ public:
 	UFUNCTION()
 		void Use();
 
+	UPROPERTY(EditAnywhere)
+		UInputAction* GrabAction;
+
+	UPROPERTY(EditAnywhere)
+		float GrabDistance = 250;
+	
+	UPROPERTY(EditAnywhere)
+		float ThrowForce = 50000;
+
+	UPROPERTY(EditAnywhere)
+		UPhysicsHandleComponent* PhysicsHandle = nullptr;
+
+	UFUNCTION()
+		void Grab();
+
+	UFUNCTION()
+		void Throw();
+
+	UPROPERTY(EditAnywhere)
+		AEnemy* GrabbedEnemy;
+
+	UPROPERTY(EditAnywhere)
+		float GrabbingTime = 1;
+
+	FTimerHandle GrabbingTimerHandle;
+
+	bool IsGrabbingObject;
+	
 protected:
 
 	/** Called for movement input */
@@ -109,5 +139,10 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
+public:	
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
+	
 };
 
