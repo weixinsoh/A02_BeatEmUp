@@ -2,7 +2,6 @@
 
 #include "BeatEmUpCharacter.h"
 
-#include "PhysicsEngine/PhysicsHandleComponent.h"
 #include "Interactable.h"
 #include "Enemy.h"
 #include "Engine/LocalPlayer.h"

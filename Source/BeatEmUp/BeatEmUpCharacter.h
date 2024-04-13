@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
-#include "PhysicsEngine/PhysicsHandleComponent.h"
 #include "BeatEmUpCharacter.generated.h"
 
 class AEnemy;
@@ -98,9 +97,6 @@ public:
 	
 	UPROPERTY(EditAnywhere)
 		float ThrowForce = 50000;
-
-	UPROPERTY(EditAnywhere)
-		UPhysicsHandleComponent* PhysicsHandle = nullptr;
 
 	UFUNCTION()
 		void Grab();
