@@ -58,7 +58,7 @@ ABeatEmUpCharacter::ABeatEmUpCharacter()
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 
 	// Initialise the boolean of grabbing an enemy
-	IsGrabbingObject = false;
+	IsGrabbingEnemy = false;
 }
 
 void ABeatEmUpCharacter::BeginPlay()
@@ -75,6 +75,14 @@ void ABeatEmUpCharacter::BeginPlay()
 			Subsystem->AddMappingContext(DefaultMappingContext, 0);
 		}
 	}
+
+	InGameUI = Cast<UInGameUI>(CreateWidget(GetGameInstance(), InGameUIClass));
+	if (InGameUI)
+	{
+		InGameUI->Player = this;
+		InGameUI->UpdateValues();
+		InGameUI->AddToViewport();
+	}
 }
 
 void ABeatEmUpCharacter::Tick(float DeltaTime)
@@ -82,11 +90,16 @@ void ABeatEmUpCharacter::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	// Set the enemy being grabbed always locating at the Player's forward vector
-	if (IsGrabbingObject)
+	if (IsGrabbingEnemy)
 	{
 		FVector NewLocation = GetActorLocation() + GetActorForwardVector() * GrabDistance;
 		NewLocation += FVector:: UpVector * 100;
 		GrabbedEnemy->SetActorLocation(NewLocation);
+	}
+
+	if (GetWorld()->GetTimerManager().TimerExists(PunchTimerHandle))
+	{
+		InGameUI->UpdateValues();
 	}
 }
 
@@ -167,11 +180,18 @@ void ABeatEmUpCharacter::Punch()
 void ABeatEmUpCharacter::ResetPunch()
 {
 	bPunchReady = true;
+	InGameUI->UpdateValues();
 }
 
 void ABeatEmUpCharacter::DealDamage(float Damage)
 {
 	CurrentHealth = FMath::Clamp(CurrentHealth - Damage, 0, MaxHealth);
+
+	InGameUI->UpdateValues();
+	if (CurrentHealth == 0)
+	{
+		Cast<APlayerController>(GetController())->RestartLevel();
+	}
 }
 
 void ABeatEmUpCharacter::Use()
@@ -221,7 +241,7 @@ void ABeatEmUpCharacter::Use()
 void ABeatEmUpCharacter::Grab()
 {
 	// Check the Player is already grabbing an enemy
-	if (!IsGrabbingObject)
+	if (!IsGrabbingEnemy)
 	{
 		// Raycasting
 		FHitResult HitResult;
@@ -253,7 +273,7 @@ void ABeatEmUpCharacter::Grab()
 					// Disable the enemy's movement
 					HitEnemy->GetCharacterMovement()->SetMovementMode(MOVE_None);
 					
-					IsGrabbingObject = true;
+					IsGrabbingEnemy = true;
 				}
 			}
 		}	
@@ -262,7 +282,7 @@ void ABeatEmUpCharacter::Grab()
 
 void ABeatEmUpCharacter::Throw()
 {
-	if (IsGrabbingObject)
+	if (IsGrabbingEnemy)
 	{
 		// Calculate the direction of throwing
 		FVector LaunchDirection = GetFollowCamera()->GetForwardVector();
@@ -277,7 +297,7 @@ void ABeatEmUpCharacter::Throw()
 		// Enable the enemy's movement
 		GrabbedEnemy->GetCharacterMovement()->SetMovementMode(MOVE_Walking);
 
-		IsGrabbingObject = false;
+		IsGrabbingEnemy = false;
 	}
 }
 

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "BeatEmUpCharacter.h"
+#include "DamageTextUI.h"
 #include "GameFramework/Character.h"
 #include "Enemy.generated.h"
 
@@ -53,4 +54,7 @@ public:
 
 	UFUNCTION()
 		void StopRagdoll();
+
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<UDamageTextUI> DamageTextClass;
 };

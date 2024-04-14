@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "InGameUI.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
 #include "BeatEmUpCharacter.generated.h"
@@ -106,7 +107,13 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		AEnemy* GrabbedEnemy;
-	bool IsGrabbingObject;
+	bool IsGrabbingEnemy;
+
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<UInGameUI> InGameUIClass;
+
+	UPROPERTY()
+		UInGameUI* InGameUI;
 	
 protected:
 
