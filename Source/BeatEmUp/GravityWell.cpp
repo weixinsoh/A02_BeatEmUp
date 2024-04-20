@@ -2,8 +2,9 @@
 
 
 #include "GravityWell.h"
-
+#include "Kismet/GameplayStatics.h"
 #include "Enemy.h"
+#include "InteractionPromptUI.h"
 
 // Sets default values
 AGravityWell::AGravityWell()
@@ -13,6 +14,13 @@ AGravityWell::AGravityWell()
 
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 	RootComponent = Mesh;
+
+	WidgetTrigger = CreateDefaultSubobject<UBoxComponent>(TEXT("Widget Trigger"));
+	WidgetTrigger->SetupAttachment(RootComponent);
+
+	InteractionPromptWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("Interaction Prompt Widget Component"));
+	InteractionPromptWidgetComponent->SetupAttachment(RootComponent);
+
 }
 
 void AGravityWell::Activate()
@@ -24,7 +32,7 @@ void AGravityWell::Activate()
 	                                              ECC_WorldDynamic, ExplosionSphere);
 	if (bSweep)
 	{
-		for (FHitResult Hit: Hits)
+		for (FHitResult Hit : Hits)
 		{
 			if (!HitActors.Contains(Hit.GetActor()))
 			{
@@ -40,10 +48,10 @@ void AGravityWell::Activate()
 				{
 					HitMesh = Cast<UMeshComponent>(Hit.GetActor()->GetRootComponent());
 				}
-				
+
 				if (HitMesh)
 				{
-					switch(GravityType)
+					switch (GravityType)
 					{
 					case EGravityType::GE_PULL:
 						HitMesh->AddRadialImpulse(GetActorLocation(), SweepSize, Force, RIF_Linear, true);
@@ -52,7 +60,7 @@ void AGravityWell::Activate()
 						HitMesh->AddRadialImpulse(GetActorLocation(), SweepSize, -Force, RIF_Linear, true);
 						break;
 					case EGravityType::GE_ON:
-						if(!HitEnemy)
+						if (!HitEnemy)
 						{
 							HitMesh->SetEnableGravity(false);
 						}
@@ -73,10 +81,45 @@ void AGravityWell::Interact_Implementation()
 	Activate();
 }
 
+void AGravityWell::OnPlayerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+                                   UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep,
+                                   const FHitResult& SweepResult)
+{
+	UE_LOG(LogTemp, Warning, TEXT("overlapped:%s"), *OtherActor->GetClass()->GetName());
+
+	if (ABeatEmUpCharacter* Player = Cast<ABeatEmUpCharacter>(OtherActor))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("setvisibility"));
+		InteractionPromptWidgetComponent->SetVisibility(true);
+	}
+}
+
+void AGravityWell::OnPlayerEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+                                      UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex)
+{
+	ABeatEmUpCharacter* Player = Cast<ABeatEmUpCharacter>(OtherActor);
+	if (Player)
+	{
+		InteractionPromptWidgetComponent->SetVisibility(false);
+	}
+}
+
 // Called when the game starts or when spawned
 void AGravityWell::BeginPlay()
 {
 	Super::BeginPlay();
+
+	PromptUI = Cast<UInteractionPromptUI>(CreateWidget(GetGameInstance(), InteractablePromptUIClass));
+	if (PromptUI)
+	{
+		PromptUI->ActionText->SetText(FText::FromString("Right Click to Use"));
+		PromptUI->InteractableNameText->SetText(FText::FromString("Gravity Well"));
+		InteractionPromptWidgetComponent->SetWidget(PromptUI);
+		InteractionPromptWidgetComponent->SetVisibility(false);
+	}
+	
+	WidgetTrigger->OnComponentBeginOverlap.AddDynamic(this, &AGravityWell::OnPlayerOverlap);
+	WidgetTrigger->OnComponentEndOverlap.AddDynamic(this, &AGravityWell::OnPlayerEndOverlap);
 }
 
 // Called every frame

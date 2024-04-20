@@ -5,6 +5,9 @@
 #include "Interactable.h"
 #include "PhysicsEngine/PhysicsConstraintComponent.h"
 #include "CoreMinimal.h"
+#include "InteractionPromptUI.h"
+#include "Components/BoxComponent.h"
+#include "Components/WidgetComponent.h"
 #include "GameFramework/Actor.h"
 #include "Trapdoor.generated.h"
 
@@ -30,6 +33,27 @@ public:
 		UPhysicsConstraintComponent* RightHinge;
 
 	virtual void Interact_Implementation() override;
+
+	UPROPERTY(EditAnywhere)
+	UBoxComponent* WidgetTrigger;
+
+	UPROPERTY(EditAnywhere)
+	UWidgetComponent* InteractionPromptWidgetComponent;
+
+	UPROPERTY(EditAnywhere)
+	UInteractionPromptUI* PromptUI;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class UInteractionPromptUI> InteractablePromptUIClass;
+
+	UFUNCTION()
+	void OnPlayerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+						 UPrimitiveComponent* OtherComponent,
+						 int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	UFUNCTION()
+	void OnPlayerEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+							UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex);
 
 protected:
 	// Called when the game starts or when spawned
