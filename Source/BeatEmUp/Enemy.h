@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "BeatEmUpCharacter.h"
+#include "Bullet.h"
 #include "DamageTextUI.h"
 #include "GameFramework/Character.h"
 #include "Enemy.generated.h"
@@ -57,4 +58,8 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<UDamageTextUI> DamageTextClass;
+
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<ABullet> BulletClass;
+	void Shoot(FVector Direction);
 };

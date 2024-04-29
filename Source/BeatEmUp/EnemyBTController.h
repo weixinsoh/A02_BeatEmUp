@@ -49,5 +49,9 @@ public:
 		UNavigationSystemV1* NavigationSystem;
 	UPROPERTY()
 		APawn* TargetPlayer;
+
+	UPROPERTY(EditAnywhere)
+		float Ammo = 5;
+	void Shoot();
 	
 };
