@@ -1,13 +1,14 @@
 // Fill out your copyright notice in the Description page of Project Settings.
+#include "JumpPoint.h"
 
 #include "GameFramework/Character.h"
 #include "Kismet/GameplayStatics.h"
-#include "JumpPoint.h"
 
 void AJumpPoint::BeginPlay()
 {
 	Super::BeginPlay();
 
+	CopyEndPointsFromSimpleLinkToSmartLink();
 	OnSmartLinkReached.AddDynamic(this, &AJumpPoint::LinkReached);
 
 }

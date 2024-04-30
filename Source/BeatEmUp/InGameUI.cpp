@@ -1,8 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "InGameUI.h"
 
 #include "BeatEmUpCharacter.h"
-#include "InGameUI.h"
 
 void UInGameUI::UpdateValues()
 {
