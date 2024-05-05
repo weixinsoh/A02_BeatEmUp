@@ -2,35 +2,78 @@
 
 
 #include "Weapon.h"
+#include "Enemy.h"
 
-#include "BeatEmUpCharacter.h"
-
-UWeapon::UWeapon()
+// Sets default values
+AWeapon::AWeapon()
 {
+	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	PrimaryActorTick.bCanEverTick = true;
+
 	WeaponName = FString("Default name");
 	WeaponDescription = FString("Default description");
+
+	bIsPickedUp = false;
 }
 
-void UWeapon::SetName(FString Name)
+void AWeapon::SetName(FString Name)
 {
 	WeaponName = Name;
 }
 
-void UWeapon::SetDescription(FString Description)
+void AWeapon::SetDescription(FString Description)
 {
 	WeaponDescription = Description;
 }
 
-FString UWeapon::GetName()
+void AWeapon::SetIcon(UTexture2D* Icon)
+{
+	WeaponIcon = Icon;
+}
+
+FString AWeapon::GetName()
 {
 	return WeaponName;
 }
 
-FString UWeapon::GetDescription()
+FString AWeapon::GetDescription()
 {
 	return WeaponDescription;
 }
 
-void UWeapon::UseWeapon(ACharacter* Character)
+void AWeapon::UseWeapon(ACharacter* Character)
 {
+}
+
+void AWeapon::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+                             UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep,
+                             const FHitResult& SweepResult)
+{
+	if (!bIsPickedUp)
+	{
+		AEnemy* Enemy = Cast<AEnemy>(OtherActor);
+		ABeatEmUpCharacter* Player = Cast<ABeatEmUpCharacter>(OtherActor);
+		if (Enemy)
+		{
+			AttachToActor(Enemy, FAttachmentTransformRules::SnapToTargetIncludingScale, FName("WeaponSocket"));
+		} else if (Player)
+		{
+			Player->PickUp(this);
+		}
+
+		SetActorHiddenInGame(true);
+	}
+}
+
+
+// Called when the game starts or when spawned
+void AWeapon::BeginPlay()
+{
+	Super::BeginPlay();
+}
+
+// Called every frame
+void AWeapon::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
 }

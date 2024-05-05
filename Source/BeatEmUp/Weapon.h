@@ -3,30 +3,48 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "BeatEmUpCharacter.h"
-#include "UObject/NoExportTypes.h"
+#include "GameFramework/Actor.h"
 #include "Weapon.generated.h"
 
-/**
- * 
- */
 UCLASS()
-class BEATEMUP_API UWeapon : public UObject
+class BEATEMUP_API AWeapon : public AActor
 {
 	GENERATED_BODY()
-
-public:
-	UWeapon();
-
+	
+public:	
+	// Sets default values for this actor's properties
+	AWeapon();
+	
+	UPROPERTY()
 	FString WeaponName;
 
+	UPROPERTY()
 	FString WeaponDescription;
+
+	UPROPERTY()
+	UTexture2D* WeaponIcon;
 
 	void SetName(FString Name);
 	void SetDescription(FString Description);
+	void SetIcon(UTexture2D* Icon);
 
 	FString GetName();
 	FString GetDescription();
 
 	virtual void UseWeapon(ACharacter* Character);
+
+	virtual void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+						 UPrimitiveComponent* OtherComponent,
+						 int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	bool bIsPickedUp;
+	
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
+public:	
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
+
 };

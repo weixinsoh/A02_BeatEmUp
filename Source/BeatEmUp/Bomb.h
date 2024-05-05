@@ -4,34 +4,33 @@
 
 #include "CoreMinimal.h"
 #include "Weapon.h"
-#include "Axe.generated.h"
+#include "Bomb.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class BEATEMUP_API AAxe : public AWeapon
+class BEATEMUP_API ABomb : public AWeapon
 {
 	GENERATED_BODY()
 
 public:
+	ABomb();
+	
+	UPROPERTY(EditAnywhere)
+	UStaticMeshComponent* Bomb;
+	
+	UPROPERTY(EditAnywhere)
+	float Damage = 100;
+	
+	UPROPERTY(EditAnywhere)
+	float AttackRange = 1000;
+	
+	UPROPERTY(EditAnywhere)
+	float AttackSpeed = 100;
 
-	AAxe();
-	
 	UPROPERTY(EditAnywhere)
-	UStaticMeshComponent* AxeHead;
-
-	UPROPERTY(EditAnywhere)
-	UStaticMeshComponent* AxeHandler;
-	
-	UPROPERTY(EditAnywhere)
-	float Damage = 150;
-	
-	UPROPERTY(EditAnywhere)
-	float AttackDistance = 500;
-	
-	UPROPERTY(EditAnywhere)
-	float AttackSpeed = 50;
+	float ExplosionForce = 100000;
 
 	virtual void UseWeapon(ACharacter* Character) override;
 
@@ -46,4 +45,7 @@ public:
 	
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector Normal, const FHitResult& Hit);
+
+	UPROPERTY(EditAnywhere)
+	UParticleSystem* ExplosionParticle;
 };

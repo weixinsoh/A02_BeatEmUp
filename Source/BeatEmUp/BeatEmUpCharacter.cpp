@@ -59,6 +59,7 @@ ABeatEmUpCharacter::ABeatEmUpCharacter()
 
 	// Initialise the boolean of grabbing an enemy
 	IsGrabbingEnemy = false;
+	
 }
 
 void ABeatEmUpCharacter::BeginPlay()
@@ -74,6 +75,10 @@ void ABeatEmUpCharacter::BeginPlay()
 		{
 			Subsystem->AddMappingContext(DefaultMappingContext, 0);
 		}
+
+		InventoryWidget = CreateWidget<UInventoryWidget>(PlayerController, InventoryWidgetClass);
+		InventoryWidget->Owner = this;
+		InventoryWidget->AddToViewport();
 	}
 
 	InGameUI = Cast<UInGameUI>(CreateWidget(GetGameInstance(), InGameUIClass));
@@ -101,6 +106,15 @@ void ABeatEmUpCharacter::Tick(float DeltaTime)
 	{
 		InGameUI->UpdateValues();
 	}
+/*
+	if (EquippingWeapon && !bUsing)
+	{
+		FVector ForwardVector = GetActorForwardVector();
+		
+		EquippingWeapon->SetActorLocation(GetFollowCamera() + FVector(0, 50, 0));
+		EquippingWeapon->SetActorRotation(GetActorRotation() + FRotator(-90, 0, 0));
+	}
+	*/
 }
 
 
@@ -131,7 +145,15 @@ void ABeatEmUpCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 		// Grab and throw
 		EnhancedInputComponent->BindAction(GrabAction, ETriggerEvent::Started, this, &ABeatEmUpCharacter::Grab);
 		EnhancedInputComponent->BindAction(GrabAction, ETriggerEvent::Completed, this, &ABeatEmUpCharacter::Throw);
+		
+		// Drop weapon
+		EnhancedInputComponent->BindAction(DropAction, ETriggerEvent::Triggered, this, &ABeatEmUpCharacter::DropWeapon);
 
+		// Use Weapon
+		EnhancedInputComponent->BindAction(UseWeaponAction, ETriggerEvent::Triggered, this, &ABeatEmUpCharacter::UseWeapon);
+
+		// Show Mouse Cursor
+		EnhancedInputComponent->BindAction(ShowCursorAction, ETriggerEvent::Started, this, &ABeatEmUpCharacter::ShowCursor);
 	}
 	else
 	{
@@ -298,6 +320,62 @@ void ABeatEmUpCharacter::Throw()
 		GrabbedEnemy->GetCharacterMovement()->SetMovementMode(MOVE_Walking);
 
 		IsGrabbingEnemy = false;
+	}
+}
+
+void ABeatEmUpCharacter::PickUp(AWeapon* Weapon)
+{
+	if(Inventory.Num() < InventorySize && !Inventory.Contains(Weapon))
+	{
+		Inventory.Add(Weapon);
+		InventoryWidget->RefreshInventory(Inventory);
+	}
+}
+
+AWeapon* ABeatEmUpCharacter::GetWeaponAtIndex(int32 Index)
+{
+	if(Index < 0 || Index >= Inventory.Num())
+	{
+		return nullptr;
+	}
+	return Inventory[Index];
+
+}
+
+void ABeatEmUpCharacter::DropWeapon()
+{
+	if (EquippingWeapon)
+	{
+		EquippingWeapon->bIsPickedUp = false;
+		EquippingWeapon->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+		Inventory.Remove(EquippingWeapon);
+		InventoryWidget->RefreshInventory(Inventory);
+		EquippingWeapon = nullptr;
+	}
+}
+
+void ABeatEmUpCharacter::UseWeapon()
+{
+	if (EquippingWeapon)
+	{
+		EquippingWeapon->UseWeapon(this);
+	}
+}
+
+void ABeatEmUpCharacter::ShowCursor()
+{
+	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
+	{
+		if (PlayerController->bShowMouseCursor)
+		{
+			PlayerController->SetInputMode(FInputModeGameOnly());
+			PlayerController->bShowMouseCursor = false;
+		}
+		else
+		{
+			PlayerController->SetInputMode(FInputModeGameAndUI());
+			PlayerController->bShowMouseCursor = true;
+		}
 	}
 }
 

@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "InGameUI.h"
+#include "InventoryWidget.h"
+#include "Weapon.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
 #include "BeatEmUpCharacter.generated.h"
@@ -115,6 +117,48 @@ public:
 	UPROPERTY()
 		UInGameUI* InGameUI;
 	
+	UPROPERTY(EditAnywhere)
+		UInputAction* DropAction;
+
+	UPROPERTY(EditAnywhere)
+		UInputAction* UseWeaponAction;
+
+	UPROPERTY(EditAnywhere)
+		UInputAction* ShowCursorAction;
+	
+	UPROPERTY(EditAnywhere)
+		float PickUpDistance = 50;
+
+	UPROPERTY(EditAnywhere)
+		AWeapon* EquippingWeapon;
+
+	UFUNCTION()
+		void PickUp(AWeapon* Weapon);
+
+	UFUNCTION()
+	void DropWeapon();
+
+	UFUNCTION()
+		AWeapon* GetWeaponAtIndex(int32 Index);
+
+	UFUNCTION()
+		void UseWeapon();
+
+	UFUNCTION()
+		void ShowCursor();
+
+	UPROPERTY(EditAnywhere)
+		TArray<AWeapon*> Inventory;
+
+	UPROPERTY(EditAnywhere)
+		UInventoryWidget* InventoryWidget;
+
+	UPROPERTY(EditAnywhere)
+		int32 InventorySize = 5;
+
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<UInventoryWidget> InventoryWidgetClass;
+
 protected:
 
 	/** Called for movement input */
@@ -129,7 +173,7 @@ protected:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	
 	// To add mapping context
-	virtual void BeginPlay();
+	virtual void BeginPlay() override;
 
 public:
 	/** Returns CameraBoom subobject **/
