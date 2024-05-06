@@ -67,15 +67,11 @@ void AEnemy::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveC
 
 void AEnemy::Ragdoll()
 {
-	if (AEnemyBTController* Controller = Cast<AEnemyBTController>(GetController()))
-	{
-		Controller->BrainComponent->PauseLogic("Ragdolling!");
-		GetMesh()->SetCollisionProfileName("Ragdoll");
-		GetMesh()->SetSimulatePhysics(true);
-		GetCapsuleComponent()->SetCollisionProfileName("NoCollision");
-		GetWorld()->GetTimerManager().SetTimer(RagdollTimerHandle, this, &AEnemy::StopRagdoll, RagdollTime, false);
-	}
-
+	Cast<AEnemyBTController>(GetController())->BrainComponent->PauseLogic("Ragdolling!");
+	GetMesh()->SetCollisionProfileName("Ragdoll");
+	GetMesh()->SetSimulatePhysics(true);
+	GetCapsuleComponent()->SetCollisionProfileName("NoCollision");
+	GetWorld()->GetTimerManager().SetTimer(RagdollTimerHandle, this, &AEnemy::StopRagdoll, RagdollTime, false);
 }
 
 void AEnemy::StopRagdoll()
@@ -91,10 +87,7 @@ void AEnemy::StopRagdoll()
 	GetMesh()->AttachToComponent(GetCapsuleComponent(), FAttachmentTransformRules::SnapToTargetIncludingScale);
 	GetMesh()->SetRelativeLocationAndRotation(FVector(0, 0, -90), FRotator(0, -90, 0));
 	GetCapsuleComponent()->SetCollisionProfileName("Pawn");
-	if (AEnemyBTController* Controller = Cast<AEnemyBTController>(GetController()))
-	{
-		Controller->BrainComponent->PauseLogic("Moving Again!");
-	}
+	Cast<AEnemyBTController>(GetController())->BrainComponent->PauseLogic("Moving Again!");
 
 }
 
