@@ -57,6 +57,37 @@ void ABomb::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveCo
 	const FHitResult& Hit)
 {
 	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ExplosionParticle, Bomb->GetComponentLocation(), FRotator::ZeroRotator, FVector(3, 3, 3));
-	UGameplayStatics::ApplyRadialDamage(GetWorld(), Damage, Bomb->GetComponentLocation(), AttackRange, nullptr, TArray<AActor*>(), this, nullptr, true, ECC_WorldStatic);
+	//UGameplayStatics::ApplyRadialDamage(GetWorld(), Damage, Bomb->GetComponentLocation(), AttackRange, nullptr, TArray<AActor*>(), this, nullptr, true, ECC_WorldStatic);
+	TArray<FHitResult> Hits;
+	TArray<AActor*> HitActors;
+	FCollisionShape ExplosionSphere = FCollisionShape::MakeSphere(AttackRange);
+	bool bSweep = GetWorld()->SweepMultiByChannel(Hits, GetActorLocation(), GetActorLocation(), FQuat::Identity,
+												  ECC_WorldDynamic, ExplosionSphere);
+	if (bSweep)
+	{
+		for (FHitResult Hit : Hits)
+		{
+			if (!HitActors.Contains(Hit.GetActor()))
+			{
+				HitActors.Add(Hit.GetActor());
+				UMeshComponent* HitMesh;
+				AEnemy* HitEnemy = Cast<AEnemy>(Hit.GetActor());
+				if (HitEnemy)
+				{
+					HitMesh = Cast<UMeshComponent>(HitEnemy->GetMesh());
+					HitEnemy->Ragdoll();
+				}
+				else
+				{
+					HitMesh = Cast<UMeshComponent>(Hit.GetActor()->GetRootComponent());
+				}
+				if (HitMesh)
+				{
+					HitMesh->AddRadialImpulse(GetActorLocation(), AttackRange, -ExplosionForce, RIF_Linear, true);
+				}
+
+			}
+		}
+	}
 	Destroy();
 }

@@ -30,7 +30,7 @@ public:
 	float AttackSpeed = 100;
 
 	UPROPERTY(EditAnywhere)
-	float ExplosionForce = 100000;
+	float ExplosionForce = 50000;
 
 	virtual void UseWeapon(ACharacter* Character) override;
 

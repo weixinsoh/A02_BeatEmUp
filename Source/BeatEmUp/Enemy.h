@@ -51,10 +51,10 @@ public:
 
 	FTimerHandle RagdollTimerHandle;
 	
-	void Ragdoll();
+	virtual void Ragdoll();
 
 	UFUNCTION()
-		void StopRagdoll();
+		virtual void StopRagdoll();
 
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<UDamageTextUI> DamageTextClass;
