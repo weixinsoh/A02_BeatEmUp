@@ -10,16 +10,16 @@ AMeleeEnemy::AMeleeEnemy()
 {
 	FVector SpawnLocation = GetActorLocation();
 	FRotator SpawnRotation = GetActorRotation();
+	/*
 	AActor* Bomb = GetWorld()->SpawnActor(BombClass, &SpawnLocation, &SpawnRotation);
-	if (Bomb)
+	if (LeftWeapon = Cast<ABomb>(Bomb))
 	{
-		LeftWeapon = Cast<ABomb>(Bomb);
+		LeftWeapon->AttachToActor(this, FAttachmentTransformRules::SnapToTargetIncludingScale, FName("LeftWeaponSocket"));
 	}
-	LeftWeapon->AttachToActor(this, FAttachmentTransformRules::SnapToTargetIncludingScale, FName("LeftWeaponSocket"));
 	AActor* Axe = GetWorld()->SpawnActor(BombClass, &SpawnLocation, &SpawnRotation);
 	RightWeapon = Cast<AAxe>(Axe);
 	RightWeapon->AttachToActor(this, FAttachmentTransformRules::SnapToTargetIncludingScale, FName("RightWeaponSocket"));
-
+*/
 }
 
 void AMeleeEnemy::Ragdoll()
@@ -45,19 +45,21 @@ void AMeleeEnemy::StopRagdoll()
 void AMeleeEnemy::UseLeftWeapon()
 {
 	LeftWeapon->UseWeapon(this);
-	FVector SpawnLocation = GetActorLocation();
-	FRotator SpawnRotation = GetActorRotation();
-	AActor* Bomb = GetWorld()->SpawnActor(BombClass, &SpawnLocation, &SpawnRotation);
-	LeftWeapon = Cast<ABomb>(Bomb);
-	LeftWeapon->AttachToActor(this, FAttachmentTransformRules::SnapToTargetIncludingScale, FName("LeftWeaponSocket"));
+	if (Cast<AEnemyWeaponBTController>(GetController())->LeftAmmo > 1)
+	{
+		FVector SpawnLocation = GetActorLocation();
+		FRotator SpawnRotation = GetActorRotation();
+		AActor* Bomb = GetWorld()->SpawnActor(BombClass, &SpawnLocation, &SpawnRotation);
+		LeftWeapon = Cast<ABomb>(Bomb);
+		LeftWeapon->AttachToActor(this, FAttachmentTransformRules::SnapToTargetIncludingScale, FName("LeftWeaponSocket"));	
+	}
 }
 
 void AMeleeEnemy::UseRightWeapon()
 {
 	RightWeapon->UseWeapon(this);
-	FVector SpawnLocation = GetActorLocation();
-	FRotator SpawnRotation = GetActorRotation();
-	AActor* Axe = GetWorld()->SpawnActor(BombClass, &SpawnLocation, &SpawnRotation);
-	RightWeapon = Cast<AAxe>(Axe);
-	RightWeapon->AttachToActor(this, FAttachmentTransformRules::SnapToTargetIncludingScale, FName("RightWeaponSocket"));
+	if (Cast<AEnemyWeaponBTController>(GetController())->RightAmmo <= 1)
+	{
+		RightWeapon->Destroy();
+	}
 }
