@@ -2,6 +2,8 @@
 
 
 #include "EnemyWeaponBTController.h"
+
+#include "MeleeEnemy.h"
 #include "Perception/AIPerceptionComponent.h"
 #include "Weapon.h"
 
@@ -33,8 +35,9 @@ void AEnemyWeaponBTController::BeginPlay()
 	UseBlackboard(AIBlackboard, BlackboardComponent);
 	RunBehaviorTree(BehaviourTree);
 	GetPerceptionComponent()->OnTargetPerceptionUpdated.AddDynamic(this, &AEnemyWeaponBTController::OnSensesUpdated);
-
-	BlackboardComponent->SetValueAsBool("HasWeapon", true);
+	BlackboardComponent->SetValueAsBool("HasAmmo", true);
+	BlackboardComponent->SetValueAsBool("LeftAmmo", true);
+	BlackboardComponent->SetValueAsBool("RightAmmo", true);
 }
 
 void AEnemyWeaponBTController::Tick(float DeltaSeconds)
@@ -69,22 +72,6 @@ void AEnemyWeaponBTController::GenerateNewRandomLocation()
 
 void AEnemyWeaponBTController::OnSensesUpdated(AActor* UpdatedActor, FAIStimulus Stimulus)
 {
-	AWeapon* SensedWeapon = Cast<AWeapon>(UpdatedActor);
-	if (SensedWeapon)
-	{
-		if (Stimulus.WasSuccessfullySensed())
-		{
-			TargetWeapon = SensedWeapon;
-			BlackboardComponent->SetValueAsBool("WalkToWeapon", true);
-			BlackboardComponent->SetValueAsVector("WeaponPosition", TargetWeapon->GetActorLocation());
-		}
-		else
-		{
-			TargetWeapon = nullptr;
-			BlackboardComponent->SetValueAsBool("WalkToWeapon", false);
-		}
-	}
-	
 	APawn* SensedPawn = Cast<APawn>(UpdatedActor);
 	if (SensedPawn)
 	{
@@ -95,6 +82,18 @@ void AEnemyWeaponBTController::OnSensesUpdated(AActor* UpdatedActor, FAIStimulus
 				TargetPlayer = SensedPawn;
 				BlackboardComponent->SetValueAsBool("ChasePlayer", true);
 				BlackboardComponent->SetValueAsVector("PlayerPosition", TargetPlayer->GetActorLocation());
+				
+				AMeleeEnemy* MeleeEnemy = Cast<AMeleeEnemy>(GetPawn());
+				if (FVector::Distance(TargetPlayer->GetActorLocation(), GetPawn()->GetActorLocation()) <= MeleeEnemy->LeftWeapon->AttackDistance)
+				{
+					BlackboardComponent->SetValueAsBool("UseLeftWeapon", true);
+				} else if (FVector::Distance(TargetPlayer->GetActorLocation(), GetPawn()->GetActorLocation()) <= MeleeEnemy->RightWeapon->AttackDistance)
+				{
+					BlackboardComponent->SetValueAsBool("UseRightWeapon", true);
+				} else
+				{
+					BlackboardComponent->SetValueAsBool("IsWithinIdealRange", false);
+				}
 			}
 			else
 			{
@@ -105,7 +104,18 @@ void AEnemyWeaponBTController::OnSensesUpdated(AActor* UpdatedActor, FAIStimulus
 	}
 }
 
-void AEnemyWeaponBTController::UseWeapon()
+void AEnemyWeaponBTController::UseLeftWeapon()
 {
-	
+	Cast<AMeleeEnemy>(GetPawn())->UseLeftWeapon();
+	LeftAmmo--;
+	BlackboardComponent->SetValueAsBool("LeftAmmo", LeftAmmo > 0);
+	BlackboardComponent->SetValueAsBool("HasAmmo", LeftAmmo > 0 || RightAmmo > 0);
+}
+
+void AEnemyWeaponBTController::UseRightWeapon()
+{
+	Cast<AMeleeEnemy>(GetPawn())->UseLeftWeapon();
+	RightAmmo--;
+	BlackboardComponent->SetValueAsBool("RightAmmo", RightAmmo > 0);
+	BlackboardComponent->SetValueAsBool("HasAmmo", LeftAmmo > 0 || RightAmmo > 0);
 }

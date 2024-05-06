@@ -55,8 +55,12 @@ public:
 	UPROPERTY()
 	AWeapon* TargetWeapon;
 
-	UPROPERTY()
-	AWeapon* EquippingWeapon;
+	UPROPERTY(EditAnywhere)
+	float LeftAmmo = 5;
+
+	UPROPERTY(EditAnywhere)
+	float RightAmmo = 5;
 	
-	void UseWeapon();
+	void UseLeftWeapon();
+	void UseRightWeapon();
 };

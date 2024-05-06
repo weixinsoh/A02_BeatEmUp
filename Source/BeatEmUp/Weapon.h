@@ -24,6 +24,15 @@ public:
 	UPROPERTY()
 	UTexture2D* WeaponIcon;
 
+	UPROPERTY(EditAnywhere)
+	float Damage;
+	
+	UPROPERTY(EditAnywhere)
+	float AttackDistance;
+	
+	UPROPERTY(EditAnywhere)
+	float AttackSpeed;
+
 	void SetName(FString Name);
 	void SetDescription(FString Description);
 	void SetIcon(UTexture2D* Icon);

@@ -33,7 +33,7 @@ public:
 	virtual void OnMoveCompleted(FAIRequestID RequestID, const FPathFollowingResult& Result) override;
 
 	EnemyState CurrentState = IDLE;
-	void ChangeState(EnemyState NewState);
+	void ChangeEnemyState(EnemyState NewState);
 
 	void OnIdleEnter();
 	void OnIdleTick(float DeltaTime);

@@ -64,7 +64,7 @@ void AEnemyController::OnMoveCompleted(FAIRequestID RequestID, const FPathFollow
 	}
 }
 
-void AEnemyController::ChangeState(EnemyState NewState)
+void AEnemyController::ChangeEnemyState(EnemyState NewState)
 {
 	TimeInState = 0;
 	switch (CurrentState)
@@ -103,7 +103,7 @@ void AEnemyController::OnIdleTick(float DeltaTime)
 {
 	if (TimeInState > 1)
 	{
-		ChangeState(PATROL);
+		ChangeEnemyState(PATROL);
 	}
 }
 
@@ -126,7 +126,7 @@ void AEnemyController::OnPatrolTick(float DeltaTime)
 	{
 		if (FVector::Dist(PossessedEnemy->Player->GetActorLocation(), PossessedEnemy->GetActorLocation()) < DetectionRange)
 		{
-			ChangeState(CHASE);
+			ChangeEnemyState(CHASE);
 			return;
 		}
 	}
@@ -152,7 +152,7 @@ void AEnemyController::OnChaseTick(float DeltaTime)
 		else
 		{
 			StopMovement();
-			ChangeState(PATROL);
+			ChangeEnemyState(PATROL);
 		}
 	}
 }

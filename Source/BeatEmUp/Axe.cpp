@@ -10,6 +10,9 @@ AAxe::AAxe()
 {
 	WeaponName = "Axe";
 	WeaponDescription = "An Axe";
+	Damage = 150;
+	AttackDistance = 500;
+	AttackSpeed = 50;
 
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root Component"));
 	AxeHead = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Axe Head"));

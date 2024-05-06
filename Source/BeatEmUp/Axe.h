@@ -24,14 +24,7 @@ public:
 	UPROPERTY(EditAnywhere)
 	UStaticMeshComponent* AxeHandler;
 	
-	UPROPERTY(EditAnywhere)
-	float Damage = 150;
-	
-	UPROPERTY(EditAnywhere)
-	float AttackDistance = 500;
-	
-	UPROPERTY(EditAnywhere)
-	float AttackSpeed = 50;
+
 
 	virtual void UseWeapon(ACharacter* Character) override;
 
