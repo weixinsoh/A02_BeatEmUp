@@ -93,7 +93,7 @@ void AEnemy::StopRagdoll()
 	GetCapsuleComponent()->SetCollisionProfileName("Pawn");
 	if (AEnemyBTController* EnemyBTController = Cast<AEnemyBTController>(GetController()))
 	{
-		EnemyBTController->BrainComponent->PauseLogic("Moving Again!");
+		EnemyBTController->BrainComponent->ResumeLogic("Moving Again!");
 	}
 
 }

@@ -39,6 +39,7 @@ void AAxe::UseWeapon(ACharacter* Character)
 		{
 			HitThisPunch.Add(HitResult.GetActor());
 			AEnemy* HitEnemy = Cast<AEnemy>(HitResult.GetActor());
+			ABeatEmUpCharacter* HitPlayer = Cast<ABeatEmUpCharacter>(HitResult.GetActor());
 			if (HitEnemy)
 			{
 				HitEnemy->Ragdoll();
@@ -46,8 +47,17 @@ void AAxe::UseWeapon(ACharacter* Character)
 				LaunchDirection.Normalize();
 				LaunchDirection *= 3;
 				LaunchDirection += FVector::UpVector;
-				//HitEnemy->GetMesh()->AddImpulse(LaunchDirection * PunchForce);
+				HitEnemy->GetMesh()->AddImpulse(LaunchDirection * HitForce);
 				HitEnemy->DealDamage(Damage);
+			} else if (HitPlayer)
+			{
+				HitPlayer->Ragdoll();
+				FVector LaunchDirection = HitPlayer->GetActorLocation() - GetActorLocation();
+				LaunchDirection.Normalize();
+				LaunchDirection *= 3;
+				LaunchDirection += FVector::UpVector;
+				HitPlayer->GetMesh()->AddImpulse(LaunchDirection * HitForce);
+				HitPlayer->DealDamage(Damage);
 			}
 		}
 	}
@@ -70,21 +80,3 @@ void AAxe::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActo
 	Super::OnOverlap(OverlappedComponent, OtherActor, OtherComponent, OtherBodyIndex, bFromSweep, SweepResult);
 }
 
-void AAxe::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector Normal,
-                 const FHitResult& Hit)
-{
-	//bHit = true;
-	ABeatEmUpCharacter* Player = Cast<ABeatEmUpCharacter>(OtherActor);
-	if (Player)
-	{
-		Player->DealDamage(Damage);
-	} else
-	{
-		AEnemy* Enemy = Cast<AEnemy>(OtherActor);
-		if (Enemy)
-		{
-			Enemy->DealDamage(Damage);
-		}
-	}
-
-}

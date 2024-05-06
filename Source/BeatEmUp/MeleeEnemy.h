@@ -19,14 +19,19 @@ class BEATEMUP_API AMeleeEnemy : public AEnemy
 
 public:
 	AMeleeEnemy();
+	virtual void BeginPlay() override;
 	virtual void Ragdoll() override;
 	virtual void StopRagdoll() override;
 
 	void UseLeftWeapon();
 	void UseRightWeapon();
+	void SetMovementSpeed(float Speed);
+	
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<ABomb> BombClass;
 
-	TSubclassOf<ABomb> BombClass;
-	TSubclassOf<AAxe> AxeClass;
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<AAxe> AxeClass;
 
 	AWeapon* LeftWeapon;
 	AWeapon* RightWeapon;

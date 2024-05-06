@@ -51,17 +51,12 @@ void AWeapon::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherA
 {
 	if (!bIsPickedUp)
 	{
-		AEnemy* Enemy = Cast<AEnemy>(OtherActor);
 		ABeatEmUpCharacter* Player = Cast<ABeatEmUpCharacter>(OtherActor);
-		if (Enemy)
-		{
-			AttachToActor(Enemy, FAttachmentTransformRules::SnapToTargetIncludingScale, FName("WeaponSocket"));
-		} else if (Player)
+		if (Player)
 		{
 			Player->PickUp(this);
+			SetActorHiddenInGame(true);
 		}
-
-		SetActorHiddenInGame(true);
 	}
 }
 

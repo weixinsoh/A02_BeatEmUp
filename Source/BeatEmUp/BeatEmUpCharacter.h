@@ -147,6 +147,17 @@ public:
 	UFUNCTION()
 		void ShowCursor();
 
+	UFUNCTION()
+		void Ragdoll();
+
+	UFUNCTION()
+		void StopRagdoll();
+	
+	UPROPERTY(EditAnywhere)
+		float RagdollTime = 5;
+	
+	FTimerHandle RagdollTimerHandle;
+
 	UPROPERTY(EditAnywhere)
 		TArray<AWeapon*> Inventory;
 

@@ -74,10 +74,15 @@ void ABomb::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveCo
 				HitActors.Add(Hit.GetActor());
 				UMeshComponent* HitMesh;
 				AEnemy* HitEnemy = Cast<AEnemy>(Hit.GetActor());
+				ABeatEmUpCharacter* HitPlayer = Cast<ABeatEmUpCharacter>(Hit.GetActor());
 				if (HitEnemy)
 				{
 					HitMesh = Cast<UMeshComponent>(HitEnemy->GetMesh());
 					HitEnemy->Ragdoll();
+				} else if (HitPlayer)
+				{
+					HitMesh = Cast<UMeshComponent>(HitPlayer->GetMesh());
+					HitPlayer->Ragdoll();
 				}
 				else
 				{

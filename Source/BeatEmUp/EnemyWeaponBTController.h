@@ -60,7 +60,18 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	float RightAmmo = 5;
+
+	UPROPERTY(EditAnywhere)
+	float WalkingSpeed;
+
+	UPROPERTY(EditAnywhere)
+	float SprintSpeed;
 	
 	void UseLeftWeapon();
 	void UseRightWeapon();
+	void SprintToAttackableRange();
+	void SetMovementSpeed(float Speed);
+	void RangeCheck();
 };
+
+

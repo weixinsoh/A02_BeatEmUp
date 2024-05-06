@@ -379,6 +379,38 @@ void ABeatEmUpCharacter::ShowCursor()
 	}
 }
 
+void ABeatEmUpCharacter::Ragdoll()
+{
+	if (APlayerController* PlayerController = Cast<APlayerController>(GetController()))
+	{
+		DisableInput(PlayerController);
+	}
+	GetMesh()->SetCollisionProfileName("Ragdoll");
+	GetMesh()->SetSimulatePhysics(true);
+	GetCapsuleComponent()->SetCollisionProfileName("NoCollision");
+	GetWorld()->GetTimerManager().SetTimer(RagdollTimerHandle, this, &ABeatEmUpCharacter::StopRagdoll, RagdollTime, false);
+}
+
+void ABeatEmUpCharacter::StopRagdoll()
+{
+	if (CurrentHealth <= 0)
+	{
+		Destroy();
+		return;
+	}
+	GetMesh()->SetSimulatePhysics(false);
+	GetMesh()->SetCollisionProfileName("CharacterMesh");
+	GetCapsuleComponent()->SetWorldLocation(GetMesh()->GetSocketLocation("pelvis"));
+	GetMesh()->AttachToComponent(GetCapsuleComponent(), FAttachmentTransformRules::SnapToTargetIncludingScale);
+	GetMesh()->SetRelativeLocationAndRotation(FVector(0, 0, -90), FRotator(0, -90, 0));
+	GetCapsuleComponent()->SetCollisionProfileName("Pawn");
+	if (APlayerController* PlayerController = Cast<APlayerController>(GetController()))
+	{
+		EnableInput(PlayerController);
+	}
+
+}
+
 void ABeatEmUpCharacter::Move(const FInputActionValue& Value)
 {
 	// input is a Vector2D
