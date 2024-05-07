@@ -83,6 +83,7 @@ void AEnemyWeaponBTController::OnSensesUpdated(AActor* UpdatedActor, FAIStimulus
 				TargetPlayer = SensedPawn;
 				BlackboardComponent->SetValueAsBool("ChasePlayer", true);
 				BlackboardComponent->SetValueAsVector("PlayerPosition", TargetPlayer->GetActorLocation());
+				BlackboardComponent->SetValueAsBool("NeedsCheck", true);
 			}
 			else
 			{
@@ -100,15 +101,20 @@ void AEnemyWeaponBTController::UseLeftWeapon()
 	BlackboardComponent->SetValueAsBool("HasLeftAmmo", LeftAmmo > 0);
 	BlackboardComponent->SetValueAsBool("HasAmmo", LeftAmmo > 0 || RightAmmo > 0);
 	BlackboardComponent->SetValueAsBool("UseLeftWeapon", false);
+	//Set NeedsCheck to true
+	BlackboardComponent->SetValueAsBool("NeedsCheck", true);
+
 }
 
 void AEnemyWeaponBTController::UseRightWeapon()
 {
-	Cast<AMeleeEnemy>(GetPawn())->UseLeftWeapon();
+	Cast<AMeleeEnemy>(GetPawn())->UseRightWeapon();
 	RightAmmo--;
 	BlackboardComponent->SetValueAsBool("HasRightAmmo", RightAmmo > 0);
 	BlackboardComponent->SetValueAsBool("HasAmmo", LeftAmmo > 0 || RightAmmo > 0);
 	BlackboardComponent->SetValueAsBool("UseRightWeapon", false);
+	BlackboardComponent->SetValueAsBool("NeedsCheck", true);
+
 }
 
 void AEnemyWeaponBTController::SprintToAttackableRange()
