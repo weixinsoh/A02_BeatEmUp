@@ -63,9 +63,12 @@ void AMeleeEnemy::UseLeftWeapon()
 	{
 		FVector SpawnLocation = GetActorLocation();
 		FRotator SpawnRotation = GetActorRotation();
-		AActor* Bomb = GetWorld()->SpawnActor(BombClass, &SpawnLocation, &SpawnRotation);
-		LeftWeapon = Cast<ABomb>(Bomb);
-		LeftWeapon->AttachToActor(this, FAttachmentTransformRules::SnapToTargetIncludingScale, FName("LeftWeaponSocket"));	
+		ABomb* Bomb = Cast<ABomb>(GetWorld()->SpawnActor(BombClass, &SpawnLocation, &SpawnRotation));
+		if (Bomb)
+		{
+			LeftWeapon = Bomb;
+			LeftWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, FName("LeftWeaponSocket"));
+		}
 	}
 }
 

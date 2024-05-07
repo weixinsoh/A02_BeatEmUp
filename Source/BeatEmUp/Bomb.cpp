@@ -12,7 +12,7 @@ ABomb::ABomb()
 {
 	WeaponName = "Bomb";
 	WeaponDescription = "A Bomb";
-	Damage = 100;
+	Damage = 5;
 	AttackDistance = 1000;
 	AttackSpeed = 100;
 	
@@ -81,8 +81,9 @@ void ABomb::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveCo
 					HitEnemy->Ragdoll();
 				} else if (HitPlayer)
 				{
-					HitMesh = Cast<UMeshComponent>(HitPlayer->GetMesh());
-					HitPlayer->Ragdoll();
+					HitPlayer->DealDamage(Damage);
+					Destroy();
+					return;
 				}
 				else
 				{

@@ -4,6 +4,7 @@
 #include "GenerateNewRandomLocationTask.h"
 
 #include "EnemyBTController.h"
+#include "EnemyWeaponBTController.h"
 
 EBTNodeResult::Type UGenerateNewRandomLocationTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
@@ -14,12 +15,21 @@ EBTNodeResult::Type UGenerateNewRandomLocationTask::ExecuteTask(UBehaviorTreeCom
 	}
 
 	AEnemyBTController* BTController = Cast<AEnemyBTController>(BTComp->GetOwner());
-	if (!BTController)
+	AEnemyWeaponBTController* WeaponBTController = Cast<AEnemyWeaponBTController>(BTComp->GetOwner());
+	if (!BTController && !WeaponBTController)
 	{
 		return EBTNodeResult::Failed;
 	}
 
-	BTController->GenerateNewRandomLocation();
+	if(BTController)
+	{
+		BTController->GenerateNewRandomLocation();
 
+	}
+	else if(WeaponBTController)
+	{
+		WeaponBTController->GenerateNewRandomLocation();
+
+	}
 	return EBTNodeResult::Succeeded;
 }

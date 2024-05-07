@@ -32,7 +32,7 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<AAxe> AxeClass;
-
+	
 	AWeapon* LeftWeapon;
 	AWeapon* RightWeapon;
 };

@@ -3,6 +3,7 @@
 
 #include "RangeCheckTask.h"
 
+#include "EnemyBTController.h"
 #include "EnemyWeaponBTController.h"
 
 EBTNodeResult::Type URangeCheckTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
@@ -12,12 +13,16 @@ EBTNodeResult::Type URangeCheckTask::ExecuteTask(UBehaviorTreeComponent& OwnerCo
 	{
 		return EBTNodeResult::Failed;
 	}
-
-	AEnemyWeaponBTController* BTController = Cast<AEnemyWeaponBTController>(BTComp->GetOwner());
-	if (!BTController)
+	AEnemyBTController* BTController = Cast<AEnemyBTController>(BTComp->GetOwner());
+	AEnemyWeaponBTController* WeaponBTController = Cast<AEnemyWeaponBTController>(BTComp->GetOwner());
+	if (!BTController && !WeaponBTController)
 	{
 		return EBTNodeResult::Failed;
 	}
 
-	BTController->RangeCheck();
+	if(WeaponBTController)
+	{
+		WeaponBTController->RangeCheck();
+
+	}
 	return EBTNodeResult::Succeeded;}

@@ -83,16 +83,6 @@ void AEnemyWeaponBTController::OnSensesUpdated(AActor* UpdatedActor, FAIStimulus
 				TargetPlayer = SensedPawn;
 				BlackboardComponent->SetValueAsBool("ChasePlayer", true);
 				BlackboardComponent->SetValueAsVector("PlayerPosition", TargetPlayer->GetActorLocation());
-				
-				AMeleeEnemy* MeleeEnemy = Cast<AMeleeEnemy>(GetPawn());
-				float Distance = FVector::Distance(TargetPlayer->GetActorLocation(), GetPawn()->GetActorLocation());
-				if (Distance <= MeleeEnemy->LeftWeapon->AttackDistance)
-				{
-					BlackboardComponent->SetValueAsBool("UseLeftWeapon", true);
-				} else if (Distance <= MeleeEnemy->RightWeapon->AttackDistance)
-				{
-					BlackboardComponent->SetValueAsBool("UseRightWeapon", true);
-				}
 			}
 			else
 			{
@@ -156,19 +146,43 @@ void AEnemyWeaponBTController::RangeCheck()
 {
 	AMeleeEnemy* MeleeEnemy = Cast<AMeleeEnemy>(GetPawn());
 	float AttackableDistance;
-	
+	float Distance = FVector::Distance(TargetPlayer->GetActorLocation(), GetPawn()->GetActorLocation());
+
 	if (LeftAmmo < 0)
 	{
 		AttackableDistance = MeleeEnemy->RightWeapon->AttackDistance;
+		BlackboardComponent->SetValueAsBool("UseRightWeapon", Distance <= AttackableDistance);
+
 	} else if (RightAmmo < 0)
 	{
 		AttackableDistance = MeleeEnemy->RightWeapon->AttackDistance;
+		BlackboardComponent->SetValueAsBool("UseLeftWeapon", Distance <= AttackableDistance);
+
 	} else
 	{
 		AttackableDistance = FMath::Min(MeleeEnemy->LeftWeapon->AttackDistance, MeleeEnemy->RightWeapon->AttackDistance);
+		if (Distance <= MeleeEnemy->LeftWeapon->AttackDistance && Distance <= MeleeEnemy->RightWeapon->AttackDistance)
+		{
+			if (MeleeEnemy->LeftWeapon->AttackDistance <= MeleeEnemy->RightWeapon->AttackDistance)
+			{
+				BlackboardComponent->SetValueAsBool("UseLeftWeapon", Distance <= AttackableDistance);
+			}else
+			{
+				BlackboardComponent->SetValueAsBool("UseLeftWeapon", Distance <= AttackableDistance);
+			}
+		} else
+		{
+			if (Distance <= MeleeEnemy->LeftWeapon->AttackDistance)
+			{
+				BlackboardComponent->SetValueAsBool("UseLeftWeapon", Distance <= AttackableDistance);
+			} else if (Distance <= MeleeEnemy->RightWeapon->AttackDistance)
+			{
+				BlackboardComponent->SetValueAsBool("UseLeftWeapon", Distance <= AttackableDistance);
+			}
+		}
 	}
-	float Distance = FVector::Distance(TargetPlayer->GetActorLocation(), GetPawn()->GetActorLocation());
 	BlackboardComponent->SetValueAsBool("IsWithinAttackableRange", Distance <= AttackableDistance);
+
 }
 
 

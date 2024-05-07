@@ -10,7 +10,7 @@ AAxe::AAxe()
 {
 	WeaponName = "Axe";
 	WeaponDescription = "An Axe";
-	Damage = 150;
+	Damage = 5;
 	AttackDistance = 500;
 	AttackSpeed = 50;
 
@@ -25,7 +25,7 @@ AAxe::AAxe()
 void AAxe::UseWeapon(ACharacter* Character)
 {
 	Super::UseWeapon(Character);
-
+	UE_LOG(LogTemp, Warning, TEXT("Used Axe"))
 	TArray<FHitResult> HitResults;
 	const FVector Start = GetActorLocation();
 	const FVector End = Start + GetActorForwardVector() * AttackDistance;
@@ -51,12 +51,6 @@ void AAxe::UseWeapon(ACharacter* Character)
 				HitEnemy->DealDamage(Damage);
 			} else if (HitPlayer)
 			{
-				HitPlayer->Ragdoll();
-				FVector LaunchDirection = HitPlayer->GetActorLocation() - GetActorLocation();
-				LaunchDirection.Normalize();
-				LaunchDirection *= 3;
-				LaunchDirection += FVector::UpVector;
-				HitPlayer->GetMesh()->AddImpulse(LaunchDirection * HitForce);
 				HitPlayer->DealDamage(Damage);
 			}
 		}
