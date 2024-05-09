@@ -35,7 +35,7 @@ AChainBall::AChainBall()
 	Hinge67 = CreateDefaultSubobject<UPhysicsConstraintComponent>(TEXT("Hinge67"));
 	Hinge78 = CreateDefaultSubobject<UPhysicsConstraintComponent>(TEXT("Hinge78"));
 	Hinge78 = CreateDefaultSubobject<UPhysicsConstraintComponent>(TEXT("Hinge89"));
-	//HingeBall = CreateDefaultSubobject<UPhysicsConstraintComponent>(TEXT("BallHinge"));
+	HingeBall = CreateDefaultSubobject<UPhysicsConstraintComponent>(TEXT("BallHinge"));
 
 	BallMesh->SetupAttachment(RootComponent);
 	Chain1->SetupAttachment(RootComponent);
@@ -54,8 +54,8 @@ AChainBall::AChainBall()
 	Hinge56->SetupAttachment(RootComponent);
 	Hinge67->SetupAttachment(RootComponent);
 	Hinge78->SetupAttachment(RootComponent);
-	//Hinge89->SetupAttachment(RootComponent);
-	//HingeBall->SetupAttachment(RootComponent);
+	Hinge89->SetupAttachment(RootComponent);
+	HingeBall->SetupAttachment(RootComponent);
 
 }
 
