@@ -4,24 +4,22 @@
 
 #include "CoreMinimal.h"
 #include "Weapon.h"
-#include "Bomb.generated.h"
+#include "GameFramework/ProjectileMovementComponent.h"
+#include "FrostBall.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class BEATEMUP_API ABomb : public AWeapon
+class BEATEMUP_API AFrostBall : public AWeapon
 {
 	GENERATED_BODY()
 
 public:
-	ABomb();
+	AFrostBall();
 	
 	UPROPERTY(EditAnywhere)
-	UStaticMeshComponent* BombMesh;
-
-	UPROPERTY(EditAnywhere)
-	float ExplosionForce = 50000;
+	UStaticMeshComponent* BallMesh;
 
 	virtual void UseWeapon(ACharacter* Character) override;
 
@@ -31,12 +29,13 @@ public:
 
 	UFUNCTION()
 	virtual void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-						 UPrimitiveComponent* OtherComponent,
-						 int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) override;
-	
-	UFUNCTION()
-	void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector Normal, const FHitResult& Hit);
+	                       UPrimitiveComponent* OtherComponent,
+	                       int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) override;
 
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector Normal,
+	           const FHitResult& Hit);
+	
 	UPROPERTY(EditAnywhere)
 	UParticleSystem* ExplosionParticle;
 };

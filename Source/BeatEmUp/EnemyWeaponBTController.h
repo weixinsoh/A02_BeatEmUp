@@ -30,7 +30,7 @@ public:
 	void OnSensesUpdated(AActor* UpdatedActor, FAIStimulus Stimulus);
 
 	UPROPERTY(EditAnywhere)
-	float SightRadius = 500;
+	float SightRadius = 1000;
 	UPROPERTY(EditAnywhere)
 	float SightAge = 3.5;
 	UPROPERTY(EditAnywhere)
@@ -53,7 +53,10 @@ public:
 	APawn* TargetPlayer;
 
 	UPROPERTY()
-	AWeapon* TargetWeapon;
+	AWeapon* ShortRangeWeapon;
+
+	UPROPERTY()
+	AWeapon* LongRangeWeapon;
 
 	UPROPERTY(EditAnywhere)
 	float LeftAmmo = 5;

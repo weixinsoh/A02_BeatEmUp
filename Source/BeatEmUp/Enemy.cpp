@@ -70,11 +70,11 @@ void AEnemy::Ragdoll()
 	if (AEnemyBTController* EnemyBTController = Cast<AEnemyBTController>(GetController()))
 	{
 		EnemyBTController->BrainComponent->PauseLogic("Ragdolling!");
-		GetMesh()->SetCollisionProfileName("Ragdoll");
-		GetMesh()->SetSimulatePhysics(true);
-		GetCapsuleComponent()->SetCollisionProfileName("NoCollision");
-		GetWorld()->GetTimerManager().SetTimer(RagdollTimerHandle, this, &AEnemy::StopRagdoll, RagdollTime, false);
 	}
+	GetMesh()->SetCollisionProfileName("Ragdoll");
+	GetMesh()->SetSimulatePhysics(true);
+	GetCapsuleComponent()->SetCollisionProfileName("NoCollision");
+	GetWorld()->GetTimerManager().SetTimer(RagdollTimerHandle, this, &AEnemy::StopRagdoll, RagdollTime, false);
 
 }
 
@@ -96,6 +96,30 @@ void AEnemy::StopRagdoll()
 		EnemyBTController->BrainComponent->ResumeLogic("Moving Again!");
 	}
 
+}
+
+void AEnemy::Freeze()
+{
+	if (AEnemyBTController* EnemyBTController = Cast<AEnemyBTController>(GetController()))
+	{
+		EnemyBTController->BrainComponent->PauseLogic("Freezing!");
+	}
+	GetCharacterMovement()->DisableMovement();
+	GetWorld()->GetTimerManager().SetTimer(FreezeTimeHandle, this, &AEnemy::UnFreeze, FreezeTime, false);
+}
+
+void AEnemy::UnFreeze()
+{
+	if (CurrentHealth <= 0)
+	{
+		Destroy();
+		return;
+	}
+	GetCharacterMovement()->SetMovementMode(MOVE_Walking);
+	if (AEnemyBTController* EnemyBTController = Cast<AEnemyBTController>(GetController()))
+	{
+		EnemyBTController->BrainComponent->ResumeLogic("Moving Again!");
+	}
 }
 
 void AEnemy::Shoot(FVector Direction)

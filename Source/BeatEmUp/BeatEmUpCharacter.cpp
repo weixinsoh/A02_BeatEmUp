@@ -346,8 +346,7 @@ void ABeatEmUpCharacter::DropWeapon()
 {
 	if (EquippingWeapon)
 	{
-		EquippingWeapon->bIsPickedUp = false;
-		EquippingWeapon->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+		EquippingWeapon->PickedUpCharacter = nullptr;
 		Inventory.Remove(EquippingWeapon);
 		InventoryWidget->RefreshInventory(Inventory);
 		EquippingWeapon = nullptr;

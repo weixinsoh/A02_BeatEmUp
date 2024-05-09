@@ -24,7 +24,6 @@ void UInventoryWidget::OnButtonWasClicked(UInventoryTile* Tile)
 	Owner->EquippingWeapon->SetActorHiddenInGame(false);
 	FName WeaponSocket = FName("WeaponSocket");
 	Owner->EquippingWeapon->AttachToComponent(Owner->GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, WeaponSocket);
-	Owner->EquippingWeapon->bIsPickedUp = true;
 }
 
 void UInventoryWidget::RefreshInventory(TArray<AWeapon*> Weapons)
@@ -52,7 +51,7 @@ void UInventoryWidget::NativeConstruct()
 		return;
 	}
 
-	for(int32 Y = 0; Y < 5; Y++)
+	for(int32 Y = 0; Y < 3; Y++)
 	{
 		UInventoryTile* Tile = Cast<UInventoryTile>(CreateWidget(GetGameInstance(), BPInventoryTile));
 

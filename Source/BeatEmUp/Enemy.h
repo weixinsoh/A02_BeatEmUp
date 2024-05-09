@@ -56,6 +56,14 @@ public:
 	UFUNCTION()
 		virtual void StopRagdoll();
 
+	void Freeze();
+	void UnFreeze();
+
+	UPROPERTY(EditAnywhere)
+	float FreezeTime = 5;
+
+	FTimerHandle FreezeTimeHandle;
+
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<UDamageTextUI> DamageTextClass;
 

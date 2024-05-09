@@ -11,7 +11,7 @@ AAxe::AAxe()
 	WeaponName = "Axe";
 	WeaponDescription = "An Axe";
 	Damage = 5;
-	AttackDistance = 500;
+	AttackDistance = 400;
 	AttackSpeed = 50;
 
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root Component"));
@@ -25,7 +25,6 @@ AAxe::AAxe()
 void AAxe::UseWeapon(ACharacter* Character)
 {
 	Super::UseWeapon(Character);
-	UE_LOG(LogTemp, Warning, TEXT("Used Axe"))
 	TArray<FHitResult> HitResults;
 	const FVector Start = GetActorLocation();
 	const FVector End = Start + GetActorForwardVector() * AttackDistance;
@@ -33,10 +32,12 @@ void AAxe::UseWeapon(ACharacter* Character)
 	const bool bSweep = GetWorld()->SweepMultiByChannel(HitResults, End, End, GetActorQuat(), ECC_WorldDynamic, CubeShape);
 
 	TArray<AActor*> HitThisPunch;
+	
 	for(FHitResult HitResult : HitResults)
 	{
-		if (HitResult.GetActor() != this && !HitThisPunch.Contains(HitResult.GetActor()))
+		if (HitResult.GetActor() != Character && !HitThisPunch.Contains(HitResult.GetActor()))
 		{
+			UE_LOG(LogTemp, Warning, TEXT("hits: %s, %s"), *HitResult.GetActor()->GetName(), *this->GetName());
 			HitThisPunch.Add(HitResult.GetActor());
 			AEnemy* HitEnemy = Cast<AEnemy>(HitResult.GetActor());
 			ABeatEmUpCharacter* HitPlayer = Cast<ABeatEmUpCharacter>(HitResult.GetActor());

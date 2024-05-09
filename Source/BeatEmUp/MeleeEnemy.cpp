@@ -23,26 +23,27 @@ void AMeleeEnemy::BeginPlay()
 	ABomb* Bomb = Cast<ABomb>(GetWorld()->SpawnActor(BombClass, &SpawnLocation, &SpawnRotation));
 	if (Bomb)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("spawned weapon"));
 		LeftWeapon = Bomb;
 		LeftWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, FName("LeftWeaponSocket"));
+		LeftWeapon->PickedUpCharacter = this;
 	}
 
 	AAxe* Axe = Cast<AAxe>(GetWorld()->SpawnActor(AxeClass, &SpawnLocation, &SpawnRotation));
 	if (Axe)
 	{
 		RightWeapon = Axe;
-		RightWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, FName("RightWeaponSocket")); 
+		RightWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, FName("RightWeaponSocket"));
+		RightWeapon->PickedUpCharacter = this;
 	}
 }
 
 void AMeleeEnemy::Ragdoll()
 {
-	Super::Ragdoll();
 	if (AEnemyWeaponBTController* MeleeEnemyController = Cast<AEnemyWeaponBTController>(GetController()))
 	{
 		MeleeEnemyController->BrainComponent->PauseLogic("Ragdolling!");
 	}
+	Super::Ragdoll();
 }
 
 
@@ -68,6 +69,7 @@ void AMeleeEnemy::UseLeftWeapon()
 		{
 			LeftWeapon = Bomb;
 			LeftWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, FName("LeftWeaponSocket"));
+			LeftWeapon->PickedUpCharacter = this;
 		}
 	}
 }
@@ -85,3 +87,13 @@ void AMeleeEnemy::SetMovementSpeed(float Speed)
 {
 	GetCharacterMovement()->MaxWalkSpeed += Speed;
 }
+
+
+// Destroy with weapon or not destroying itself
+// Damage TEXT
+// Inventory Widget Size
+// freezing weapon
+// physics contraint
+// boss
+// level
+// axe move when attack

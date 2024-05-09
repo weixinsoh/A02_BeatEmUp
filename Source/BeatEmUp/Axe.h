@@ -27,8 +27,6 @@ public:
 	UPROPERTY(EditAnywhere)
 	float HitForce = 50000;
 	
-
-
 	virtual void UseWeapon(ACharacter* Character) override;
 
 	virtual void BeginPlay() override;

@@ -46,7 +46,8 @@ public:
 						 UPrimitiveComponent* OtherComponent,
 						 int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
-	bool bIsPickedUp;
+	UPROPERTY()
+	ACharacter* PickedUpCharacter;
 	
 protected:
 	// Called when the game starts or when spawned

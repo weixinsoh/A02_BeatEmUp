@@ -126,19 +126,20 @@ void AEnemyWeaponBTController::SprintToAttackableRange()
 	Direction.Normalize();
 	float AttackableDistance;
 	
-	if (LeftAmmo < 0)
+	if (LeftAmmo <= 0)
 	{
 		AttackableDistance = MeleeEnemy->RightWeapon->AttackDistance;
-	} else if (RightAmmo < 0)
+	} else if (RightAmmo <= 0)
 	{
 		AttackableDistance = MeleeEnemy->RightWeapon->AttackDistance;
 	} else
 	{
-		AttackableDistance = FMath::Min(MeleeEnemy->LeftWeapon->AttackDistance, MeleeEnemy->RightWeapon->AttackDistance);
+		AttackableDistance = FMath::Max(MeleeEnemy->LeftWeapon->AttackDistance, MeleeEnemy->RightWeapon->AttackDistance);
 	}
 	float Distance = FVector::Distance(TargetPlayer->GetActorLocation(), GetPawn()->GetActorLocation()) - AttackableDistance;
-	FVector Position = Direction * Distance;
+	FVector Position = GetPawn()->GetActorLocation() + Direction * Distance;
 	BlackboardComponent->SetValueAsVector("SprintToPoint", Position);
+	BlackboardComponent->SetValueAsBool("NeedsCheck", true);
 }
 
 void AEnemyWeaponBTController::SetMovementSpeed(float Speed)
@@ -154,40 +155,41 @@ void AEnemyWeaponBTController::RangeCheck()
 	float AttackableDistance;
 	float Distance = FVector::Distance(TargetPlayer->GetActorLocation(), GetPawn()->GetActorLocation());
 
-	if (LeftAmmo < 0)
+	if (LeftAmmo <= 0)
 	{
 		AttackableDistance = MeleeEnemy->RightWeapon->AttackDistance;
 		BlackboardComponent->SetValueAsBool("UseRightWeapon", Distance <= AttackableDistance);
 
-	} else if (RightAmmo < 0)
+	} else if (RightAmmo <= 0)
 	{
-		AttackableDistance = MeleeEnemy->RightWeapon->AttackDistance;
+		AttackableDistance = MeleeEnemy->LeftWeapon->AttackDistance;
 		BlackboardComponent->SetValueAsBool("UseLeftWeapon", Distance <= AttackableDistance);
 
 	} else
 	{
-		AttackableDistance = FMath::Min(MeleeEnemy->LeftWeapon->AttackDistance, MeleeEnemy->RightWeapon->AttackDistance);
+		AttackableDistance = FMath::Max(MeleeEnemy->LeftWeapon->AttackDistance, MeleeEnemy->RightWeapon->AttackDistance);
 		if (Distance <= MeleeEnemy->LeftWeapon->AttackDistance && Distance <= MeleeEnemy->RightWeapon->AttackDistance)
 		{
 			if (MeleeEnemy->LeftWeapon->AttackDistance <= MeleeEnemy->RightWeapon->AttackDistance)
 			{
-				BlackboardComponent->SetValueAsBool("UseLeftWeapon", Distance <= AttackableDistance);
+				BlackboardComponent->SetValueAsBool("UseLeftWeapon", true);
 			}else
 			{
-				BlackboardComponent->SetValueAsBool("UseLeftWeapon", Distance <= AttackableDistance);
+				BlackboardComponent->SetValueAsBool("UseRightWeapon", true);
 			}
 		} else
 		{
 			if (Distance <= MeleeEnemy->LeftWeapon->AttackDistance)
 			{
-				BlackboardComponent->SetValueAsBool("UseLeftWeapon", Distance <= AttackableDistance);
+				BlackboardComponent->SetValueAsBool("UseLeftWeapon", true);
 			} else if (Distance <= MeleeEnemy->RightWeapon->AttackDistance)
 			{
-				BlackboardComponent->SetValueAsBool("UseLeftWeapon", Distance <= AttackableDistance);
+				BlackboardComponent->SetValueAsBool("UseRightWeapon", true);
 			}
 		}
 	}
-	BlackboardComponent->SetValueAsBool("IsWithinAttackableRange", Distance <= AttackableDistance);
+	BlackboardComponent->SetValueAsBool("IsNotWithinAttackableRange", Distance > AttackableDistance);
+	BlackboardComponent->SetValueAsBool("NeedsCheck", false);
 
 }
 

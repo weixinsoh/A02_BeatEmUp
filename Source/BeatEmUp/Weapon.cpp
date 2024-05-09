@@ -12,8 +12,6 @@ AWeapon::AWeapon()
 
 	WeaponName = FString("Default name");
 	WeaponDescription = FString("Default description");
-
-	bIsPickedUp = false;
 }
 
 void AWeapon::SetName(FString Name)
@@ -49,13 +47,14 @@ void AWeapon::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherA
                              UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep,
                              const FHitResult& SweepResult)
 {
-	if (!bIsPickedUp)
+	if (PickedUpCharacter == nullptr)
 	{
 		ABeatEmUpCharacter* Player = Cast<ABeatEmUpCharacter>(OtherActor);
 		if (Player)
 		{
 			Player->PickUp(this);
 			SetActorHiddenInGame(true);
+			PickedUpCharacter = Player;
 		}
 	}
 }

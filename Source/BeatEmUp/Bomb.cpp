@@ -5,6 +5,7 @@
 
 #include "BeatEmUpCharacter.h"
 #include "Enemy.h"
+#include "MeleeEnemy.h"
 #include "GameFramework/Character.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -13,12 +14,12 @@ ABomb::ABomb()
 	WeaponName = "Bomb";
 	WeaponDescription = "A Bomb";
 	Damage = 5;
-	AttackDistance = 1000;
+	AttackDistance = 800;
 	AttackSpeed = 100;
 	
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root Component"));
-	Bomb = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Bomb"));
-	Bomb->SetupAttachment(RootComponent);
+	BombMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Bomb"));
+	BombMesh->SetupAttachment(RootComponent);
 }
 
 void ABomb::UseWeapon(ACharacter* Character)
@@ -30,19 +31,30 @@ void ABomb::UseWeapon(ACharacter* Character)
 		Player->DropWeapon();
 	}
 	FVector LaunchDirection = Character->GetActorForwardVector();
-	LaunchDirection *= 3;
-	Bomb->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-	Bomb->SetCollisionResponseToChannel(ECC_WorldStatic, ECR_Block);
-	Bomb->SetSimulatePhysics(true);
-	Bomb->SetPhysicsLinearVelocity(LaunchDirection * 1000);
-	Bomb->SetNotifyRigidBodyCollision(true);
-	Bomb->OnComponentHit.AddDynamic(this, &ABomb::OnHit);
+	LaunchDirection.Normalize();
+	LaunchDirection *= 2;
+	if (Cast<AMeleeEnemy>(Character))
+	{
+		LaunchDirection *= 3;
+		LaunchDirection += FVector::UpVector * 5;
+	} else
+	{
+		LaunchDirection += FVector::UpVector;
+	}
+	UE_LOG(LogTemp, Warning, TEXT("launch vector: %s"), *LaunchDirection.ToString());
+	BombMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	BombMesh->SetCollisionResponseToChannel(ECC_WorldStatic, ECR_Block);
+	BombMesh->SetSimulatePhysics(true);
+	BombMesh->SetPhysicsLinearVelocity(LaunchDirection * AttackSpeed);
+	BombMesh->SetEnableGravity(true);
+	BombMesh->SetNotifyRigidBodyCollision(true);
+	BombMesh->OnComponentHit.AddDynamic(this, &ABomb::OnHit);
 }
 
 void ABomb::BeginPlay()
 {
 	Super::BeginPlay();
-	Bomb->OnComponentBeginOverlap.AddDynamic(this, &ABomb::OnOverlap);
+	BombMesh->OnComponentBeginOverlap.AddDynamic(this, &ABomb::OnOverlap);
 }
 
 void ABomb::Tick(float DeltaTime)
@@ -59,7 +71,7 @@ void ABomb::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherAct
 void ABomb::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector Normal,
 	const FHitResult& Hit)
 {
-	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ExplosionParticle, Bomb->GetComponentLocation(), FRotator::ZeroRotator, FVector(3, 3, 3));
+	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ExplosionParticle, BombMesh->GetComponentLocation(), FRotator::ZeroRotator, FVector(3, 3, 3));
 	TArray<FHitResult> Hits;
 	TArray<AActor*> HitActors;
 	FCollisionShape ExplosionSphere = FCollisionShape::MakeSphere(AttackDistance);
@@ -69,7 +81,7 @@ void ABomb::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveCo
 	{
 		for (FHitResult Hit : Hits)
 		{
-			if (!HitActors.Contains(Hit.GetActor()))
+			if (Hit.GetActor() != PickedUpCharacter && !HitActors.Contains(Hit.GetActor()))
 			{
 				HitActors.Add(Hit.GetActor());
 				UMeshComponent* HitMesh;
