@@ -16,38 +16,38 @@ public:
 	AWeapon();
 	
 	UPROPERTY()
-	FString WeaponName;
+		FString WeaponName;
 
 	UPROPERTY()
-	FString WeaponDescription;
+		FString WeaponDescription;
 
 	UPROPERTY()
-	UTexture2D* WeaponIcon;
+		UTexture2D* WeaponIcon;
 
 	UPROPERTY(EditAnywhere)
-	float Damage;
+		float Damage;
 	
 	UPROPERTY(EditAnywhere)
-	float AttackDistance;
+		float AttackDistance;
 	
 	UPROPERTY(EditAnywhere)
-	float AttackSpeed;
+		float AttackSpeed;
+	
+	UPROPERTY()
+		ACharacter* PickedUpCharacter;
 
 	void SetName(FString Name);
 	void SetDescription(FString Description);
 	void SetIcon(UTexture2D* Icon);
-
 	FString GetName();
 	FString GetDescription();
 
 	virtual void UseWeapon(ACharacter* Character);
 
-	virtual void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UFUNCTION()
+		void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 						 UPrimitiveComponent* OtherComponent,
 						 int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-
-	UPROPERTY()
-	ACharacter* PickedUpCharacter;
 	
 protected:
 	// Called when the game starts or when spawned

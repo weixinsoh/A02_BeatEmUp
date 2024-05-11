@@ -56,7 +56,8 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		int CurrentHealth = MaxHealth;
-
+	
+	// Punch
 	UPROPERTY(EditAnywhere)
 		UInputAction* PunchAction;
 
@@ -74,7 +75,7 @@ public:
 
 	bool bPunchReady = true;
 	FTimerHandle PunchTimerHandle;
-
+	
 	UFUNCTION()
 		void Punch();
 
@@ -83,6 +84,7 @@ public:
 
 	void DealDamage(float Damage);
 
+	// Interact with interactable actor
 	UPROPERTY(EditAnywhere)
 		UInputAction* UseAction;
 
@@ -92,14 +94,17 @@ public:
 	UFUNCTION()
 		void Use();
 
+	// Grab and throw enemy
 	UPROPERTY(EditAnywhere)
 		UInputAction* GrabAction;
 
 	UPROPERTY(EditAnywhere)
 		float GrabDistance = 250;
-	
+
 	UPROPERTY(EditAnywhere)
 		float ThrowForce = 50000;
+
+	bool IsGrabbingEnemy;
 
 	UFUNCTION()
 		void Grab();
@@ -109,13 +114,26 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		AEnemy* GrabbedEnemy;
-	bool IsGrabbingEnemy;
 
+	// In game UI
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<UInGameUI> InGameUIClass;
 
 	UPROPERTY()
 		UInGameUI* InGameUI;
+
+	// Inventory system and weapon
+	UPROPERTY(EditAnywhere)
+		TArray<AWeapon*> Inventory;
+	
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<UInventoryWidget> InventoryWidgetClass;
+
+	UPROPERTY(EditAnywhere)
+		UInventoryWidget* InventoryWidget;
+
+	UPROPERTY(EditAnywhere)
+		int32 InventorySize = 5;
 	
 	UPROPERTY(EditAnywhere)
 		UInputAction* DropAction;
@@ -136,7 +154,7 @@ public:
 		void PickUp(AWeapon* Weapon);
 
 	UFUNCTION()
-	void DropWeapon();
+		void DropWeapon();
 
 	UFUNCTION()
 		AWeapon* GetWeaponAtIndex(int32 Index);
@@ -146,29 +164,6 @@ public:
 
 	UFUNCTION()
 		void ShowCursor();
-
-	UFUNCTION()
-		void Ragdoll();
-
-	UFUNCTION()
-		void StopRagdoll();
-	
-	UPROPERTY(EditAnywhere)
-		float RagdollTime = 5;
-	
-	FTimerHandle RagdollTimerHandle;
-
-	UPROPERTY(EditAnywhere)
-		TArray<AWeapon*> Inventory;
-
-	UPROPERTY(EditAnywhere)
-		UInventoryWidget* InventoryWidget;
-
-	UPROPERTY(EditAnywhere)
-		int32 InventorySize = 5;
-
-	UPROPERTY(EditAnywhere)
-		TSubclassOf<UInventoryWidget> InventoryWidgetClass;
 
 protected:
 

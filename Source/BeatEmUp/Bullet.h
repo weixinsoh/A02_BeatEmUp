@@ -26,12 +26,16 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		UProjectileMovementComponent* MovementComponent;
+
 	UPROPERTY(EditAnywhere)
 		UStaticMeshComponent* Mesh;
+
 	UPROPERTY(EditAnywhere)
 		float MovementSpeed = 2000;
+
 	UPROPERTY(EditAnywhere)
 		float Damage = 5;
+
 	UFUNCTION()
 		void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector Normal, const FHitResult& Hit);
 	

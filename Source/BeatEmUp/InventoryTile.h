@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "InventoryDescriptionUI.h"
 #include "Weapon.h"
 #include "Blueprint/UserWidget.h"
 #include "Components/Border.h"
@@ -24,19 +25,33 @@ class BEATEMUP_API UInventoryTile : public UUserWidget
 public:
 
 	UPROPERTY(meta = (BindWidget))
-	UImage* WeaponIcon;
+		UImage* WeaponIcon;
 
 	UPROPERTY(meta = (BindWidget))
-	UButton* TileButton;
+		UButton* TileButton;
 
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<UInventoryDescriptionUI> InventoryDescriptionClass;
+
+	UPROPERTY(EditAnywhere)
+		UInventoryDescriptionUI* InventoryDescriptionUI;
+	
 	FUInventoryTileOnClicked OnClickedDelegate;
 
-	void SetTile(UTexture2D* Icon);
+	void SetTile(UTexture2D* Icon, AWeapon* Weapon);
 
 	virtual void NativeConstruct() override;
 
+	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
+	
 	UFUNCTION()
-	void OnClicked();
+		void OnClicked();
 
-	int32 Index;
+	UFUNCTION()
+		void OnHovered();
+
+	UFUNCTION()
+		void OnUnHovered();
+	
+	bool bIsHovered;
 };

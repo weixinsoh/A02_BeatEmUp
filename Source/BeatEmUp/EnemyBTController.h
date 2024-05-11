@@ -29,29 +29,40 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		float SightRadius = 500;
+
 	UPROPERTY(EditAnywhere)
 		float SightAge = 3.5;
+
 	UPROPERTY(EditAnywhere)
 		float LoseSightRadius = SightRadius + 50;
+
 	UPROPERTY(EditAnywhere)
 		float FieldOfView = 45;
+
 	UPROPERTY(EditAnywhere)
 		float PatrolDistance = 2000;
+
 	UPROPERTY(EditAnywhere)
 		UAISenseConfig_Sight* SightConfiguration;
+
 	UPROPERTY(EditAnywhere)
 		UBlackboardData* AIBlackboard;
+
 	UPROPERTY(EditAnywhere)
 		UBehaviorTree* BehaviourTree;
+
 	UPROPERTY()
 		UBlackboardComponent* BlackboardComponent;
+
 	UPROPERTY()
 		UNavigationSystemV1* NavigationSystem;
+
 	UPROPERTY()
 		APawn* TargetPlayer;
 
 	UPROPERTY(EditAnywhere)
 		float Ammo = 5;
+
 	void Shoot();
 	
 };

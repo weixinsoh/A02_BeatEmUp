@@ -19,23 +19,15 @@ public:
 	AAxe();
 	
 	UPROPERTY(EditAnywhere)
-	UStaticMeshComponent* AxeHead;
+		UStaticMeshComponent* AxeHead;
 
 	UPROPERTY(EditAnywhere)
-	UStaticMeshComponent* AxeHandler;
+		UStaticMeshComponent* AxeHandler;
 
 	UPROPERTY(EditAnywhere)
-	float HitForce = 50000;
-	
-	virtual void UseWeapon(ACharacter* Character) override;
+		float HitForce = 50000;
 
 	virtual void BeginPlay() override;
-
-	virtual void Tick(float DeltaTime) override;
-
-	UFUNCTION()
-	virtual void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-						 UPrimitiveComponent* OtherComponent,
-						 int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) override;
+	virtual void UseWeapon(ACharacter* Character) override;
 
 };

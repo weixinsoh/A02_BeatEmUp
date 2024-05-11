@@ -27,54 +27,58 @@ public:
 	void GenerateNewRandomLocation();
 
 	UFUNCTION()
-	void OnSensesUpdated(AActor* UpdatedActor, FAIStimulus Stimulus);
+		void OnSensesUpdated(AActor* UpdatedActor, FAIStimulus Stimulus);
 
 	UPROPERTY(EditAnywhere)
-	float SightRadius = 1000;
-	UPROPERTY(EditAnywhere)
-	float SightAge = 3.5;
-	UPROPERTY(EditAnywhere)
-	float LoseSightRadius = SightRadius + 50;
-	UPROPERTY(EditAnywhere)
-	float FieldOfView = 45;
-	UPROPERTY(EditAnywhere)
-	float PatrolDistance = 2000;
-	UPROPERTY(EditAnywhere)
-	UAISenseConfig_Sight* SightConfiguration;
-	UPROPERTY(EditAnywhere)
-	UBlackboardData* AIBlackboard;
-	UPROPERTY(EditAnywhere)
-	UBehaviorTree* BehaviourTree;
-	UPROPERTY()
-	UBlackboardComponent* BlackboardComponent;
-	UPROPERTY()
-	UNavigationSystemV1* NavigationSystem;
-	UPROPERTY()
-	APawn* TargetPlayer;
+		float SightRadius = 1000;
 
-	UPROPERTY()
-	AWeapon* ShortRangeWeapon;
+	UPROPERTY(EditAnywhere)
+		float SightAge = 3.5;
+
+	UPROPERTY(EditAnywhere)
+		float LoseSightRadius = SightRadius + 100;
+
+	UPROPERTY(EditAnywhere)
+		float FieldOfView = 45;
+
+	UPROPERTY(EditAnywhere)
+		float PatrolDistance = 2000;
+
+	UPROPERTY(EditAnywhere)
+		UAISenseConfig_Sight* SightConfiguration;
+
+	UPROPERTY(EditAnywhere)
+		UBlackboardData* AIBlackboard;
+
+	UPROPERTY(EditAnywhere)
+		UBehaviorTree* BehaviourTree;
 
 	UPROPERTY()
-	AWeapon* LongRangeWeapon;
+		UBlackboardComponent* BlackboardComponent;
+
+	UPROPERTY()
+		UNavigationSystemV1* NavigationSystem;
+
+	UPROPERTY()
+		APawn* TargetPlayer;
 
 	UPROPERTY(EditAnywhere)
-	float LeftAmmo = 5;
+		float LeftAmmo = 5;
 
 	UPROPERTY(EditAnywhere)
-	float RightAmmo = 5;
+		float RightAmmo = 5;
 
 	UPROPERTY(EditAnywhere)
-	float WalkingSpeed;
+		float WalkingSpeed;
 
 	UPROPERTY(EditAnywhere)
-	float SprintSpeed;
-	
+		float SprintSpeed;
+
+	void RangeCheck();
+	void SprintToAttackableRange();
+	void SetMovementSpeed(bool bSprint);
 	void UseLeftWeapon();
 	void UseRightWeapon();
-	void SprintToAttackableRange();
-	void SetMovementSpeed(float Speed);
-	void RangeCheck();
 };
 
 

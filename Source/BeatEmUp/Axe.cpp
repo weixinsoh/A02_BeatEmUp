@@ -6,14 +6,20 @@
 #include "BeatEmUpCharacter.h"
 #include "Enemy.h"
 
+/**
+ * Constructor for axe weapon.
+ */
 AAxe::AAxe()
 {
+	// Set weapon info
 	WeaponName = "Axe";
-	WeaponDescription = "An Axe";
+	WeaponDescription = "A versatile melee tool featuring a sharp, heavy blade attached to a sturdy handle. "
+					 "Designed for close-quarters combat, it delivers powerful, sweeping strikes capable of inflicting significant damage. ";
 	Damage = 5;
 	AttackDistance = 400;
 	AttackSpeed = 50;
 
+	// Create component
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root Component"));
 	AxeHead = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Axe Head"));
 	AxeHandler = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Axe Handler"));
@@ -22,27 +28,43 @@ AAxe::AAxe()
 
 }
 
+/**
+ * Begin play function which dynamically delegate OnOverlap() function
+ * once the axe head is overlapped with something.
+ */
+void AAxe::BeginPlay()
+{
+	Super::BeginPlay();
+	AxeHead->OnComponentBeginOverlap.AddDynamic(this, &AAxe::OnOverlap);
+}
+
+/**
+ * Deal damage to the hit target. If the hit target is enemy, add impulse to it. 
+ * @param Character The character who use this weapon.
+ */
 void AAxe::UseWeapon(ACharacter* Character)
 {
 	Super::UseWeapon(Character);
+
+	// Detect hit target by performing Multi Sweep using cube collision
 	TArray<FHitResult> HitResults;
 	const FVector Start = GetActorLocation();
 	const FVector End = Start + GetActorForwardVector() * AttackDistance;
 	const FCollisionShape CubeShape = FCollisionShape::MakeBox(FVector(AttackDistance));
 	const bool bSweep = GetWorld()->SweepMultiByChannel(HitResults, End, End, GetActorQuat(), ECC_WorldDynamic, CubeShape);
-
 	TArray<AActor*> HitThisPunch;
-	
+
+	// Perform attack effect on every hit target
 	for(FHitResult HitResult : HitResults)
 	{
 		if (HitResult.GetActor() != Character && !HitThisPunch.Contains(HitResult.GetActor()))
 		{
-			UE_LOG(LogTemp, Warning, TEXT("hits: %s, %s"), *HitResult.GetActor()->GetName(), *this->GetName());
 			HitThisPunch.Add(HitResult.GetActor());
 			AEnemy* HitEnemy = Cast<AEnemy>(HitResult.GetActor());
 			ABeatEmUpCharacter* HitPlayer = Cast<ABeatEmUpCharacter>(HitResult.GetActor());
 			if (HitEnemy)
 			{
+				// Add impulse to the enemy and deal damage
 				HitEnemy->Ragdoll();
 				FVector LaunchDirection = HitEnemy->GetActorLocation() - GetActorLocation();
 				LaunchDirection.Normalize();
@@ -50,28 +72,13 @@ void AAxe::UseWeapon(ACharacter* Character)
 				LaunchDirection += FVector::UpVector;
 				HitEnemy->GetMesh()->AddImpulse(LaunchDirection * HitForce);
 				HitEnemy->DealDamage(Damage);
+				
 			} else if (HitPlayer)
 			{
+				// Deal damage to the player
 				HitPlayer->DealDamage(Damage);
 			}
 		}
 	}
-}
-
-void AAxe::BeginPlay()
-{
-	Super::BeginPlay();
-	AxeHead->OnComponentBeginOverlap.AddDynamic(this, &AAxe::OnOverlap);
-}
-
-void AAxe::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-}
-
-void AAxe::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent,
-	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
-{
-	Super::OnOverlap(OverlappedComponent, OtherActor, OtherComponent, OtherBodyIndex, bFromSweep, SweepResult);
 }
 

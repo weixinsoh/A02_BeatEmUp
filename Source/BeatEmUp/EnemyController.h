@@ -48,6 +48,7 @@ public:
 	void OnChaseExit();
 
 	float TimeInState = 0;
+
 	UPROPERTY(EditAnywhere)
 		float DetectionRange = 1000;
 

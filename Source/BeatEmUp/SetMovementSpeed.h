@@ -13,6 +13,7 @@ UCLASS()
 class BEATEMUP_API USetMovementSpeed : public UBTTaskNode
 {
 	GENERATED_BODY()
+	
 public:
 	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
 };

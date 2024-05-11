@@ -81,6 +81,10 @@ void AGravityWell::Interact_Implementation()
 	Activate();
 }
 
+/**
+ * This function set the interaction prompt UI to be visible
+ * once the widget trigger overlapped with the player
+ */
 void AGravityWell::OnPlayerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
                                    UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep,
                                    const FHitResult& SweepResult)
@@ -89,11 +93,14 @@ void AGravityWell::OnPlayerOverlap(UPrimitiveComponent* OverlappedComponent, AAc
 
 	if (ABeatEmUpCharacter* Player = Cast<ABeatEmUpCharacter>(OtherActor))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("setvisibility"));
 		InteractionPromptWidgetComponent->SetVisibility(true);
 	}
 }
 
+/**
+ * This function set the interaction prompt UI to be hidden
+ * once the widget trigger end overlapped with the player
+ */
 void AGravityWell::OnPlayerEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
                                       UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex)
 {
@@ -109,6 +116,7 @@ void AGravityWell::BeginPlay()
 {
 	Super::BeginPlay();
 
+	// Create the interaction prompt widget and set the widget information
 	PromptUI = Cast<UInteractionPromptUI>(CreateWidget(GetGameInstance(), InteractablePromptUIClass));
 	if (PromptUI)
 	{
@@ -117,7 +125,8 @@ void AGravityWell::BeginPlay()
 		InteractionPromptWidgetComponent->SetWidget(PromptUI);
 		InteractionPromptWidgetComponent->SetVisibility(false);
 	}
-	
+
+	// dynamically delegate overlap functions once the widget trigger component overlapped/end overlapped with something
 	WidgetTrigger->OnComponentBeginOverlap.AddDynamic(this, &AGravityWell::OnPlayerOverlap);
 	WidgetTrigger->OnComponentEndOverlap.AddDynamic(this, &AGravityWell::OnPlayerEndOverlap);
 }

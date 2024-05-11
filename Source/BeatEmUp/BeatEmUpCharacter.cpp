@@ -80,7 +80,7 @@ void ABeatEmUpCharacter::BeginPlay()
 		InventoryWidget->Owner = this;
 		InventoryWidget->AddToViewport();
 	}
-
+	
 	InGameUI = Cast<UInGameUI>(CreateWidget(GetGameInstance(), InGameUIClass));
 	if (InGameUI)
 	{
@@ -94,7 +94,7 @@ void ABeatEmUpCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	// Set the enemy being grabbed always locating at the Player's forward vector
+	// Update the position of the enemy being grabbed to always locate in front of the player
 	if (IsGrabbingEnemy)
 	{
 		FVector NewLocation = GetActorLocation() + GetActorForwardVector() * GrabDistance;
@@ -106,15 +106,6 @@ void ABeatEmUpCharacter::Tick(float DeltaTime)
 	{
 		InGameUI->UpdateValues();
 	}
-/*
-	if (EquippingWeapon && !bUsing)
-	{
-		FVector ForwardVector = GetActorForwardVector();
-		
-		EquippingWeapon->SetActorLocation(GetFollowCamera() + FVector(0, 50, 0));
-		EquippingWeapon->SetActorRotation(GetActorRotation() + FRotator(-90, 0, 0));
-	}
-	*/
 }
 
 
@@ -260,6 +251,9 @@ void ABeatEmUpCharacter::Use()
 	}
 }
 
+/**
+ * This function is used to grab an enemy using line trace.
+ */
 void ABeatEmUpCharacter::Grab()
 {
 	// Check the Player is already grabbing an enemy
@@ -302,6 +296,9 @@ void ABeatEmUpCharacter::Grab()
 	}
 }
 
+/**
+ * This function is used to throw the grabbed enemy using physics mechanics. 
+ */
 void ABeatEmUpCharacter::Throw()
 {
 	if (IsGrabbingEnemy)
@@ -323,6 +320,11 @@ void ABeatEmUpCharacter::Throw()
 	}
 }
 
+/**
+ * This function is used to pick up a weapon by adding it to the inventory array.
+ * It refreshes the inventory widget after picking up the weapon.
+ * @param Weapon The weapon to be picked up.
+ */
 void ABeatEmUpCharacter::PickUp(AWeapon* Weapon)
 {
 	if(Inventory.Num() < InventorySize && !Inventory.Contains(Weapon))
@@ -332,6 +334,11 @@ void ABeatEmUpCharacter::PickUp(AWeapon* Weapon)
 	}
 }
 
+/**
+ * Returns a weapon in the inventory for a given index.
+ * @param Index the index position of the weapon in the inventory.
+ * @return a weapon in the inventory.
+ */
 AWeapon* ABeatEmUpCharacter::GetWeaponAtIndex(int32 Index)
 {
 	if(Index < 0 || Index >= Inventory.Num())
@@ -342,10 +349,16 @@ AWeapon* ABeatEmUpCharacter::GetWeaponAtIndex(int32 Index)
 
 }
 
+/**
+ * This function is used to drop the equipping weapon.
+ * It detaches the weapon from the player's weapon socket
+ * and removes it from the inventory.
+ */
 void ABeatEmUpCharacter::DropWeapon()
 {
 	if (EquippingWeapon)
 	{
+		EquippingWeapon->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 		EquippingWeapon->PickedUpCharacter = nullptr;
 		Inventory.Remove(EquippingWeapon);
 		InventoryWidget->RefreshInventory(Inventory);
@@ -353,6 +366,9 @@ void ABeatEmUpCharacter::DropWeapon()
 	}
 }
 
+/**
+ * This function is used to perform the attack action using the equipping weapon.
+ */
 void ABeatEmUpCharacter::UseWeapon()
 {
 	if (EquippingWeapon)
@@ -361,6 +377,9 @@ void ABeatEmUpCharacter::UseWeapon()
 	}
 }
 
+/**
+ * This function is used to show/hide the mouse cursor.
+ */
 void ABeatEmUpCharacter::ShowCursor()
 {
 	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
@@ -376,38 +395,6 @@ void ABeatEmUpCharacter::ShowCursor()
 			PlayerController->bShowMouseCursor = true;
 		}
 	}
-}
-
-void ABeatEmUpCharacter::Ragdoll()
-{
-	if (APlayerController* PlayerController = Cast<APlayerController>(GetController()))
-	{
-		DisableInput(PlayerController);
-	}
-	GetMesh()->SetCollisionProfileName("Ragdoll");
-	GetMesh()->SetSimulatePhysics(true);
-	GetCapsuleComponent()->SetCollisionProfileName("NoCollision");
-	GetWorld()->GetTimerManager().SetTimer(RagdollTimerHandle, this, &ABeatEmUpCharacter::StopRagdoll, RagdollTime, false);
-}
-
-void ABeatEmUpCharacter::StopRagdoll()
-{
-	if (CurrentHealth <= 0)
-	{
-		Destroy();
-		return;
-	}
-	GetMesh()->SetSimulatePhysics(false);
-	GetMesh()->SetCollisionProfileName("CharacterMesh");
-	GetCapsuleComponent()->SetWorldLocation(GetMesh()->GetSocketLocation("pelvis"));
-	GetMesh()->AttachToComponent(GetCapsuleComponent(), FAttachmentTransformRules::SnapToTargetIncludingScale);
-	GetMesh()->SetRelativeLocationAndRotation(FVector(0, 0, -90), FRotator(0, -90, 0));
-	GetCapsuleComponent()->SetCollisionProfileName("Pawn");
-	if (APlayerController* PlayerController = Cast<APlayerController>(GetController()))
-	{
-		EnableInput(PlayerController);
-	}
-
 }
 
 void ABeatEmUpCharacter::Move(const FInputActionValue& Value)

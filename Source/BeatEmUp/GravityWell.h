@@ -29,41 +29,42 @@ public:
 	AGravityWell();
 
 	UPROPERTY(EditAnywhere)
-	UStaticMeshComponent* Mesh;
+		UStaticMeshComponent* Mesh;
 
 	UPROPERTY(EditAnywhere)
-	EGravityType GravityType;
+		EGravityType GravityType;
 
 	UPROPERTY(EditAnywhere)
-	float SweepSize = 1000;
+		float SweepSize = 1000;
 
 	UPROPERTY(EditAnywhere)
-	float Force = 2000;
+		float Force = 2000;
 
 	void Activate();
 
 	virtual void Interact_Implementation() override;
 
+	// Interaction prompt In game UI
 	UPROPERTY(EditAnywhere)
-	UBoxComponent* WidgetTrigger;
+		UBoxComponent* WidgetTrigger;
 
 	UPROPERTY(EditAnywhere)
-	UWidgetComponent* InteractionPromptWidgetComponent;
+		UWidgetComponent* InteractionPromptWidgetComponent;
 
 	UPROPERTY(EditAnywhere)
-	UInteractionPromptUI* PromptUI;
+		UInteractionPromptUI* PromptUI;
 
 	UPROPERTY(EditAnywhere)
-	TSubclassOf<class UInteractionPromptUI> InteractablePromptUIClass;
+		TSubclassOf<class UInteractionPromptUI> InteractablePromptUIClass;
 
 	UFUNCTION()
-	void OnPlayerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-	                     UPrimitiveComponent* OtherComponent,
-	                     int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+		void OnPlayerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+							UPrimitiveComponent* OtherComponent,
+							int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 	UFUNCTION()
-	void OnPlayerEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-	                        UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex);
+		void OnPlayerEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+								UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex);
 
 protected:
 	// Called when the game starts or when spawned

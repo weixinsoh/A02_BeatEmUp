@@ -38,6 +38,10 @@ void ATrapdoor::Interact_Implementation()
 	RightDoor->AddImpulse(FVector::DownVector);
 }
 
+/**
+ * This function set the interaction prompt UI to be visible
+ * once the widget trigger overlapped with the player
+ */
 void ATrapdoor::OnPlayerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
@@ -47,6 +51,10 @@ void ATrapdoor::OnPlayerOverlap(UPrimitiveComponent* OverlappedComponent, AActor
 	}
 }
 
+/**
+ * This function set the interaction prompt UI to be hidden
+ * once the widget trigger end overlapped with the player
+ */
 void ATrapdoor::OnPlayerEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex)
 {
@@ -65,12 +73,14 @@ void ATrapdoor::BeginPlay()
 	LeftDoor->SetSimulatePhysics(false);
 	RightDoor->SetSimulatePhysics(false);
 
+	// Create the interaction prompt widget and set the widget information
 	PromptUI = Cast<UInteractionPromptUI>(CreateWidget(GetGameInstance(), InteractablePromptUIClass));
 	PromptUI->ActionText->SetText(FText::FromString("Right Click to Use"));
 	PromptUI->InteractableNameText->SetText(FText::FromString("Trapdoor"));
 	InteractionPromptWidgetComponent->SetWidget(PromptUI);
 	InteractionPromptWidgetComponent->SetVisibility(false);
-	
+
+	// dynamically delegate overlap functions once the widget trigger component overlapped/end overlapped with something
 	WidgetTrigger->OnComponentBeginOverlap.AddDynamic(this, &ATrapdoor::OnPlayerOverlap);
 	WidgetTrigger->OnComponentEndOverlap.AddDynamic(this, &ATrapdoor::OnPlayerEndOverlap);
 }

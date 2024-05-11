@@ -21,24 +21,24 @@ class BEATEMUP_API UInventoryWidget : public UUserWidget
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TSubclassOf<UInventoryTile> BPInventoryTile;
+		TSubclassOf<UInventoryTile> BPInventoryTile;
 
 	UPROPERTY()
-	TArray<UInventoryTile*> TileList;
+		TArray<UInventoryTile*> TileList;
 	
 	UPROPERTY(meta=(BindWidget))
-	UGridPanel* InventoryGrid;
+		UGridPanel* InventoryGrid;
+
+	UPROPERTY(EditAnywhere)
+		TMap<FString, UTexture2D*> IconMap;
+
+	UPROPERTY(EditAnywhere)
+		ABeatEmUpCharacter* Owner;
 
 	UFUNCTION()
-	void OnButtonWasClicked(UInventoryTile* Tile);
+		void OnButtonWasClicked(UInventoryTile* Tile);
 
 	void RefreshInventory(TArray<AWeapon*> Weapons);
 
 	virtual void NativeConstruct() override;
-
-	UPROPERTY(EditAnywhere)
-	ABeatEmUpCharacter* Owner;
-
-	UPROPERTY(EditAnywhere)
-	TMap<FString, UTexture2D*> IconMap;
 };

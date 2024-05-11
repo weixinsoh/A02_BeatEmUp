@@ -98,6 +98,10 @@ void AEnemy::StopRagdoll()
 
 }
 
+/**
+ * This function diables enemy movement and
+ * pause the behaviour logic of the enemy controller.
+ */
 void AEnemy::Freeze()
 {
 	if (AEnemyBTController* EnemyBTController = Cast<AEnemyBTController>(GetController()))
@@ -108,6 +112,10 @@ void AEnemy::Freeze()
 	GetWorld()->GetTimerManager().SetTimer(FreezeTimeHandle, this, &AEnemy::UnFreeze, FreezeTime, false);
 }
 
+/**
+ * This function enables back enemy movement and
+ * resumes the behaviour logic of the enemy controller.
+ */
 void AEnemy::UnFreeze()
 {
 	if (CurrentHealth <= 0)

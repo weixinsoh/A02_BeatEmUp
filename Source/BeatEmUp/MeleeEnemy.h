@@ -22,6 +22,7 @@ public:
 	virtual void BeginPlay() override;
 	virtual void Ragdoll() override;
 	virtual void StopRagdoll() override;
+	virtual void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector Normal, const FHitResult& Hit) override;
 
 	void UseLeftWeapon();
 	void UseRightWeapon();
@@ -32,7 +33,11 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<AAxe> AxeClass;
-	
-	AWeapon* LeftWeapon;
-	AWeapon* RightWeapon;
+
+	UPROPERTY(EditAnywhere)
+		AWeapon* LeftWeapon;
+
+	UPROPERTY(EditAnywhere)
+		AWeapon* RightWeapon;
+
 };

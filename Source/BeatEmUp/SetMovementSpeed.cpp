@@ -19,5 +19,5 @@ EBTNodeResult::Type USetMovementSpeed::ExecuteTask(UBehaviorTreeComponent& Owner
 		return EBTNodeResult::Failed;
 	}
 
-	BTController->SetMovementSpeed(1500);
+	BTController->SetMovementSpeed(false);
 	return EBTNodeResult::Succeeded;}

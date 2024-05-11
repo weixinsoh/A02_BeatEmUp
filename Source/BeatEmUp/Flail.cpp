@@ -1,19 +1,23 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "ChainBall.h"
+#include "Flail.h"
 
 #include "Enemy.h"
-#include "GameFramework/Character.h"
 
-AChainBall::AChainBall()
+/**
+ * Constructor for flail. This weapon uses physics constraints.
+ */
+AFlail::AFlail()
 {
-	WeaponName = "Chain Ball";
-	WeaponDescription = "A Chain Ball";
+	// Set weapon info
+	WeaponName = "Flail";
+	WeaponDescription = "A Flail";
 	Damage = 5;
 	AttackDistance = 800;
 	AttackSpeed = 100;
-	
+
+	// Create component
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root Component"));
 	BallMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Ball"));
 	
@@ -26,6 +30,7 @@ AChainBall::AChainBall()
 	Chain7 = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Chain7"));
 	Chain8 = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Chain8"));
 	Chain9 = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Chain9"));
+	Chain10 = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Chain10"));
 
 	Hinge12 = CreateDefaultSubobject<UPhysicsConstraintComponent>(TEXT("Hinge12"));
 	Hinge23 = CreateDefaultSubobject<UPhysicsConstraintComponent>(TEXT("Hinge23"));
@@ -34,7 +39,8 @@ AChainBall::AChainBall()
 	Hinge56 = CreateDefaultSubobject<UPhysicsConstraintComponent>(TEXT("Hinge56"));
 	Hinge67 = CreateDefaultSubobject<UPhysicsConstraintComponent>(TEXT("Hinge67"));
 	Hinge78 = CreateDefaultSubobject<UPhysicsConstraintComponent>(TEXT("Hinge78"));
-	Hinge78 = CreateDefaultSubobject<UPhysicsConstraintComponent>(TEXT("Hinge89"));
+	Hinge89 = CreateDefaultSubobject<UPhysicsConstraintComponent>(TEXT("Hinge89"));
+	Hinge90 = CreateDefaultSubobject<UPhysicsConstraintComponent>(TEXT("Hinge90"));
 	HingeBall = CreateDefaultSubobject<UPhysicsConstraintComponent>(TEXT("HingeBall"));
 
 	BallMesh->SetupAttachment(RootComponent);
@@ -47,6 +53,7 @@ AChainBall::AChainBall()
 	Chain7->SetupAttachment(RootComponent);
 	Chain8->SetupAttachment(RootComponent);
 	Chain9->SetupAttachment(RootComponent);
+	Chain10->SetupAttachment(RootComponent);
 	Hinge12->SetupAttachment(RootComponent);
 	Hinge23->SetupAttachment(RootComponent);
 	Hinge34->SetupAttachment(RootComponent);
@@ -54,31 +61,65 @@ AChainBall::AChainBall()
 	Hinge56->SetupAttachment(RootComponent);
 	Hinge67->SetupAttachment(RootComponent);
 	Hinge78->SetupAttachment(RootComponent);
-	//Hinge89->SetupAttachment(RootComponent);
-	//HingeBall->SetupAttachment(RootComponent);
-
+	Hinge89->SetupAttachment(RootComponent);
+	Hinge90->SetupAttachment(RootComponent);
+	HingeBall->SetupAttachment(RootComponent);
 }
 
-void AChainBall::UseWeapon(ACharacter* Character)
+/**
+ * Throw the flail ball and collide with the world static and dynamic component. 
+ * @param Character The character who use this weapon.
+ */
+void AFlail::UseWeapon(ACharacter* Character)
 {
 	Super::UseWeapon(Character);
-	DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-	Chain1->AttachToComponent(Character->GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, FName("WeaponSocket"));
+
+	// Calculate the launch direction
 	FVector LaunchDirection = Character->GetActorLocation();
 	LaunchDirection.Normalize();
 	LaunchDirection *= 3;
 	LaunchDirection += FVector::UpVector;
+
+	// Set collision settings
+	BallMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	BallMesh->SetCollisionResponseToChannel(ECC_WorldDynamic, ECR_Block);
+	BallMesh->SetCollisionResponseToChannel(ECC_WorldStatic, ECR_Block);
+
+	// Launch the flail ball
 	BallMesh->SetSimulatePhysics(true);
+	BallMesh->SetEnableGravity(true);
+	BallMesh->SetNotifyRigidBodyCollision(true);
 	BallMesh->AddImpulse(LaunchDirection * HitForce);
 }
 
-void AChainBall::BeginPlay()
+/**
+ * Begin play function which dynamically delegate OnOverlap() function
+ * once the ball is overlapped with something.
+ */
+void AFlail::BeginPlay()
 {
 	Super::BeginPlay();
-	BallMesh->OnComponentBeginOverlap.AddDynamic(this, &AChainBall::OnOverlap);
+	BallMesh->OnComponentBeginOverlap.AddDynamic(this, &AFlail::OnOverlap);
+
 }
 
-void AChainBall::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector Normal,
+/**
+ * This function update the position of the flail staying beside the player if it is picked up. 
+ */
+void AFlail::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	if (PickedUpCharacter != nullptr)
+	{
+		FVector Distance = PickedUpCharacter->GetActorForwardVector() * 100 + FVector::LeftVector * 100;
+		SetActorLocation(PickedUpCharacter->GetActorLocation() + Distance);
+	}
+}
+
+/**
+ * Deal damage to the hit enemy.
+ */
+void AFlail::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector Normal,
 	const FHitResult& Hit)
 {
 	if (OtherActor && OtherActor != PickedUpCharacter)
@@ -87,7 +128,6 @@ void AChainBall::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimit
 		if (HitEnemy)
 		{
 			HitEnemy->DealDamage(Damage);
-			Destroy();
 		}
 	}
 }

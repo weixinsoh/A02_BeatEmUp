@@ -81,13 +81,6 @@ public:
 	virtual void UseWeapon(ACharacter* Character) override;
 
 	virtual void BeginPlay() override;
-
-	virtual void Tick(float DeltaTime) override;
-
-	UFUNCTION()
-	virtual void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-						 UPrimitiveComponent* OtherComponent,
-						 int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) override;
 	
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector Normal, const FHitResult& Hit);

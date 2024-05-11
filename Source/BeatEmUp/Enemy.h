@@ -38,16 +38,21 @@ public:
 	UPROPERTY(EditAnywhere)
 		float CurrentHealth = MaxHealth;
 
+	// Chase player and deal damage on hit
+	UPROPERTY(EditAnywhere)
+		float DamageToPlayer = 10;
+	
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<UDamageTextUI> DamageTextClass;
+
 	void DealDamage(float Damage);
 
 	UFUNCTION()
-		void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector Normal, const FHitResult& Hit);
+		virtual void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector Normal, const FHitResult& Hit);
 
+	// Rag doll
 	UPROPERTY(EditAnywhere)
-		float DamageToPlayer = 10;
-
-	UPROPERTY(EditAnywhere)
-		float RagdollTime = 5;
+	float RagdollTime = 5;
 
 	FTimerHandle RagdollTimerHandle;
 	
@@ -56,18 +61,21 @@ public:
 	UFUNCTION()
 		virtual void StopRagdoll();
 
-	void Freeze();
-	void UnFreeze();
-
+	// Get freeze and unfreeze
 	UPROPERTY(EditAnywhere)
-	float FreezeTime = 5;
+		float FreezeTime = 5;
 
 	FTimerHandle FreezeTimeHandle;
+	
+	UFUNCTION()
+		void Freeze();
 
-	UPROPERTY(EditAnywhere)
-		TSubclassOf<UDamageTextUI> DamageTextClass;
+	UFUNCTION()
+		void UnFreeze();
 
+	// Shoot bullets
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<ABullet> BulletClass;
+	
 	void Shoot(FVector Direction);
 };
