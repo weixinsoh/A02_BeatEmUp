@@ -13,8 +13,7 @@ AAxe::AAxe()
 {
 	// Set weapon info
 	WeaponName = "Axe";
-	WeaponDescription = "A versatile melee tool featuring a sharp, heavy blade attached to a sturdy handle. "
-					 "Designed for close-quarters combat, it delivers powerful, sweeping strikes capable of inflicting significant damage. ";
+	WeaponDescription = "A melee tool featuring a sharp blade attached to a sturdy handle. Designed for close-quarters combat, it delivers powerful and sweeping strikes. ";
 	Damage = 5;
 	AttackDistance = 400;
 	AttackSpeed = 50;

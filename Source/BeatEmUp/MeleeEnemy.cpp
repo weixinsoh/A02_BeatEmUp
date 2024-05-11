@@ -134,12 +134,8 @@ void AMeleeEnemy::SetMovementSpeed(float Speed)
 	GetCharacterMovement()->MaxWalkSpeed = Speed;
 }
 
-// Inventory details *****
 // physics contraint - cannot be thrown
 // boss
 // level
-
-// axe move when attack
-// freezing weapon
 // ticking
 // folder organise

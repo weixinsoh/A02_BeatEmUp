@@ -12,7 +12,8 @@ AFlail::AFlail()
 {
 	// Set weapon info
 	WeaponName = "Flail";
-	WeaponDescription = "A Flail";
+	WeaponDescription = "A medieval melee weapon consisting of a spiked ball attached to a chain. "
+					 "When swung, the flexible chain allows for unpredictable and devastating attacks. ";
 	Damage = 5;
 	AttackDistance = 800;
 	AttackSpeed = 100;
@@ -75,7 +76,7 @@ void AFlail::UseWeapon(ACharacter* Character)
 	Super::UseWeapon(Character);
 
 	// Calculate the launch direction
-	FVector LaunchDirection = Character->GetActorLocation();
+	FVector LaunchDirection = Character->GetActorForwardVector();
 	LaunchDirection.Normalize();
 	LaunchDirection *= 3;
 	LaunchDirection += FVector::UpVector;
@@ -89,7 +90,7 @@ void AFlail::UseWeapon(ACharacter* Character)
 	BallMesh->SetSimulatePhysics(true);
 	BallMesh->SetEnableGravity(true);
 	BallMesh->SetNotifyRigidBodyCollision(true);
-	BallMesh->AddImpulse(LaunchDirection * HitForce);
+	BallMesh->SetPhysicsLinearVelocity(LaunchDirection * HitForce);
 }
 
 /**
@@ -111,7 +112,7 @@ void AFlail::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	if (PickedUpCharacter != nullptr)
 	{
-		FVector Distance = PickedUpCharacter->GetActorForwardVector() * 100 + FVector::LeftVector * 100;
+		FVector Distance = PickedUpCharacter->GetActorForwardVector() * 100 + FVector::LeftVector * 200;
 		SetActorLocation(PickedUpCharacter->GetActorLocation() + Distance);
 	}
 }
