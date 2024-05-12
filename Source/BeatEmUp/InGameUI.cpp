@@ -14,4 +14,6 @@ void UInGameUI::UpdateValues()
 		PunchTimePercentage = GetWorld()->GetTimerManager().GetTimerRemaining(Player->PunchTimerHandle) / Player->PunchCooldown;
 	}
 	PunchCoolDown->SetPercent(1 - PunchTimePercentage);
+	MaxHealthText->SetText(FText::FromString(FString::SanitizeFloat(Player->MaxHealth)));
+	EXPBar->SetPercent((float)Player->CurrentEXP / Player->EXPToLevel);
 }

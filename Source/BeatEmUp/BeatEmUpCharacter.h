@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "InGameUI.h"
 #include "InventoryWidget.h"
+#include "PauseMenu.h"
 #include "Portal.h"
 #include "Weapon.h"
 #include "GameFramework/Character.h"
@@ -178,6 +179,29 @@ public:
 
 	bool bPortalIsSpawned;
 
+	// Adding progression
+	UPROPERTY(EditAnywhere)
+		int CurrentEXP = 0;
+	
+	UPROPERTY(EditAnywhere)
+		int EXPToLevel = 50;
+	
+	UPROPERTY(EditAnywhere)
+		float IncreaseMultiplier = 1.5;
+
+	void AddEXP(int EXPToAdd);
+
+	// Saving and Loading
+	UPROPERTY(EditAnywhere)
+		UInputAction* PauseAction;
+
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<UPauseMenu> PauseMenuClass;
+
+	UFUNCTION()
+		void PauseGame();
+
+	
 protected:
 
 	/** Called for movement input */

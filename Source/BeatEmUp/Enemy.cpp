@@ -77,6 +77,7 @@ void AEnemy::StopRagdoll()
 	if (CurrentHealth <= 0 && Player)
 	{
 		Player->NumEnemiesDefeated += 1;
+		Player->AddEXP(EXPAmount);
 		Destroy();
 		return;
 	}
@@ -90,7 +91,7 @@ void AEnemy::StopRagdoll()
 	{
 		EnemyBTController->BrainComponent->ResumeLogic("Moving Again!");
 	}
-
+	GetCharacterMovement()->GravityScale = 1;
 }
 
 /**

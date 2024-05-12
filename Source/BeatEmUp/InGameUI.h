@@ -23,6 +23,9 @@ public:
 		UProgressBar* HealthBar;
 
 	UPROPERTY(meta = (BindWidget))
+		UProgressBar* EXPBar;
+
+	UPROPERTY(meta = (BindWidget))
 		UTextBlock* CurrentHealthText;
 
 	UPROPERTY(meta = (BindWidget))

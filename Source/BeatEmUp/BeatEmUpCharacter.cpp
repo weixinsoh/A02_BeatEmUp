@@ -13,6 +13,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
+#include "Kismet/GameplayStatics.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -160,6 +161,9 @@ void ABeatEmUpCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 
 		// Show Mouse Cursor
 		EnhancedInputComponent->BindAction(ShowCursorAction, ETriggerEvent::Started, this, &ABeatEmUpCharacter::ShowCursor);
+
+		// Pause Game
+		EnhancedInputComponent->BindAction(PauseAction, ETriggerEvent::Started, this, &ABeatEmUpCharacter::PauseGame);
 	}
 	else
 	{
@@ -410,6 +414,35 @@ void ABeatEmUpCharacter::ShowCursor()
 		{
 			PlayerController->SetInputMode(FInputModeGameAndUI());
 			PlayerController->bShowMouseCursor = true;
+		}
+	}
+}
+
+void ABeatEmUpCharacter::AddEXP(int EXPToAdd)
+{
+	CurrentEXP += EXPToAdd;
+	while (CurrentEXP > EXPToLevel)
+	{
+		CurrentEXP -= EXPToLevel;
+		EXPToLevel *= IncreaseMultiplier;
+		PunchDamage *= IncreaseMultiplier;
+		MaxHealth *= IncreaseMultiplier;
+		CurrentHealth = MaxHealth;
+	}
+	InGameUI->UpdateValues();
+}
+
+void ABeatEmUpCharacter::PauseGame()
+{
+	if(!UGameplayStatics::IsGamePaused(GetWorld()))
+	{
+		UGameplayStatics::SetGamePaused(GetWorld(), true);
+		UPauseMenu* PauseMenu = Cast<UPauseMenu>(CreateWidget(GetGameInstance(),PauseMenuClass));
+		if(PauseMenu)
+		{
+			GetWorld()->GetFirstPlayerController()->SetShowMouseCursor(true);
+			GetWorld()->GetFirstPlayerController()->SetInputMode(FInputModeUIOnly());
+			PauseMenu->AddToViewport();
 		}
 	}
 }

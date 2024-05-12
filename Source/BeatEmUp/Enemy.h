@@ -76,4 +76,7 @@ public:
 		TSubclassOf<ABullet> BulletClass;
 	
 	void Shoot(FVector Direction);
+
+	UPROPERTY(EditAnywhere)
+		int EXPAmount = 20;
 };
