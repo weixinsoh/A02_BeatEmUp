@@ -36,9 +36,3 @@ void AEnemySpawner::BeginPlay()
 
 	GetWorld()->GetTimerManager().SetTimer(SpawnTimerHandle, this, &AEnemySpawner::SpawnEnemy, SpawnFrequency, true);
 }
-
-// Called every frame
-void AEnemySpawner::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-}

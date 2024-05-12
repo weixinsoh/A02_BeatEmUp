@@ -13,7 +13,7 @@
 AEnemy::AEnemy()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 	AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
 
@@ -28,13 +28,6 @@ void AEnemy::BeginPlay()
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 	GetCapsuleComponent()->OnComponentHit.AddDynamic(this, &AEnemy::OnHit);
 	
-}
-
-// Called every frame
-void AEnemy::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input
@@ -61,6 +54,7 @@ void AEnemy::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveC
 	if (OtherActor == Player)
 	{
 		Player->DealDamage(DamageToPlayer);
+		Player->NumEnemiesDefeated += 1;
 		Destroy();
 	}
 }
@@ -80,8 +74,9 @@ void AEnemy::Ragdoll()
 
 void AEnemy::StopRagdoll()
 {
-	if (CurrentHealth <= 0)
+	if (CurrentHealth <= 0 && Player)
 	{
+		Player->NumEnemiesDefeated += 1;
 		Destroy();
 		return;
 	}
@@ -118,8 +113,9 @@ void AEnemy::Freeze()
  */
 void AEnemy::UnFreeze()
 {
-	if (CurrentHealth <= 0)
+	if (CurrentHealth <= 0 && Player)
 	{
+		Player->NumEnemiesDefeated += 1;
 		Destroy();
 		return;
 	}

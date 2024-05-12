@@ -12,7 +12,7 @@
 AMeleeEnemy::AMeleeEnemy()
 {
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 	AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
 }
@@ -82,8 +82,15 @@ void AMeleeEnemy::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimi
 	if (OtherActor == Player)
 	{
 		Player->DealDamage(DamageToPlayer);
-		LeftWeapon->Destroy();
-		RightWeapon->Destroy();
+		if (LeftWeapon)
+		{
+			LeftWeapon->Destroy();
+		}
+		if (RightWeapon)
+		{
+			RightWeapon->Destroy();
+		}
+		Player->NumEnemiesDefeated += 1;
 		Destroy();
 	}
 }
@@ -133,9 +140,4 @@ void AMeleeEnemy::SetMovementSpeed(float Speed)
 {
 	GetCharacterMovement()->MaxWalkSpeed = Speed;
 }
-
-// physics contraint - cannot be thrown
-// boss
-// level
-// ticking
 // folder organise

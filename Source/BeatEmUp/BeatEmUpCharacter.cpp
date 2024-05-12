@@ -59,6 +59,11 @@ ABeatEmUpCharacter::ABeatEmUpCharacter()
 
 	// Initialise the boolean of grabbing an enemy
 	IsGrabbingEnemy = false;
+
+	// Initialise the number of enemies defeated as 0
+	NumEnemiesDefeated = 0;
+
+	bPortalIsSpawned = false;
 	
 }
 
@@ -105,6 +110,16 @@ void ABeatEmUpCharacter::Tick(float DeltaTime)
 	if (GetWorld()->GetTimerManager().TimerExists(PunchTimerHandle))
 	{
 		InGameUI->UpdateValues();
+	}
+	if (!bPortalIsSpawned && NumEnemiesDefeated >= NumEnemiesToDefeat)
+	{
+		FVector SpawnLocation = FVector(GetActorLocation() + GetActorForwardVector() * 500);
+		SpawnLocation.Z = 0;
+		FRotator SpawnRotation = GetActorRotation();
+		FActorSpawnParameters SpawnParams;
+		SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+		GetWorld()->SpawnActor(PortalClass, &SpawnLocation, &SpawnRotation, SpawnParams);
+		bPortalIsSpawned = true;
 	}
 }
 
@@ -331,6 +346,8 @@ void ABeatEmUpCharacter::PickUp(AWeapon* Weapon)
 	{
 		Inventory.Add(Weapon);
 		InventoryWidget->RefreshInventory(Inventory);
+		Weapon->SetActorHiddenInGame(true);
+		Weapon->PickedUpCharacter = this;
 	}
 }
 

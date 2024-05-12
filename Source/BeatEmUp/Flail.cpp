@@ -10,6 +10,8 @@
  */
 AFlail::AFlail()
 {
+	PrimaryActorTick.bCanEverTick = true;
+
 	// Set weapon info
 	WeaponName = "Flail";
 	WeaponDescription = "A medieval melee weapon consisting of a spiked ball attached to a chain. "

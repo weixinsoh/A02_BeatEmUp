@@ -9,7 +9,7 @@
 ABullet::ABullet()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 	RootComponent = Mesh;
@@ -30,13 +30,6 @@ void ABullet::BeginPlay()
 
 	Mesh->OnComponentHit.AddDynamic(this, &ABullet::OnHit);
 	Mesh->SetNotifyRigidBodyCollision(true);
-}
-
-// Called every frame
-void ABullet::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
 }
 
 void ABullet::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector Normal,

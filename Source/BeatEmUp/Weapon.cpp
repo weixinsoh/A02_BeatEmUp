@@ -8,7 +8,7 @@
 AWeapon::AWeapon()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 	WeaponName = FString("Default name");
 	WeaponDescription = FString("Default description");
@@ -79,8 +79,6 @@ void AWeapon::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherA
 		if (Player)
 		{
 			Player->PickUp(this);
-			SetActorHiddenInGame(true);
-			PickedUpCharacter = Player;
 		}
 	}
 }
@@ -90,10 +88,4 @@ void AWeapon::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherA
 void AWeapon::BeginPlay()
 {
 	Super::BeginPlay();
-}
-
-// Called every frame
-void AWeapon::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
 }

@@ -10,7 +10,7 @@
 AGravityWell::AGravityWell()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 	RootComponent = Mesh;
@@ -89,8 +89,6 @@ void AGravityWell::OnPlayerOverlap(UPrimitiveComponent* OverlappedComponent, AAc
                                    UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep,
                                    const FHitResult& SweepResult)
 {
-	UE_LOG(LogTemp, Warning, TEXT("overlapped:%s"), *OtherActor->GetClass()->GetName());
-
 	if (ABeatEmUpCharacter* Player = Cast<ABeatEmUpCharacter>(OtherActor))
 	{
 		InteractionPromptWidgetComponent->SetVisibility(true);
@@ -129,10 +127,4 @@ void AGravityWell::BeginPlay()
 	// dynamically delegate overlap functions once the widget trigger component overlapped/end overlapped with something
 	WidgetTrigger->OnComponentBeginOverlap.AddDynamic(this, &AGravityWell::OnPlayerOverlap);
 	WidgetTrigger->OnComponentEndOverlap.AddDynamic(this, &AGravityWell::OnPlayerEndOverlap);
-}
-
-// Called every frame
-void AGravityWell::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
 }
