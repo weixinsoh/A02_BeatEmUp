@@ -17,7 +17,7 @@ ABomb::ABomb()
 	// Set weapon info
 	WeaponName = "Bomb";
 	WeaponDescription = "An explosive device. When activated, it releases a powerful blast, impacting a wide area and potentially harming enemies within its vicinity. ";
-	Damage = 5;
+	Damage = 20;
 	AttackDistance = 800;
 	AttackSpeed = 100;
 

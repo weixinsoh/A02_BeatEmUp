@@ -16,7 +16,7 @@ AFlail::AFlail()
 	WeaponName = "Flail";
 	WeaponDescription = "A medieval melee weapon consisting of a spiked ball attached to a chain. "
 					 "When swung, the flexible chain allows for unpredictable and devastating attacks. ";
-	Damage = 5;
+	Damage = 10;
 	AttackDistance = 800;
 	AttackSpeed = 100;
 

@@ -69,7 +69,7 @@ public:
 		float PunchForce = 50000;
 
 	UPROPERTY(EditAnywhere)
-		float PunchDamage = 50;
+		float PunchDamage = 10;
 
 	UPROPERTY(EditAnywhere)
 		float PunchCooldown = 1;
@@ -134,7 +134,7 @@ public:
 		UInventoryWidget* InventoryWidget;
 
 	UPROPERTY(EditAnywhere)
-		int32 InventorySize = 5;
+		int32 InventorySize = 4;
 	
 	UPROPERTY(EditAnywhere)
 		UInputAction* DropAction;
