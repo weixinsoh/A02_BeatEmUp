@@ -4,6 +4,8 @@
 #include "BeatEmUpCharacter.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "BeatEmUpGameInstance.h"
+#include "Flail.h"
+#include "MeleeEnemy.h"
 #include "Kismet/GameplayStatics.h"
 #include "UObject/ConstructorHelpers.h"
 
@@ -37,10 +39,31 @@ void ABeatEmUpGameMode::Load(UBeatEmUpSaveGame* LoadedGame)
 	PlayerCharacter->CurrentEXP = LoadedGame->PlayerCurrentEXP;
 	PlayerCharacter->EXPToLevel = LoadedGame->PlayerEXPToLevel;
 	PlayerCharacter->InGameUI->UpdateValues();
+	PlayerCharacter->NumEnemiesDefeated = LoadedGame->PlayerNumOfEnemiesDefeated;
+	PlayerCharacter->Inventory = LoadedGame->PlayerInventory;
+	PlayerCharacter->InventoryWidget->RefreshInventory(PlayerCharacter->Inventory);
+	for (AWeapon* Weapon: PlayerCharacter->Inventory)
+	{
+		Weapon->SetActorHiddenInGame(true);
+		Weapon->PickedUpCharacter = PlayerCharacter;
+	}
+	if (LoadedGame->PlayerEquippingWeapon != nullptr)
+	{
+		PlayerCharacter->EquippingWeapon = LoadedGame->PlayerEquippingWeapon;
+		PlayerCharacter->EquippingWeapon->SetActorHiddenInGame(false);
+		if (Cast<AFlail>(PlayerCharacter->EquippingWeapon))
+		{
+			return;
+		}
+		FName WeaponSocket = FName("WeaponSocket");
+		PlayerCharacter->EquippingWeapon->AttachToComponent(PlayerCharacter->GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, WeaponSocket);
+	}
 
 	for (int i = 0; i < LoadedGame->EnemyLocations.Num(); i++)
 	{
 		AEnemy* SpawnedEnemy = Cast<AEnemy>(GetWorld()->SpawnActor(EnemyClass));
+		AMeleeEnemy* SpawnedMeleeEnemy = Cast<AMeleeEnemy>(GetWorld()->SpawnActor(MeleeEnemyClass));
+
 		if (SpawnedEnemy)
 		{
 			SpawnedEnemy->SetActorLocationAndRotation(LoadedGame->EnemyLocations[i], LoadedGame->EnemyRotations[i]);
@@ -53,6 +76,32 @@ void ABeatEmUpGameMode::Load(UBeatEmUpSaveGame* LoadedGame)
 				SpawnedEnemy->GetMesh()->SetWorldLocation(LoadedGame->EnemyMeshLocations[i], false, nullptr,
 				                                          ETeleportType::TeleportPhysics);
 				SpawnedEnemy->GetMesh()->SetAllPhysicsLinearVelocity(LoadedGame->EnemyMeshVelocities[i], true);
+			}
+		}
+
+		if (SpawnedMeleeEnemy)
+		{
+			AEnemyWeaponBTController* SpawnedMeleeEnemyController = Cast<AEnemyWeaponBTController>(SpawnedMeleeEnemy->GetController());
+			SpawnedMeleeEnemy->GetCharacterMovement()->MaxWalkSpeed = LoadedGame->MeleeEnemyMaxWalkspeed[i];
+			if (SpawnedMeleeEnemyController)
+			{
+				SpawnedMeleeEnemyController->LeftAmmo = LoadedGame->MeleeEnemyLeftAmmo[i];
+				SpawnedMeleeEnemyController->RightAmmo = LoadedGame->MeleeEnemyRightAmmo[i];
+				if (SpawnedMeleeEnemyController->LeftAmmo <= 0)
+				{
+					SpawnedMeleeEnemy->LeftWeapon->Destroy();
+				} else
+				{
+					if (ABomb* Bomb = Cast<ABomb>(SpawnedMeleeEnemy->LeftWeapon))
+					{
+						Bomb->BombMesh->SetWorldLocation(LoadedGame->MeleeEnemyLeftWeaponLocations[i]);
+						Bomb->BombMesh->SetAllPhysicsLinearVelocity(LoadedGame->MeleeEnemyLeftWeaponVelocities[i]);
+					}
+				}
+				if (SpawnedMeleeEnemyController->RightAmmo <= 0)
+				{
+					SpawnedMeleeEnemy->RightWeapon->Destroy();
+				}
 			}
 		}
 	}
@@ -68,6 +117,9 @@ void ABeatEmUpGameMode::Save(UBeatEmUpSaveGame* SaveGame)
 	SaveGame->PlayerPunchDamage = PlayerCharacter->PunchDamage;
 	SaveGame->PlayerCurrentEXP = PlayerCharacter->CurrentEXP;
 	SaveGame->PlayerEXPToLevel = PlayerCharacter->EXPToLevel;
+	SaveGame->PlayerInventory = PlayerCharacter->Inventory;
+	SaveGame->PlayerEquippingWeapon = PlayerCharacter->EquippingWeapon;
+	SaveGame->PlayerNumOfEnemiesDefeated = PlayerCharacter->NumEnemiesDefeated;
 
 	TArray<AActor*> Enemies;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AEnemy::StaticClass(), Enemies);
@@ -88,6 +140,21 @@ void ABeatEmUpGameMode::Save(UBeatEmUpSaveGame* SaveGame)
 		}
 		SaveGame->EnemyMeshLocations.Add(CurrentEnemy->GetMesh()->GetComponentLocation());
 		SaveGame->EnemyMeshVelocities.Add(CurrentEnemy->GetMesh()->GetComponentVelocity());
+
+		AMeleeEnemy* CurrentMeleeEnemy = Cast<AMeleeEnemy>(Enemies[i]);
+		if (CurrentMeleeEnemy)
+		{
+			SaveGame->MeleeEnemyMaxWalkspeed.Add(CurrentMeleeEnemy->GetCharacterMovement()->MaxWalkSpeed);
+			if (ABomb* Bomb = Cast<ABomb>(CurrentMeleeEnemy->LeftWeapon))
+			{
+				SaveGame->MeleeEnemyLeftWeaponLocations.Add(Bomb->BombMesh->GetComponentLocation());
+				SaveGame->MeleeEnemyLeftWeaponVelocities.Add(Bomb->BombMesh->GetComponentVelocity());
+			}
+			AEnemyWeaponBTController* EnemyWeaponBTController = Cast<AEnemyWeaponBTController>(CurrentMeleeEnemy->GetController());
+			SaveGame->MeleeEnemyLeftAmmo.Add(EnemyWeaponBTController->LeftAmmo);
+			SaveGame->MeleeEnemyRightAmmo.Add(EnemyWeaponBTController->RightAmmo);
+		}
+		
 	}
 }
 

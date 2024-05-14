@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Enemy.h"
 #include "GameFramework/SaveGame.h"
 #include "BeatEmUpSaveGame.generated.h"
 
@@ -38,8 +39,18 @@ public:
 	
 	UPROPERTY()
 		float PlayerEXPToLevel;
+	
 	UPROPERTY()
 		float PlayerPunchDamage;
+
+	UPROPERTY()
+		TArray<AWeapon*> PlayerInventory;
+
+	UPROPERTY()
+		AWeapon* PlayerEquippingWeapon;
+
+	UPROPERTY()
+		float PlayerNumOfEnemiesDefeated;
 
 	UPROPERTY()
 		TArray<FVector> EnemyLocations;
@@ -61,4 +72,19 @@ public:
 
 	UPROPERTY()
 		TArray<FVector> EnemyMeshVelocities;
+
+	UPROPERTY()
+		TArray<float> MeleeEnemyMaxWalkspeed;
+
+	UPROPERTY()
+		TArray<float> MeleeEnemyLeftAmmo;
+
+	UPROPERTY()
+		TArray<float> MeleeEnemyRightAmmo;
+
+	UPROPERTY()
+		TArray<FVector> MeleeEnemyLeftWeaponLocations;
+
+	UPROPERTY()
+		TArray<FVector> MeleeEnemyLeftWeaponVelocities;
 };

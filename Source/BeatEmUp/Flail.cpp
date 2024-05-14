@@ -47,16 +47,16 @@ AFlail::AFlail()
 	HingeBall = CreateDefaultSubobject<UPhysicsConstraintComponent>(TEXT("HingeBall"));
 
 	BallMesh->SetupAttachment(RootComponent);
-	Chain1->SetupAttachment(RootComponent);
-	Chain2->SetupAttachment(RootComponent);
-	Chain3->SetupAttachment(RootComponent);
-	Chain4->SetupAttachment(RootComponent);
-	Chain5->SetupAttachment(RootComponent);
-	Chain6->SetupAttachment(RootComponent);
-	Chain7->SetupAttachment(RootComponent);
-	Chain8->SetupAttachment(RootComponent);
-	Chain9->SetupAttachment(RootComponent);
-	Chain10->SetupAttachment(RootComponent);
+	Chain1->SetupAttachment(BallMesh);
+	Chain2->SetupAttachment(Chain1);
+	Chain3->SetupAttachment(Chain2);
+	Chain4->SetupAttachment(Chain3);
+	Chain5->SetupAttachment(Chain4);
+	Chain6->SetupAttachment(Chain5);
+	Chain7->SetupAttachment(Chain6);
+	Chain8->SetupAttachment(Chain7);
+	Chain9->SetupAttachment(Chain8);
+	Chain10->SetupAttachment(Chain9);
 	Hinge12->SetupAttachment(RootComponent);
 	Hinge23->SetupAttachment(RootComponent);
 	Hinge34->SetupAttachment(RootComponent);

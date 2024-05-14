@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "BeatEmUpSaveGame.h"
 #include "Enemy.h"
+#include "MeleeEnemy.h"
 #include "GameFramework/GameModeBase.h"
 #include "BeatEmUpGameMode.generated.h"
 
@@ -20,6 +21,9 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<AEnemy> EnemyClass;
+
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<AMeleeEnemy> MeleeEnemyClass;
 
 	void Load(UBeatEmUpSaveGame* LoadedGame);
 	void Save(UBeatEmUpSaveGame* SaveGame);
