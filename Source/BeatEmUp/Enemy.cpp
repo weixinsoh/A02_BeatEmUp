@@ -3,6 +3,7 @@
 
 #include "Enemy.h"
 
+#include "NiagaraComponent.h"
 #include "BrainComponent.h"
 #include "EnemyBTController.h"
 #include "Kismet/GameplayStatics.h"
@@ -78,6 +79,19 @@ void AEnemy::StopRagdoll()
 	{
 		Player->NumEnemiesDefeated += 1;
 		Player->AddEXP(EXPAmount);
+		UE_LOG(LogTemp, Warning, TEXT("Player"));
+		if(DeathParticleClass)
+		{
+			UNiagaraComponent* SpawnedEffect = UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), DeathParticleClass, GetMesh()->GetComponentLocation());
+			SpawnedEffect->SetColorParameter(FName("User.SpawnColour"), FLinearColor::MakeRandomColor());
+		}
+		
+		if(HealthPackClass)
+		{
+			FVector SpawnLocation = GetMesh()->GetComponentLocation() + FVector(0,0,50);
+			GetWorld()->SpawnActor(HealthPackClass, &SpawnLocation);
+		}
+		
 		Destroy();
 		return;
 	}

@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "NiagaraFunctionLibrary.h"
 #include "CoreMinimal.h"
 #include "InGameUI.h"
 #include "InventoryWidget.h"
@@ -200,6 +201,9 @@ public:
 
 	UFUNCTION()
 		void PauseGame();
+
+	UPROPERTY(EditAnywhere)
+		UNiagaraSystem* PunchEffectClass;
 
 	
 protected:

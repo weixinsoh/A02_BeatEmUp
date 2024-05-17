@@ -6,6 +6,7 @@
 #include "BeatEmUpCharacter.h"
 #include "Bullet.h"
 #include "DamageTextUI.h"
+#include "HealthPack.h"
 #include "GameFramework/Character.h"
 #include "Enemy.generated.h"
 
@@ -79,4 +80,12 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		int EXPAmount = 20;
+
+	UPROPERTY(EditAnywhere)
+		UNiagaraSystem* DeathParticleClass;
+
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<AHealthPack> HealthPackClass;
+
+
 };

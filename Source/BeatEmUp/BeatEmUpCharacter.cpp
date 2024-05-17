@@ -1,7 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "BeatEmUpCharacter.h"
-
+#include "NiagaraComponent.h"
 #include "Interactable.h"
 #include "Enemy.h"
 #include "Engine/LocalPlayer.h"
@@ -178,6 +178,11 @@ void ABeatEmUpCharacter::Punch()
 {
 	if (bPunchReady)
 	{
+		if (PunchEffectClass)
+		{
+			UNiagaraComponent* SpawnedEffect = UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), PunchEffectClass, GetActorLocation(), GetActorRotation());
+			SpawnedEffect->SetColorParameter(FName("User.SpawnColour"), FLinearColor::MakeRandomColor());
+		}
 		bPunchReady = false;
 		GetWorld()->GetTimerManager().SetTimer(PunchTimerHandle, this, &ABeatEmUpCharacter::ResetPunch, PunchCooldown,
 		                                       false);
