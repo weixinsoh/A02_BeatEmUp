@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Components/SpotLightComponent.h"
 #include "GameFramework/Actor.h"
 #include "DynamicSpotLight.generated.h"
 
@@ -15,7 +16,23 @@ public:
 	// Sets default values for this actor's properties
 	ADynamicSpotLight();
 
-	UPROPERTY()
+	UPROPERTY(EditAnywhere)
+		USpotLightComponent* Spotlight;
+
+	UPROPERTY(EditAnywhere)
+		AActor* TargetActor;
+
+	UPROPERTY(EditAnywhere)
+		bool bStartingSpotlight = false;
+
+	UPROPERTY(EditAnywhere)
+		FVector ActorOffset = FVector(0, 0, 1000);
+
+	UPROPERTY(EditAnywhere)
+		FLinearColor HealthyColour;
+
+	UPROPERTY(EditAnywhere)
+		FLinearColor DeadColour;
 	
 protected:
 	// Called when the game starts or when spawned

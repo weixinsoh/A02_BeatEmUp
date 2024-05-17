@@ -28,6 +28,14 @@ void AEnemy::BeginPlay()
 	Player = Cast<ABeatEmUpCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 	GetCapsuleComponent()->OnComponentHit.AddDynamic(this, &AEnemy::OnHit);
+
+	if(DynamicSpotlightClass)
+    {
+		FVector SpawnLocation = GetActorLocation();
+	    Spotlight = Cast<ADynamicSpotLight>(GetWorld()->SpawnActor(DynamicSpotlightClass, &SpawnLocation));
+		Spotlight->TargetActor = this;
+    }
+
 	
 }
 
@@ -79,7 +87,6 @@ void AEnemy::StopRagdoll()
 	{
 		Player->NumEnemiesDefeated += 1;
 		Player->AddEXP(EXPAmount);
-		UE_LOG(LogTemp, Warning, TEXT("Player"));
 		if(DeathParticleClass)
 		{
 			UNiagaraComponent* SpawnedEffect = UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), DeathParticleClass, GetMesh()->GetComponentLocation());
@@ -91,7 +98,7 @@ void AEnemy::StopRagdoll()
 			FVector SpawnLocation = GetMesh()->GetComponentLocation() + FVector(0,0,50);
 			GetWorld()->SpawnActor(HealthPackClass, &SpawnLocation);
 		}
-		
+		Spotlight->Destroy();
 		Destroy();
 		return;
 	}

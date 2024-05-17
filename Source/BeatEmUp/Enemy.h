@@ -6,6 +6,7 @@
 #include "BeatEmUpCharacter.h"
 #include "Bullet.h"
 #include "DamageTextUI.h"
+#include "DynamicSpotLight.h"
 #include "HealthPack.h"
 #include "GameFramework/Character.h"
 #include "Enemy.generated.h"
@@ -87,5 +88,9 @@ public:
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<AHealthPack> HealthPackClass;
 
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<ADynamicSpotLight> DynamicSpotlightClass;
 
+	UPROPERTY()
+		ADynamicSpotLight* Spotlight;
 };

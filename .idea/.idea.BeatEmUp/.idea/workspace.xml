@@ -5,31 +5,33 @@
     <projectFile profileName="EpicGames.AspNet">../../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Programs/Shared/EpicGames.AspNet/EpicGames.AspNet.csproj</projectFile>
     <projectFile>../../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Programs/UnrealBuildTool/UnrealBuildTool.csproj</projectFile>
     <projectFile>Intermediate/ProjectFiles/BeatEmUp.vcxproj</projectFile>
-    <projectFile>Intermediate/ProjectFiles/UE5.vcxproj</projectFile>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09be5070-a22a-425c-928c-509ad64a5443" name="Changes" comment="">
+    <list default="true" id="c93c3324-0a9a-430d-8265-3939f392668b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BeatEmUp/.idea/encodings.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BeatEmUp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BeatEmUp/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BeatEmUp.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/BeatEmUp.uproject" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_GravityWell.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_GravityWell.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Blueprints/Enemies/BP_Enemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Enemies/BP_Enemy.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Weapons/BP_Bullet.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Weapons/BP_Bullet.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Materials/MI_Red.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Materials/MI_Red.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Materials/M_Coin.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Materials/M_Coin.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Materials/M_Colour.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Materials/M_Colour.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Materials/M_DeathCube.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Materials/M_DeathCube.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Materials/M_HealthPack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Materials/M_HealthPack.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/StarterContent/Architecture/Floor_400x400.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/Architecture/Floor_400x400.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/StarterContent/HDRI/HDRI_Epic_Courtyard_Daylight.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/HDRI/HDRI_Epic_Courtyard_Daylight.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/StarterContent/Maps/Advanced_Lighting_BuiltData.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/Maps/Advanced_Lighting_BuiltData.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/StarterContent/Materials/M_Basic_Wall.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/Materials/M_Basic_Wall.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/ThirdPerson/Blueprints/BP_ThirdPersonCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ThirdPerson/Blueprints/BP_ThirdPersonCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/4/Q2/ETIXC9UAMJVWFUPNA4CXI4.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/4/Q2/ETIXC9UAMJVWFUPNA4CXI4.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/5/7M/FONVHRGPW9RVKGHTKXE9HY.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/7/SK/FUUUIQ5ORO3T3JRKQEO43W.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/A/I1/Y4WGKFT4PMDGZ96VG310UY.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/C/J2/79PBSI00CL3N3F2SF6TK14.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/C/J2/79PBSI00CL3N3F2SF6TK14.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/D/3C/YIZOXM0UFQK9K30J9JVTHD.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/D/3C/YIZOXM0UFQK9K30J9JVTHD.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/D/MU/T9VDCYA33M5NUDWEKSU3RH.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/D/MU/T9VDCYA33M5NUDWEKSU3RH.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/D/U9/BLGMTIO0MLY9W66X8YGLUE.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/D/U9/BLGMTIO0MLY9W66X8YGLUE.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUp.Build.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUp.Build.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpCharacter.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/3/05/0VPR29ONJ4578QRYRYW0M3.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/3/HE/U35NZS5A9W1UXP1E3FF2GW.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/3/HE/U35NZS5A9W1UXP1E3FF2GW.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/9/MO/72II2GSLK9VS0ULW9SACWH.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/9/MO/72II2GSLK9VS0ULW9SACWH.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/A/2H/17X6VXL63WYZNDHN35FJEM.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/A/2H/17X6VXL63WYZNDHN35FJEM.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/Bullet.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/Bullet.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/Bullet.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/Bullet.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/DynamicSpotLight.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/DynamicSpotLight.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/DynamicSpotLight.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/DynamicSpotLight.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/Enemy.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/Enemy.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/Enemy.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/Enemy.h" afterDir="false" />
     </list>
@@ -44,37 +46,36 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: 5
-}</component>
-  <component name="ProjectId" id="2gRDmKFfG62oTwe1LStMc6hkpYQ" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 5
+}]]></component>
+  <component name="ProjectId" id="2gbAaX3yIACblrjHisXZn8eznCp" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;C++ Project.BeatEmUp.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "C++ Project.BeatEmUp.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\Dell\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\Dell\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\Dell\\AppData\\Local\\Symbols\\src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\Dell\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache",
+      "C:\\Users\\Dell\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache",
+      "C:\\Users\\Dell\\AppData\\Local\\Symbols\\src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="C++ Project.BeatEmUp">
     <configuration name="BeatEmUp" type="CppProject" factoryName="C++ Project">
       <configuration_1>
@@ -137,67 +138,6 @@
         <option name="Build" />
       </method>
     </configuration>
-    <configuration name="UE5" type="CppProject" factoryName="C++ Project">
-      <configuration_1>
-        <option name="CONFIGURATION" value="DebugGame Editor" />
-        <option name="PLATFORM" value="Win64" />
-        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/Intermediate/ProjectFiles/UE5.vcxproj" />
-        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXE_PATH" value="$(LocalDebuggerCommand)" />
-        <option name="PROGRAM_PARAMETERS" value="$(LocalDebuggerCommandArguments)" />
-        <option name="WORKING_DIRECTORY" value="$(LocalDebuggerWorkingDirectory)" />
-        <option name="PASS_PARENT_ENVS" value="1" />
-        <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      </configuration_1>
-      <configuration_2>
-        <option name="CONFIGURATION" value="Shipping" />
-        <option name="PLATFORM" value="Win64" />
-        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/Intermediate/ProjectFiles/UE5.vcxproj" />
-        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXE_PATH" value="$(LocalDebuggerCommand)" />
-        <option name="PROGRAM_PARAMETERS" value="$(LocalDebuggerCommandArguments)" />
-        <option name="WORKING_DIRECTORY" value="$(LocalDebuggerWorkingDirectory)" />
-        <option name="PASS_PARENT_ENVS" value="1" />
-        <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      </configuration_2>
-      <configuration_3>
-        <option name="CONFIGURATION" value="DebugGame" />
-        <option name="PLATFORM" value="Win64" />
-        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/Intermediate/ProjectFiles/UE5.vcxproj" />
-        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXE_PATH" value="$(LocalDebuggerCommand)" />
-        <option name="PROGRAM_PARAMETERS" value="$(LocalDebuggerCommandArguments)" />
-        <option name="WORKING_DIRECTORY" value="$(LocalDebuggerWorkingDirectory)" />
-        <option name="PASS_PARENT_ENVS" value="1" />
-        <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      </configuration_3>
-      <configuration_4>
-        <option name="CONFIGURATION" value="Development Editor" />
-        <option name="PLATFORM" value="Win64" />
-        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/Intermediate/ProjectFiles/UE5.vcxproj" />
-        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXE_PATH" value="$(LocalDebuggerCommand)" />
-        <option name="PROGRAM_PARAMETERS" value="$(LocalDebuggerCommandArguments)" />
-        <option name="WORKING_DIRECTORY" value="$(LocalDebuggerWorkingDirectory)" />
-        <option name="PASS_PARENT_ENVS" value="1" />
-        <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      </configuration_4>
-      <configuration_5>
-        <option name="CONFIGURATION" value="Development" />
-        <option name="PLATFORM" value="Win64" />
-        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/Intermediate/ProjectFiles/UE5.vcxproj" />
-        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXE_PATH" value="$(LocalDebuggerCommand)" />
-        <option name="PROGRAM_PARAMETERS" value="$(LocalDebuggerCommandArguments)" />
-        <option name="WORKING_DIRECTORY" value="$(LocalDebuggerWorkingDirectory)" />
-        <option name="PASS_PARENT_ENVS" value="1" />
-        <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      </configuration_5>
-      <option name="DEFAULT_PROJECT_PATH" value="$PROJECT_DIR$/Intermediate/ProjectFiles/UE5.vcxproj" />
-      <method v="2">
-        <option name="Build" />
-      </method>
-    </configuration>
     <configuration name="AutomationTool" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -253,23 +193,18 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="09be5070-a22a-425c-928c-509ad64a5443" name="Changes" comment="" />
-      <created>1715651654511</created>
+      <changelist id="c93c3324-0a9a-430d-8265-3939f392668b" name="Changes" comment="" />
+      <created>1715955969745</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1715651654511</updated>
-      <workItem from="1715651657521" duration="44000" />
-      <workItem from="1715844791764" duration="1706000" />
-      <workItem from="1715906772804" duration="6089000" />
-      <workItem from="1715922876543" duration="718000" />
-      <workItem from="1715923659993" duration="53000" />
+      <updated>1715955969745</updated>
+      <workItem from="1715955973830" duration="8265000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>

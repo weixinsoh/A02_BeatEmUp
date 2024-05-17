@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "NiagaraSystem.h"
 #include "GameFramework/Actor.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Bullet.generated.h"
@@ -19,6 +20,8 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	virtual void Tick(float DeltaTime) override;
 
 public:	
 
@@ -37,5 +40,9 @@ public:
 	UFUNCTION()
 		void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector Normal, const FHitResult& Hit);
 	
+	UPROPERTY(EditAnywhere)
+		UNiagaraSystem* BulletTrailSystem;
 
+	UPROPERTY(EditAnywhere)
+		UNiagaraComponent* BulletTrailComponent;
 };
