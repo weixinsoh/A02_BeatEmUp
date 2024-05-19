@@ -10,30 +10,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c93c3324-0a9a-430d-8265-3939f392668b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BeatEmUp/.idea/encodings.xml" beforeDir="false" />
+    <list default="true" id="45047650-6ffc-4563-b486-015ca7512f18" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BeatEmUp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BeatEmUp/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_GravityWell.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_GravityWell.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Enemies/BP_Enemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Enemies/BP_Enemy.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Weapons/BP_Bullet.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Weapons/BP_Bullet.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Materials/MI_Red.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Materials/MI_Red.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Materials/M_Coin.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Materials/M_Coin.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Materials/M_Colour.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Materials/M_Colour.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Materials/M_DeathCube.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Materials/M_DeathCube.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Materials/M_HealthPack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Materials/M_HealthPack.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Materials/M_EmissiveDynamic.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Materials/M_EmissiveDynamic.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Particles/NS_Death.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Particles/NS_Death.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/StarterContent/Architecture/Floor_400x400.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/Architecture/Floor_400x400.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/StarterContent/HDRI/HDRI_Epic_Courtyard_Daylight.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/HDRI/HDRI_Epic_Courtyard_Daylight.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/StarterContent/Materials/M_Basic_Wall.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/Materials/M_Basic_Wall.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/3/05/0VPR29ONJ4578QRYRYW0M3.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/3/HE/U35NZS5A9W1UXP1E3FF2GW.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/3/HE/U35NZS5A9W1UXP1E3FF2GW.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/9/MO/72II2GSLK9VS0ULW9SACWH.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/9/MO/72II2GSLK9VS0ULW9SACWH.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/A/2H/17X6VXL63WYZNDHN35FJEM.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/A/2H/17X6VXL63WYZNDHN35FJEM.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/Bullet.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/Bullet.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/Bullet.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/Bullet.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/DynamicSpotLight.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/DynamicSpotLight.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/DynamicSpotLight.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/DynamicSpotLight.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/Enemy.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/Enemy.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/Enemy.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/Enemy.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,14 +31,13 @@
   "customColor": "",
   "associatedIndex": 5
 }]]></component>
-  <component name="ProjectId" id="2gbAaX3yIACblrjHisXZn8eznCp" />
+  <component name="ProjectId" id="2ggu9deINeXP4P9Pw4zWff35M1n" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "C++ Project.BeatEmUp.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
@@ -193,12 +173,12 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="c93c3324-0a9a-430d-8265-3939f392668b" name="Changes" comment="" />
-      <created>1715955969745</created>
+      <changelist id="45047650-6ffc-4563-b486-015ca7512f18" name="Changes" comment="" />
+      <created>1716131398292</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1715955969745</updated>
-      <workItem from="1715955973830" duration="8265000" />
+      <updated>1716131398292</updated>
+      <workItem from="1716131418598" duration="593000" />
     </task>
     <servers />
   </component>
