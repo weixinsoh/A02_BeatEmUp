@@ -146,9 +146,6 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		UInputAction* ShowCursorAction;
-	
-	UPROPERTY(EditAnywhere)
-		float PickUpDistance = 50;
 
 	UPROPERTY(EditAnywhere)
 		AWeapon* EquippingWeapon;
