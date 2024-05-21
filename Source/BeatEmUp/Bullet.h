@@ -45,4 +45,7 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		UNiagaraComponent* BulletTrailComponent;
+
+	UPROPERTY()
+	UNiagaraComponent* Test;
 };

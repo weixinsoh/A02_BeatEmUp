@@ -35,11 +35,21 @@ void ABullet::BeginPlay()
 	Mesh->OnComponentHit.AddDynamic(this, &ABullet::OnHit);
 	Mesh->SetNotifyRigidBodyCollision(true);
 
+	if(BulletTrailSystem)
+	{
+		Test = UNiagaraFunctionLibrary::SpawnSystemAttached(BulletTrailSystem, Mesh, FName("None"), FVector(0,0,0), FRotator::ZeroRotator, EAttachLocation::SnapToTargetIncludingScale, true);
+	}
+
 }
 
 void ABullet::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	if(Test)
+	{
+		//Test->SetWorldLocation(Mesh->GetComponentLocation());
+		Test->SetVectorParameter(FName("User.Location"), Mesh->GetComponentLocation());
+	}
 }
 
 void ABullet::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector Normal,
