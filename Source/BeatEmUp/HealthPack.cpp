@@ -52,14 +52,13 @@ void AHealthPack::BeginPlay()
 	{
 		HealthMaterialInstance = UMaterialInstanceDynamic::Create(HealthMaterialClass, this);
 		Mesh->SetMaterial(0, HealthMaterialInstance);
-		/*
 		FLinearColor PickupColour;
 		TArray<FMaterialParameterInfo> MaterialParameters;
 		TArray<FGuid> ParameterIDs;
 		HealthMaterialInstance->GetAllVectorParameterInfo(MaterialParameters,ParameterIDs);
 		HealthMaterialInstance->GetVectorParameterValue(MaterialParameters[0], PickupColour);
 		PointLight->SetLightColor(PickupColour);
-		*/
+		
 		
 	}
 }
