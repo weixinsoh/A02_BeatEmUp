@@ -13,9 +13,8 @@
   <component name="ChangeListManager">
     <list default="true" id="45047650-6ffc-4563-b486-015ca7512f18" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BeatEmUp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BeatEmUp/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_RotatingSpotLight.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_RotatingSpotLight.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Levels/BossWorld.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/BossWorld.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Materials/MI_BulletTrail.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Materials/MI_BulletTrail.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/1/AZ/A7GPT109Y6ZTTJD4A7TXER.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/1/AZ/A7GPT109Y6ZTTJD4A7TXER.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -278,7 +277,7 @@
       <workItem from="1716131418598" duration="605000" />
       <workItem from="1716203640842" duration="10114000" />
       <workItem from="1716251643506" duration="3946000" />
-      <workItem from="1716861590713" duration="19679000" />
+      <workItem from="1716861590713" duration="20319000" />
     </task>
     <servers />
   </component>
