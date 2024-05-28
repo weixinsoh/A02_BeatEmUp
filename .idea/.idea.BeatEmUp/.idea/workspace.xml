@@ -13,11 +13,9 @@
   <component name="ChangeListManager">
     <list default="true" id="45047650-6ffc-4563-b486-015ca7512f18" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BeatEmUp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BeatEmUp/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Weapons/BP_Bullet.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Weapons/BP_Bullet.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Levels/BossWorld.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/BossWorld.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Particles/NS_BulletTrail.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Particles/NS_BulletTrail.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/StarterContent/HDRI/HDRI_Epic_Courtyard_Daylight.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/HDRI/HDRI_Epic_Courtyard_Daylight.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/Bullet.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/Bullet.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Materials/MI_BulletTrail.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Materials/MI_BulletTrail.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/1/AZ/A7GPT109Y6ZTTJD4A7TXER.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/1/AZ/A7GPT109Y6ZTTJD4A7TXER.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -280,7 +278,7 @@
       <workItem from="1716131418598" duration="605000" />
       <workItem from="1716203640842" duration="10114000" />
       <workItem from="1716251643506" duration="3946000" />
-      <workItem from="1716861590713" duration="14327000" />
+      <workItem from="1716861590713" duration="19679000" />
     </task>
     <servers />
   </component>
