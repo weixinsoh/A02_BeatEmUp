@@ -15,8 +15,6 @@ ABullet::ABullet()
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 	RootComponent = Mesh;
 	MovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("Movement Component"));
-	BulletTrailComponent = CreateDefaultSubobject<UNiagaraComponent>(TEXT("Bullet Trail"));
-	BulletTrailComponent->SetupAttachment(RootComponent);
 
 	MovementComponent->bShouldBounce = true;
 	MovementComponent->BounceVelocityStopSimulatingThreshold = MovementSpeed / 2;
@@ -35,9 +33,9 @@ void ABullet::BeginPlay()
 	Mesh->OnComponentHit.AddDynamic(this, &ABullet::OnHit);
 	Mesh->SetNotifyRigidBodyCollision(true);
 
-	if(BulletTrailSystem)
+	if (BulletTrailSystem)
 	{
-		Test = UNiagaraFunctionLibrary::SpawnSystemAttached(BulletTrailSystem, Mesh, FName("None"), FVector(0,0,0), FRotator::ZeroRotator, EAttachLocation::SnapToTargetIncludingScale, true);
+		BulletTrailComponent = UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), BulletTrailSystem, Mesh->GetComponentLocation(), Mesh->GetComponentRotation());
 	}
 
 }
@@ -45,10 +43,10 @@ void ABullet::BeginPlay()
 void ABullet::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	if(Test)
+	
+	if(BulletTrailComponent)
 	{
-		//Test->SetWorldLocation(Mesh->GetComponentLocation());
-		Test->SetVectorParameter(FName("User.Location"), Mesh->GetComponentLocation());
+		BulletTrailComponent->SetWorldLocation(Mesh->GetComponentLocation());
 	}
 }
 
@@ -62,17 +60,16 @@ void ABullet::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitive
 		{
 			HitEnemy->DealDamage(Damage);
 			Destroy();
+			BulletTrailComponent->DestroyComponent();
 		}
 		ABeatEmUpCharacter* HitCharacter = Cast<ABeatEmUpCharacter>(OtherActor);
 		if (HitCharacter)
 		{
 			HitCharacter->DealDamage(Damage);
 			Destroy();
+			BulletTrailComponent->DestroyComponent();
 		}
 	}
-	if (BulletTrailComponent)
-	{
-		BulletTrailComponent->DestroyComponent();
-	}
+
 }
 
