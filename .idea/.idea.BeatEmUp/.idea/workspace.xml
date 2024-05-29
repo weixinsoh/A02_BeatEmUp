@@ -13,8 +13,11 @@
   <component name="ChangeListManager">
     <list default="true" id="45047650-6ffc-4563-b486-015ca7512f18" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BeatEmUp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BeatEmUp/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_RotatingSpotLight.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_RotatingSpotLight.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Levels/BossWorld.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/BossWorld.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_BeatEmUpGameMode.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_BeatEmUpGameMode.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpGameMode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpGameMode.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpGameMode.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpGameMode.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpSaveGame.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpSaveGame.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/EnemyWeaponBTController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/EnemyWeaponBTController.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,28 +50,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "C++ Project.BeatEmUp.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;C++ Project.BeatEmUp.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\Dell\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache",
-      "C:\\Users\\Dell\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache",
-      "C:\\Users\\Dell\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\Dell\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\Dell\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\Dell\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="C++ Project.BeatEmUp">
     <configuration name="BeatEmUp" type="CppProject" factoryName="C++ Project">
       <configuration_1>
@@ -126,17 +129,6 @@
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
       </configuration_5>
-      <configuration_6>
-        <option name="CONFIGURATION" value="" />
-        <option name="PLATFORM" value="" />
-        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/Intermediate/ProjectFiles/BeatEmUp.vcxproj" />
-        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXE_PATH" value="$(TargetPath)" />
-        <option name="PROGRAM_PARAMETERS" value="" />
-        <option name="WORKING_DIRECTORY" value="$(ProjectDir)" />
-        <option name="PASS_PARENT_ENVS" value="1" />
-        <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      </configuration_6>
       <option name="DEFAULT_PROJECT_PATH" value="$PROJECT_DIR$/Intermediate/ProjectFiles/BeatEmUp.vcxproj" />
       <method v="2">
         <option name="Build" />
@@ -198,17 +190,6 @@
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
       </configuration_5>
-      <configuration_6>
-        <option name="CONFIGURATION" value="" />
-        <option name="PLATFORM" value="" />
-        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/Intermediate/ProjectFiles/UE5.vcxproj" />
-        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXE_PATH" value="$(TargetPath)" />
-        <option name="PROGRAM_PARAMETERS" value="" />
-        <option name="WORKING_DIRECTORY" value="$(ProjectDir)" />
-        <option name="PASS_PARENT_ENVS" value="1" />
-        <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      </configuration_6>
       <option name="DEFAULT_PROJECT_PATH" value="$PROJECT_DIR$/Intermediate/ProjectFiles/UE5.vcxproj" />
       <method v="2">
         <option name="Build" />
@@ -277,7 +258,8 @@
       <workItem from="1716131418598" duration="605000" />
       <workItem from="1716203640842" duration="10114000" />
       <workItem from="1716251643506" duration="3946000" />
-      <workItem from="1716861590713" duration="20319000" />
+      <workItem from="1716861590713" duration="24557000" />
+      <workItem from="1716981198171" duration="5383000" />
     </task>
     <servers />
   </component>

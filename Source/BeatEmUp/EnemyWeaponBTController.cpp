@@ -49,9 +49,11 @@ void AEnemyWeaponBTController::BeginPlay()
 	BlackboardComponent->SetValueAsBool("HasRightAmmo", true);
 
 	// Store enemy movement speed
-	AMeleeEnemy* MeleeEnemy = Cast<AMeleeEnemy>(GetPawn());
-	WalkingSpeed = MeleeEnemy->GetCharacterMovement()->MaxWalkSpeed;
-	SprintSpeed = WalkingSpeed + 500;
+	if (AMeleeEnemy* MeleeEnemy = Cast<AMeleeEnemy>(GetPawn()))
+	{
+		WalkingSpeed = MeleeEnemy->GetCharacterMovement()->MaxWalkSpeed;
+		SprintSpeed = WalkingSpeed + 500;
+	}
 }
 
 /**

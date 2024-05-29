@@ -24,6 +24,9 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<AMeleeEnemy> MeleeEnemyClass;
+	
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<ABullet> BulletClass;
 
 	void Load(UBeatEmUpSaveGame* LoadedGame);
 	void Save(UBeatEmUpSaveGame* SaveGame);

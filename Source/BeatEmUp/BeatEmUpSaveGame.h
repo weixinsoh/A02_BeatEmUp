@@ -74,6 +74,27 @@ public:
 		TArray<FVector> EnemyMeshVelocities;
 
 	UPROPERTY()
+		TArray<FVector> MeleeEnemyLocations;
+	
+	UPROPERTY()
+		TArray<FRotator> MeleeEnemyRotations;
+
+	UPROPERTY()
+		TArray<float> MeleeEnemyCurrentHealths;
+
+	UPROPERTY()
+		TArray<float> MeleeEnemyMaxHealths;
+
+	UPROPERTY()
+		TArray<bool> MeleeEnemyRagdollStates;
+
+	UPROPERTY()
+		TArray<FVector> MeleeEnemyMeshLocations;
+
+	UPROPERTY()
+		TArray<FVector> MeleeEnemyMeshVelocities;
+
+	UPROPERTY()
 		TArray<float> MeleeEnemyMaxWalkspeed;
 
 	UPROPERTY()
@@ -87,4 +108,14 @@ public:
 
 	UPROPERTY()
 		TArray<FVector> MeleeEnemyLeftWeaponVelocities;
+
+	UPROPERTY()
+		TArray<FVector> BulletLocations;
+
+	UPROPERTY()
+		TArray<FRotator> BulletRotations;
+
+	UPROPERTY()
+		TArray<FLinearColor> DynamicFloorColors;
+
 };
