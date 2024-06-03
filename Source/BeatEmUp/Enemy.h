@@ -45,7 +45,7 @@ public:
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<UDamageTextUI> DamageTextClass;
 
-	void DealDamage(float Damage);
+	virtual void DealDamage(float Damage);
 
 	UFUNCTION()
 		virtual void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector Normal, const FHitResult& Hit);

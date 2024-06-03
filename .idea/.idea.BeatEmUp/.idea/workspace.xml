@@ -13,11 +13,18 @@
   <component name="ChangeListManager">
     <list default="true" id="45047650-6ffc-4563-b486-015ca7512f18" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BeatEmUp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BeatEmUp/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_BeatEmUpGameMode.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_BeatEmUpGameMode.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpGameMode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpGameMode.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpGameMode.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpGameMode.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpSaveGame.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpSaveGame.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/EnemyWeaponBTController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/EnemyWeaponBTController.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/AIController/MeleeEnemyBT.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/AIController/MeleeEnemyBT.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Weapons/BP_Axe.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Weapons/BP_Axe.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Characters/Mannequins/Meshes/SKM_Manny.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Characters/Mannequins/Meshes/SKM_Manny.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Levels/BossWorld.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/BossWorld.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Materials/MI_BulletTrail.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Materials/MI_BulletTrail.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/StarterContent/Architecture/Pillar_50x500.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/Architecture/Pillar_50x500.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/StarterContent/Architecture/Wall_400x400.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/Architecture/Wall_400x400.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/StarterContent/Materials/M_Basic_Floor.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/Materials/M_Basic_Floor.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/StarterContent/Materials/M_Basic_Wall.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/Materials/M_Basic_Wall.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/UI/BP_InGameUI.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/BP_InGameUI.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/UI/BP_InventoryWidget.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/BP_InventoryWidget.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/Enemy.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/Enemy.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +43,11 @@
     <setting file="file://$PROJECT_DIR$/Source/BeatEmUp/Enemy.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/BeatEmUp/GravityWell.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/BeatEmUp/HealthPack.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Dell/Documents/WeiXin/Github/a02_beatemup/Source/BeatEmUp/Stick.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Dell/Documents/WeiXin/Github/a02_beatemup/Source/BeatEmUp/Stick.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Dell/Documents/WeiXin/Github/a02_beatemup/Source/BeatEmUp/Stick.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Dell/Documents/WeiXin/Github/a02_beatemup/Source/BeatEmUp/Stick.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Dell/Documents/WeiXin/Github/a02_beatemup/Source/BeatEmUp/Stick.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/BeatEmUp/Trapdoor.cpp" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -259,7 +271,8 @@
       <workItem from="1716203640842" duration="10114000" />
       <workItem from="1716251643506" duration="3946000" />
       <workItem from="1716861590713" duration="24557000" />
-      <workItem from="1716981198171" duration="5383000" />
+      <workItem from="1716981198171" duration="6898000" />
+      <workItem from="1717032446828" duration="44250000" />
     </task>
     <servers />
   </component>
