@@ -5,6 +5,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "BeatEmUpGameInstance.h"
 #include "DynamicColorFloor.h"
+#include "EnemyBTController.h"
 #include "Flail.h"
 #include "MeleeEnemy.h"
 #include "Kismet/GameplayStatics.h"
@@ -30,8 +31,12 @@ void ABeatEmUpGameMode::BeginPlay()
 	GetWorld()->OnWorldBeginPlay.AddUObject(this, &ABeatEmUpGameMode::PostBeginPlay);
 }
 
+/**
+ * Load the game by setting back to the previous saved state.
+ */
 void ABeatEmUpGameMode::Load(UBeatEmUpSaveGame* LoadedGame)
 {
+	// Set the player character to the previous saved state
 	ABeatEmUpCharacter* PlayerCharacter = Cast<ABeatEmUpCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
 	PlayerCharacter->SetActorLocationAndRotation(LoadedGame->PlayerPosition, LoadedGame->PlayerRotation);
 	PlayerCharacter->PunchDamage = LoadedGame->PlayerPunchDamage;
@@ -41,6 +46,8 @@ void ABeatEmUpGameMode::Load(UBeatEmUpSaveGame* LoadedGame)
 	PlayerCharacter->EXPToLevel = LoadedGame->PlayerEXPToLevel;
 	PlayerCharacter->InGameUI->UpdateValues();
 	PlayerCharacter->NumEnemiesDefeated = LoadedGame->PlayerNumOfEnemiesDefeated;
+
+	// Add the previous collected weapon back to the inventory
 	PlayerCharacter->Inventory = LoadedGame->PlayerInventory;
 	PlayerCharacter->InventoryWidget->RefreshInventory(PlayerCharacter->Inventory);
 	for (AWeapon* Weapon: PlayerCharacter->Inventory)
@@ -48,6 +55,8 @@ void ABeatEmUpGameMode::Load(UBeatEmUpSaveGame* LoadedGame)
 		Weapon->SetActorHiddenInGame(true);
 		Weapon->PickedUpCharacter = PlayerCharacter;
 	}
+
+	// Set the player character to equip previous equipping weapon
 	if (LoadedGame->PlayerEquippingWeapon != nullptr)
 	{
 		PlayerCharacter->EquippingWeapon = LoadedGame->PlayerEquippingWeapon;
@@ -60,6 +69,7 @@ void ABeatEmUpGameMode::Load(UBeatEmUpSaveGame* LoadedGame)
 		PlayerCharacter->EquippingWeapon->AttachToComponent(PlayerCharacter->GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, WeaponSocket);
 	}
 
+	// Set the enemies to the previous saved state
 	for (int i = 0; i < LoadedGame->EnemyLocations.Num(); i++)
 	{
 		AEnemy* SpawnedEnemy = Cast<AEnemy>(GetWorld()->SpawnActor(EnemyClass));
@@ -77,8 +87,16 @@ void ABeatEmUpGameMode::Load(UBeatEmUpSaveGame* LoadedGame)
 														  ETeleportType::TeleportPhysics);
 				SpawnedEnemy->GetMesh()->SetAllPhysicsLinearVelocity(LoadedGame->EnemyMeshVelocities[i], true);
 			}
+			// Set the ammo to the previous amount
+			AEnemyBTController* SpawnedEnemyController = Cast<AEnemyBTController>(SpawnedEnemy->GetController());
+			if (SpawnedEnemyController)
+			{
+				SpawnedEnemyController->Ammo = LoadedGame->EnemyAmmo[i];
+			}
 		}
 	}
+
+	// Destroy all the melee enemies spawned by default
 	TArray<AActor*> MeleeEnemies;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AMeleeEnemy::StaticClass(), MeleeEnemies);
 	for (int i = 0; i < MeleeEnemies.Num(); i++)
@@ -88,6 +106,8 @@ void ABeatEmUpGameMode::Load(UBeatEmUpSaveGame* LoadedGame)
 		SpawnedMeleeEnemy->LeftWeapon->Destroy();
 		SpawnedMeleeEnemy->RightWeapon->Destroy();
 	}
+
+	// Set the melee enemies to the previous saved state
 	for (int i = 0; i < LoadedGame->MeleeEnemyLocations.Num(); i++){
 		AMeleeEnemy* SpawnedMeleeEnemy = Cast<AMeleeEnemy>(GetWorld()->SpawnActor(MeleeEnemyClass));
 		if (SpawnedMeleeEnemy)
@@ -105,7 +125,7 @@ void ABeatEmUpGameMode::Load(UBeatEmUpSaveGame* LoadedGame)
 														  ETeleportType::TeleportPhysics);
 				SpawnedMeleeEnemy->GetMesh()->SetAllPhysicsLinearVelocity(LoadedGame->MeleeEnemyMeshVelocities[i], true);
 			}
-			
+			// Set the ammo to the previous amount 
 			AEnemyWeaponBTController* SpawnedMeleeEnemyController = Cast<AEnemyWeaponBTController>(SpawnedMeleeEnemy->GetController());
 			if (SpawnedMeleeEnemyController)
 			{
@@ -114,14 +134,7 @@ void ABeatEmUpGameMode::Load(UBeatEmUpSaveGame* LoadedGame)
 				if (SpawnedMeleeEnemyController->LeftAmmo <= 0)
 				{
 					SpawnedMeleeEnemy->LeftWeapon->Destroy();
-				} else
-				{
-					if (ABomb* Bomb = Cast<ABomb>(SpawnedMeleeEnemy->LeftWeapon))
-					{
-						Bomb->BombMesh->SetWorldLocation(LoadedGame->MeleeEnemyLeftWeaponLocations[i]);
-						Bomb->BombMesh->SetAllPhysicsLinearVelocity(LoadedGame->MeleeEnemyLeftWeaponVelocities[i]);
-					}
-				}
+				} 
 				if (SpawnedMeleeEnemyController->RightAmmo <= 0)
 				{
 					SpawnedMeleeEnemy->RightWeapon->Destroy();
@@ -130,6 +143,7 @@ void ABeatEmUpGameMode::Load(UBeatEmUpSaveGame* LoadedGame)
 		}
 	}
 
+	// Set the bullet shot by the enemy to the previous state
 	for (int i = 0; i < LoadedGame->BulletLocations.Num(); i++)
 	{
 		ABullet* SpawnedBullet = Cast<ABullet>(GetWorld()->SpawnActor(BulletClass));
@@ -139,10 +153,38 @@ void ABeatEmUpGameMode::Load(UBeatEmUpSaveGame* LoadedGame)
 			SpawnedBullet->SetActorRotation(LoadedGame->BulletRotations[i]);
 		}
 	}
+
+	// Set the bomb thrown by the melee enemy to the previous state
+	for (int i = 0; i < LoadedGame->BombLocations.Num(); i++)
+	{
+		ABomb* SpawnedBomb = Cast<ABomb>(GetWorld()->SpawnActor(BombClass));
+		if (SpawnedBomb)
+		{
+			SpawnedBomb->SetActorLocation(LoadedGame->BombLocations[i]);
+			SpawnedBomb->BombMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+			SpawnedBomb->BombMesh->SetCollisionResponseToChannel(ECC_WorldDynamic, ECR_Block);
+			SpawnedBomb->BombMesh->SetCollisionResponseToChannel(ECC_WorldStatic, ECR_Block);
+
+			SpawnedBomb->BombMesh->SetSimulatePhysics(true);
+			SpawnedBomb->BombMesh->SetPhysicsLinearVelocity(LoadedGame->BombVelocities[i]);
+			SpawnedBomb->BombMesh->SetEnableGravity(true);
+			SpawnedBomb->BombMesh->SetNotifyRigidBodyCollision(true);
+			SpawnedBomb->BombMesh->OnComponentHit.AddDynamic(SpawnedBomb, &ABomb::OnHit);
+		}
+	}
+	// Set the dynamic floors to the previous color and emissive strength
+	TArray<AActor*> DynamicFloors;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ADynamicColorFloor::StaticClass(), DynamicFloors);
+	for (int i = 0; i < LoadedGame->DynamicFloorColors.Num(); i++)
+	{
+		ADynamicColorFloor* CurrentFloor = Cast<ADynamicColorFloor>(DynamicFloors[i]);
+		CurrentFloor->EmissiveMaterialInstance->SetVectorParameterValue(FName("BaseColor"), LoadedGame->DynamicFloorColors[i]);
+	}
 }
 
 void ABeatEmUpGameMode::Save(UBeatEmUpSaveGame* SaveGame)
 {
+	// Save the player character's state
 	ABeatEmUpCharacter* PlayerCharacter = Cast<ABeatEmUpCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
 	SaveGame->PlayerPosition = PlayerCharacter->GetActorLocation();
 	SaveGame->PlayerRotation = PlayerCharacter->GetActorRotation();
@@ -155,11 +197,13 @@ void ABeatEmUpGameMode::Save(UBeatEmUpSaveGame* SaveGame)
 	SaveGame->PlayerEquippingWeapon = PlayerCharacter->EquippingWeapon;
 	SaveGame->PlayerNumOfEnemiesDefeated = PlayerCharacter->NumEnemiesDefeated;
 
+	// Save the enemies' state
 	TArray<AActor*> Enemies;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AEnemy::StaticClass(), Enemies);
 	for (int i = 0; i < Enemies.Num(); i++)
 	{
 		AMeleeEnemy* CurrentMeleeEnemy = Cast<AMeleeEnemy>(Enemies[i]);
+		// Save the basic enemies' state
 		if (!CurrentMeleeEnemy)
 		{
 			AEnemy* CurrentEnemy = Cast<AEnemy>(Enemies[i]);
@@ -177,7 +221,11 @@ void ABeatEmUpGameMode::Save(UBeatEmUpSaveGame* SaveGame)
 			}
 			SaveGame->EnemyMeshLocations.Add(CurrentEnemy->GetMesh()->GetComponentLocation());
 			SaveGame->EnemyMeshVelocities.Add(CurrentEnemy->GetMesh()->GetComponentVelocity());
-		} else
+			AEnemyBTController* EnemyBTController = Cast<AEnemyBTController>(CurrentEnemy->GetController());
+			SaveGame->EnemyAmmo.Add(EnemyBTController->Ammo);
+		}
+		// Save the melee enemies' state
+		else
 		{
 			SaveGame->MeleeEnemyLocations.Add(CurrentMeleeEnemy->GetActorLocation());
 			SaveGame->MeleeEnemyRotations.Add(CurrentMeleeEnemy->GetActorRotation());
@@ -205,6 +253,32 @@ void ABeatEmUpGameMode::Save(UBeatEmUpSaveGame* SaveGame)
 		}
 	}
 
+	// Save the state of the bombs being thrown
+	TArray<AActor*> Bombs;
+	TArray<AActor*> MeleeEnemies;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ABomb::StaticClass(), Bombs);
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AMeleeEnemy::StaticClass(), MeleeEnemies);
+	for (int i = 0; i < Bombs.Num(); i++)
+	{
+		bool bIsAttached = false;
+		for (int j = 0; j < MeleeEnemies.Num(); j++)
+		{
+			if (Bombs[i]->IsAttachedTo(MeleeEnemies[j]))
+			{
+				bIsAttached = true;
+			}
+
+		}
+		if (!bIsAttached)
+		{
+			ABomb* CurrentBomb = Cast<ABomb>(Bombs[i]);
+			SaveGame->BombLocations.Add(CurrentBomb->BombMesh->GetComponentLocation());
+			SaveGame->BombVelocities.Add(CurrentBomb->BombMesh->GetComponentVelocity());
+		}
+
+	}
+
+	// Save the state of the bullets being shot
 	TArray<AActor*> Bullets;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ABullet::StaticClass(), Bullets);
 	for (int i = 0; i < Bullets.Num(); i++)
@@ -214,13 +288,15 @@ void ABeatEmUpGameMode::Save(UBeatEmUpSaveGame* SaveGame)
 		SaveGame->BulletRotations.Add(CurrentBullet->GetActorRotation());
 	}
 
+	// Save the state of the dynamic floors
 	TArray<AActor*> DynamicColorFloors;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ADynamicColorFloor::StaticClass(), DynamicColorFloors);
 	for (int i = 0; i < DynamicColorFloors.Num(); i++)
 	{
 		ADynamicColorFloor* CurrentFloor = Cast<ADynamicColorFloor>(DynamicColorFloors[i]);
-		//FLinearColor RetrievedColor;
-		//SaveGame->DynamicFloorColors.Add(CurrentFloor->EmissiveMaterialInstance->GetVectorParameterValue(FName("BaseColor"), RetrievedColor));
+		FLinearColor RetrievedColor;
+		CurrentFloor->EmissiveMaterialInstance->GetVectorParameterValue(FName("BaseColor"), RetrievedColor);
+		SaveGame->DynamicFloorColors.Add(RetrievedColor);
 	}
 
 }

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "BeatEmUpSaveGame.h"
+#include "DynamicColorFloor.h"
 #include "Enemy.h"
 #include "MeleeEnemy.h"
 #include "GameFramework/GameModeBase.h"
@@ -27,6 +28,9 @@ public:
 	
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<ABullet> BulletClass;
+
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<ABomb> BombClass;
 
 	void Load(UBeatEmUpSaveGame* LoadedGame);
 	void Save(UBeatEmUpSaveGame* SaveGame);

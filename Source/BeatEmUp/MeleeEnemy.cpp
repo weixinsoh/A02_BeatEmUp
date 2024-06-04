@@ -102,6 +102,7 @@ void AMeleeEnemy::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimi
  */
 void AMeleeEnemy::UseLeftWeapon()
 {
+	LeftWeapon->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 	LeftWeapon->UseWeapon(this);
 	if (Cast<AEnemyWeaponBTController>(GetController())->LeftAmmo > 1)
 	{

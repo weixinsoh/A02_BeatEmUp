@@ -74,6 +74,9 @@ public:
 		TArray<FVector> EnemyMeshVelocities;
 
 	UPROPERTY()
+		TArray<float> EnemyAmmo;
+
+	UPROPERTY()
 		TArray<FVector> MeleeEnemyLocations;
 	
 	UPROPERTY()
@@ -114,6 +117,12 @@ public:
 
 	UPROPERTY()
 		TArray<FRotator> BulletRotations;
+
+	UPROPERTY()
+		TArray<FVector> BombLocations;
+
+	UPROPERTY()
+		TArray<FVector> BombVelocities;
 
 	UPROPERTY()
 		TArray<FLinearColor> DynamicFloorColors;
