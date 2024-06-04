@@ -66,6 +66,10 @@ void ABossEnemy::SpawnEnemy()
 	BossBTController->RightEnemyChild = GetWorld()->SpawnActor(EnemyClass, &RightLocation, &Rotation);
 	BossBTController->bIsLeftChildDefeated = false;
 	BossBTController->bIsRightChildDefeated = false;
+	AEnemy* LeftEnemyChild = Cast<AEnemy>(BossBTController->LeftEnemyChild);
+	LeftEnemyChild->bIsBossChild = true;
+	AEnemy* RightEnemyChild = Cast<AEnemy>(BossBTController->RightEnemyChild);
+	RightEnemyChild->bIsBossChild = true;
 }
 
 void ABossEnemy::Attack()

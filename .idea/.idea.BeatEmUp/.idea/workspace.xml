@@ -12,10 +12,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="45047650-6ffc-4563-b486-015ca7512f18" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/A/61/IXHCSWTMRTR5TBHJM81SBN.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BeatEmUp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BeatEmUp/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_BeatEmUpGameMode.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_BeatEmUpGameMode.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_LevelTrigger.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_LevelTrigger.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_RotatingSpotLight.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_RotatingSpotLight.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Levels/BossWorld.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/BossWorld.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Levels/LevelToStream.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/LevelToStream.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Materials/M_Flickering.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Materials/M_Flickering.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Particles/NS_BulletTrail.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Particles/NS_BulletTrail.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/1/AZ/A7GPT109Y6ZTTJD4A7TXER.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/1/AZ/A7GPT109Y6ZTTJD4A7TXER.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/2/DE/7PRCTX3NSAGCKEY22AZ71V.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/2/DE/7PRCTX3NSAGCKEY22AZ71V.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/3/HE/U35NZS5A9W1UXP1E3FF2GW.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/3/HE/U35NZS5A9W1UXP1E3FF2GW.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpCharacter.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpCharacter.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpGameMode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpGameMode.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpGameMode.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpGameMode.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpSaveGame.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpSaveGame.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/BossBTController.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/BossBTController.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/BossEnemy.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/BossEnemy.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/DynamicColorFloor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/DynamicColorFloor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/DynamicColorFloor.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/DynamicColorFloor.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/Enemy.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/Enemy.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/Enemy.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/Enemy.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/LevelTrigger.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/LevelTrigger.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/LevelTrigger.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/LevelTrigger.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/RotatingSpotLight.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/RotatingSpotLight.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/RotatingSpotLight.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/RotatingSpotLight.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/Stick.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/Stick.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/Stick.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/Stick.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -265,7 +289,7 @@
       <workItem from="1716981198171" duration="6898000" />
       <workItem from="1717032446828" duration="44250000" />
       <workItem from="1717426728273" duration="5457000" />
-      <workItem from="1717459431819" duration="25649000" />
+      <workItem from="1717459431819" duration="48797000" />
     </task>
     <servers />
   </component>

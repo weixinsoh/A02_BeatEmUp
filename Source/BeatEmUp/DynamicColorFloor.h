@@ -37,6 +37,9 @@ public:
 	UPROPERTY()
 		UMaterialInstanceDynamic* EmissiveMaterialInstance;
 
+	UPROPERTY()
+		float EmissiveStrength = 50;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

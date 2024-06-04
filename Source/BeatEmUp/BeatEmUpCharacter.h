@@ -175,9 +175,6 @@ public:
 	UPROPERTY(EditAnywhere)
 		int NumEnemiesDefeated;
 
-	UPROPERTY(EditAnywhere)
-		TSubclassOf<APortal> PortalClass;
-
 	bool bPortalIsSpawned;
 
 	// Adding progression
@@ -204,6 +201,9 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		UNiagaraSystem* PunchEffectClass;
+	
+	UPROPERTY(EditAnywhere)
+		bool bLevelLoaded;
 
 	
 protected:

@@ -49,11 +49,13 @@ void AStick::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveC
 
 void AStick::DelayProject()
 {
+	bToBeProject = true;
 	GetWorld()->GetTimerManager().SetTimer(ProjectTimerHandle, this, &AStick::Project, ProjectTime, false); 
 }
 
 void AStick::Project()
 {
+	bToBeProject = false;
 	FVector TargetLocation = TargetPlayer->GetActorLocation();
 	TargetLocation.Z = 0;
 	FVector Direction = TargetLocation - Mesh->GetComponentLocation();

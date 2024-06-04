@@ -22,9 +22,15 @@ void ALevelTrigger::StartLevelStreaming(UPrimitiveComponent* HitComp, AActor* Ot
 {
 	if(Cast<ABeatEmUpCharacter>(OtherActor))
 	{
-		if(bLoadLevel)
+		ABeatEmUpCharacter* Player = Cast<ABeatEmUpCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
+		if(bLoadLevel && Player && Player->NumEnemiesDefeated >= Player->NumEnemiesToDefeat)
 		{
+			Player->bLevelLoaded = true;
 			UGameplayStatics::LoadStreamLevel(this, LevelToLoad, true, true, FLatentActionInfo());
+			FVector Location = Player->GetActorLocation() + Player->GetActorForwardVector() * 1000;
+			FRotator Rotation = Player->GetActorRotation();
+			Rotation.Yaw += 180;
+			GetWorld()->SpawnActor(BossEnemyClass, &Location, &Rotation);
 		}
 		else
 		{

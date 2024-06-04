@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "BossEnemy.h"
 #include "Components/BoxComponent.h"
 #include "GameFramework/Actor.h"
 #include "LevelTrigger.generated.h"
@@ -24,6 +25,10 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		bool bLoadLevel;
+
+	// Spawn Boss
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<ABossEnemy> BossEnemyClass;
 
 	UFUNCTION()
 		void StartLevelStreaming(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 BodyIndex, bool bSweep, const FHitResult& Hit);

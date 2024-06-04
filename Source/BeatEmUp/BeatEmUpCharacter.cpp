@@ -115,18 +115,7 @@ void ABeatEmUpCharacter::Tick(float DeltaTime)
 	{
 		InGameUI->UpdateValues();
 	}
-	FString LevelName = GetWorld()->GetMapName();
-	LevelName.RemoveFromStart(GetWorld()->StreamingLevelsPrefix);
-	if (!bPortalIsSpawned && NumEnemiesDefeated >= NumEnemiesToDefeat && !LevelName.Equals("BossWorld"))
-	{
-		FVector SpawnLocation = FVector(GetActorLocation() + GetActorForwardVector() * 500);
-		SpawnLocation.Z = 5;
-		FRotator SpawnRotation = GetActorRotation();
-		FActorSpawnParameters SpawnParams;
-		SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
-		GetWorld()->SpawnActor(PortalClass, &SpawnLocation, &SpawnRotation, SpawnParams);
-		bPortalIsSpawned = true;
-	}
+
 }
 
 

@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "BossEnemy.h"
 #include "Components/SpotLightComponent.h"
 #include "GameFramework/Actor.h"
 #include "GameFramework/RotatingMovementComponent.h"
@@ -28,6 +29,24 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		URotatingMovementComponent* MovementComponent;
+
+	UPROPERTY(EditAnywhere)
+		float RotationRate = 80;
+
+	UPROPERTY(EditAnywhere)
+		ABossEnemy* BossEnemy;
+
+	UPROPERTY(EditAnywhere)
+		UMaterialInterface* MaterialClass;
+
+	UPROPERTY()
+		UMaterialInstanceDynamic* MaterialInstance;
+
+	UPROPERTY(EditAnywhere)
+		FLinearColor HealthyColour;
+
+	UPROPERTY(EditAnywhere)
+		FLinearColor DeadColour;
 
 protected:
 	// Called when the game starts or when spawned

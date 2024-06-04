@@ -18,6 +18,8 @@ AEnemy::AEnemy()
 
 	AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
 
+	bIsBossChild = false;
+
 }
 
 // Called when the game starts or when spawned
@@ -86,6 +88,7 @@ void AEnemy::StopRagdoll()
 	if (CurrentHealth <= 0 && Player)
 	{
 		Player->NumEnemiesDefeated += 1;
+		UE_LOG(LogTemp, Warning, TEXT("defeat: %d"), Player->NumEnemiesDefeated);
 		Player->AddEXP(EXPAmount);
 		if(DeathParticleClass)
 		{

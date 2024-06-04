@@ -93,4 +93,7 @@ public:
 
 	UPROPERTY()
 		ADynamicSpotLight* Spotlight;
+
+	// Boss Spawned Child
+	bool bIsBossChild;
 };

@@ -50,6 +50,8 @@ public:
 	UMaterialInstanceDynamic* MaterialInstance;
 
 	float CurrentOpacity = 1;
+
+	bool bToBeProject;
 	
 protected:
 	// Called when the game starts or when spawned

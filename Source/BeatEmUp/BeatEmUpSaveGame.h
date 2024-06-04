@@ -21,6 +21,9 @@ public:
 
 	UPROPERTY()
 		uint32 UserIndex;
+
+	UPROPERTY()
+		bool bBossLevelLoaded;
 	
 	UPROPERTY()
 		FVector PlayerPosition;
@@ -77,6 +80,9 @@ public:
 		TArray<float> EnemyAmmo;
 
 	UPROPERTY()
+		TArray<bool> EnemyIsBossChild;
+
+	UPROPERTY()
 		TArray<FVector> MeleeEnemyLocations;
 	
 	UPROPERTY()
@@ -127,6 +133,30 @@ public:
 	UPROPERTY()
 		TArray<FLinearColor> DynamicFloorColors;
 
+	UPROPERTY()
+		TArray<FVector> StickLocations;
+
+	UPROPERTY()
+		TArray<FRotator> StickRotations;
+
+	UPROPERTY()
+		TArray<bool> DestroyedSticks;
+
+	UPROPERTY()
+		TArray<FVector> StickVelocities;
+
+	UPROPERTY()
+		TArray<bool> ActiveSticks;
+
+	UPROPERTY()
+		TArray<float> StickOpacities;
+
+	UPROPERTY()
+		TArray<bool> ToBeProjectSticks;
+
+	UPROPERTY()
+		TArray<float> StickProjectTimes;
+	
 	UPROPERTY()
 		FVector BossEnemyLocation;
 	

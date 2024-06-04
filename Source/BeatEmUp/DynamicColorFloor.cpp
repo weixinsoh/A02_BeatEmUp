@@ -25,7 +25,7 @@ void ADynamicColorFloor::OnPlayerOverlap(UPrimitiveComponent* OverlappedComponen
 	if (EmissiveMaterialInstance && Player)
 	{
 		EmissiveMaterialInstance->SetVectorParameterValue("BaseColor", FLinearColor::MakeRandomColor());
-		EmissiveMaterialInstance->SetScalarParameterValue("EmissiveStrength", 50.0f);
+		EmissiveMaterialInstance->SetScalarParameterValue("EmissiveStrength", EmissiveStrength);
 	}
 }
 
