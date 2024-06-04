@@ -127,4 +127,31 @@ public:
 	UPROPERTY()
 		TArray<FLinearColor> DynamicFloorColors;
 
+	UPROPERTY()
+		FVector BossEnemyLocation;
+	
+	UPROPERTY()
+		FRotator BossEnemyRotation;
+
+	UPROPERTY()
+		float BossEnemyCurrentHealth;
+
+	UPROPERTY()
+		float BossEnemyMaxHealth;
+
+	UPROPERTY()
+		bool BossEnemyRagdollState;
+
+	UPROPERTY()
+		FVector BossEnemyMeshLocation;
+
+	UPROPERTY()
+		FVector BossEnemyMeshVelocity;
+
+	UPROPERTY()
+		bool bIsLeftChildDefeated;
+
+	UPROPERTY()
+		bool bIsRightChildDefeated;
+
 };

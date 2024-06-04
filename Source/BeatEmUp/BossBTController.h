@@ -21,30 +21,7 @@ public:
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;
 	virtual FRotator GetControlRotation() const override;
-	/*
-	void GenerateNewRandomLocation();
 
-	UFUNCTION()
-	void OnSensesUpdated(AActor* UpdatedActor, FAIStimulus Stimulus);
-
-	UPROPERTY(EditAnywhere)
-	float SightRadius = 2000;
-
-	UPROPERTY(EditAnywhere)
-	float SightAge = 3.5;
-
-	UPROPERTY(EditAnywhere)
-	float LoseSightRadius = SightRadius + 100;
-
-	UPROPERTY(EditAnywhere)
-	float FieldOfView = 45;
-
-	UPROPERTY(EditAnywhere)
-	float PatrolDistance = 2000;
-
-	UPROPERTY(EditAnywhere)
-	UAISenseConfig_Sight* SightConfiguration;
-*/
 	UPROPERTY(EditAnywhere)
 	UBlackboardData* AIBlackboard;
 

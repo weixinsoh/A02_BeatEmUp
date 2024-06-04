@@ -12,28 +12,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="45047650-6ffc-4563-b486-015ca7512f18" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Content/ThirdPerson/Input/Actions/IA_SelectWeapon.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/BeatEmUp/SpawnEnemyTask.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/BeatEmUp/SpawnEnemyTask.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BeatEmUp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BeatEmUp/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/AIController/BossEnemyBT.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/AIController/BossEnemyBT.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/AIController/BossEnemyBlackboard.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/AIController/BossEnemyBlackboard.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_Portal.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_Portal.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Enemies/BP_MeleeEnemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Enemies/BP_MeleeEnemy.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/ThirdPerson/Blueprints/BP_ThirdPersonCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ThirdPerson/Blueprints/BP_ThirdPersonCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/ThirdPerson/Input/Actions/IA_ShowCursor.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/ThirdPerson/Input/IMC_Default.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ThirdPerson/Input/IMC_Default.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/UI/BP__InventoryTile.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/BP__InventoryTile.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpCharacter.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/BossBTController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/BossBTController.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpGameMode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpGameMode.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpSaveGame.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpSaveGame.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/BossBTController.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/BossBTController.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/BossEnemy.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/BossEnemy.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/InventoryTile.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/InventoryTile.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/InventoryTile.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/InventoryTile.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/InventoryWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/InventoryWidget.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/InventoryWidget.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/InventoryWidget.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/MeleeEnemy.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/MeleeEnemy.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -283,7 +265,7 @@
       <workItem from="1716981198171" duration="6898000" />
       <workItem from="1717032446828" duration="44250000" />
       <workItem from="1717426728273" duration="5457000" />
-      <workItem from="1717459431819" duration="20297000" />
+      <workItem from="1717459431819" duration="25649000" />
     </task>
     <servers />
   </component>

@@ -4,6 +4,8 @@
 #include "BeatEmUpCharacter.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "BeatEmUpGameInstance.h"
+#include "BossBTController.h"
+#include "BossEnemy.h"
 #include "DynamicColorFloor.h"
 #include "EnemyBTController.h"
 #include "Flail.h"
@@ -143,6 +145,35 @@ void ABeatEmUpGameMode::Load(UBeatEmUpSaveGame* LoadedGame)
 		}
 	}
 
+	// Set the boss enemy to the previous state
+	ABossEnemy* SpawnedBossEnemy = Cast<ABossEnemy>(UGameplayStatics::GetActorOfClass(GetWorld(), ABossEnemy::StaticClass()));
+	if (SpawnedBossEnemy)
+	{
+		SpawnedBossEnemy->SetActorLocationAndRotation(LoadedGame->BossEnemyLocation, LoadedGame->BossEnemyRotation);
+		SpawnedBossEnemy->CurrentHealth = LoadedGame->BossEnemyCurrentHealth;
+		SpawnedBossEnemy->MaxHealth = LoadedGame->BossEnemyMaxHealth;
+		SpawnedBossEnemy->BossUI->UpdateValues();
+		if (LoadedGame->BossEnemyRagdollState)
+		{
+			SpawnedBossEnemy->Ragdoll();
+			SpawnedBossEnemy->GetCharacterMovement()->GravityScale = 0;
+			SpawnedBossEnemy->GetMesh()->SetWorldLocation(LoadedGame->BossEnemyMeshLocation, false, nullptr,
+													  ETeleportType::TeleportPhysics);
+			SpawnedBossEnemy->GetMesh()->SetAllPhysicsLinearVelocity(LoadedGame->BossEnemyMeshVelocity, true);
+		}
+		// Set the ammo to the previous amount
+		ABossBTController* SpawnedBossEnemyController = Cast<ABossBTController>(SpawnedBossEnemy->GetController());
+		if (SpawnedBossEnemyController)
+		{
+			SpawnedBossEnemyController->bIsLeftChildDefeated = LoadedGame->bIsLeftChildDefeated;
+			SpawnedBossEnemyController->bIsRightChildDefeated = LoadedGame->bIsRightChildDefeated;
+			if (!SpawnedBossEnemyController->bIsLeftChildDefeated || !SpawnedBossEnemyController->bIsRightChildDefeated)
+			{
+				SpawnedBossEnemyController->BlackboardComponent->SetValueAsBool("SpawnEnemy", false);
+			}
+		}
+	}
+
 	// Set the bullet shot by the enemy to the previous state
 	for (int i = 0; i < LoadedGame->BulletLocations.Num(); i++)
 	{
@@ -172,7 +203,7 @@ void ABeatEmUpGameMode::Load(UBeatEmUpSaveGame* LoadedGame)
 			SpawnedBomb->BombMesh->OnComponentHit.AddDynamic(SpawnedBomb, &ABomb::OnHit);
 		}
 	}
-	// Set the dynamic floors to the previous color and emissive strength
+	// Set the dynamic floors to the previous color
 	TArray<AActor*> DynamicFloors;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ADynamicColorFloor::StaticClass(), DynamicFloors);
 	for (int i = 0; i < LoadedGame->DynamicFloorColors.Num(); i++)
@@ -203,29 +234,9 @@ void ABeatEmUpGameMode::Save(UBeatEmUpSaveGame* SaveGame)
 	for (int i = 0; i < Enemies.Num(); i++)
 	{
 		AMeleeEnemy* CurrentMeleeEnemy = Cast<AMeleeEnemy>(Enemies[i]);
-		// Save the basic enemies' state
-		if (!CurrentMeleeEnemy)
-		{
-			AEnemy* CurrentEnemy = Cast<AEnemy>(Enemies[i]);
-			SaveGame->EnemyLocations.Add(CurrentEnemy->GetActorLocation());
-			SaveGame->EnemyRotations.Add(CurrentEnemy->GetActorRotation());
-			SaveGame->EnemyCurrentHealths.Add(CurrentEnemy->CurrentHealth);
-			SaveGame->EnemyMaxHealths.Add(CurrentEnemy->MaxHealth);
-			if (CurrentEnemy->GetMesh()->GetCollisionProfileName() == "Ragdoll")
-			{
-				SaveGame->EnemyRagdollStates.Add(true);
-			}
-			else
-			{
-				SaveGame->EnemyRagdollStates.Add(false);
-			}
-			SaveGame->EnemyMeshLocations.Add(CurrentEnemy->GetMesh()->GetComponentLocation());
-			SaveGame->EnemyMeshVelocities.Add(CurrentEnemy->GetMesh()->GetComponentVelocity());
-			AEnemyBTController* EnemyBTController = Cast<AEnemyBTController>(CurrentEnemy->GetController());
-			SaveGame->EnemyAmmo.Add(EnemyBTController->Ammo);
-		}
+		ABossEnemy* CurrentBossEnemy = Cast<ABossEnemy>(Enemies[i]);
 		// Save the melee enemies' state
-		else
+		if (CurrentMeleeEnemy)
 		{
 			SaveGame->MeleeEnemyLocations.Add(CurrentMeleeEnemy->GetActorLocation());
 			SaveGame->MeleeEnemyRotations.Add(CurrentMeleeEnemy->GetActorRotation());
@@ -250,6 +261,46 @@ void ABeatEmUpGameMode::Save(UBeatEmUpSaveGame* SaveGame)
 			AEnemyWeaponBTController* EnemyWeaponBTController = Cast<AEnemyWeaponBTController>(CurrentMeleeEnemy->GetController());
 			SaveGame->MeleeEnemyLeftAmmo.Add(EnemyWeaponBTController->LeftAmmo);
 			SaveGame->MeleeEnemyRightAmmo.Add(EnemyWeaponBTController->RightAmmo);
+		} else if (CurrentBossEnemy)
+		{
+			// Save the boss enemy state
+			SaveGame->BossEnemyLocation = CurrentBossEnemy->GetActorLocation();
+			SaveGame->BossEnemyRotation = CurrentBossEnemy->GetActorRotation();
+			SaveGame->BossEnemyCurrentHealth = CurrentBossEnemy->CurrentHealth;
+			SaveGame->BossEnemyMaxHealth = CurrentBossEnemy->MaxHealth;
+			if (CurrentBossEnemy->GetMesh()->GetCollisionProfileName() == "Ragdoll")
+			{
+				SaveGame->BossEnemyRagdollState = true;
+			}
+			else
+			{
+				SaveGame->BossEnemyRagdollState = false;
+			}
+			SaveGame->BossEnemyMeshLocation = CurrentBossEnemy->GetMesh()->GetComponentLocation();
+			SaveGame->BossEnemyMeshVelocity = CurrentBossEnemy->GetMesh()->GetComponentVelocity();
+			ABossBTController* EnemyBTController = Cast<ABossBTController>(CurrentBossEnemy->GetController());
+			SaveGame->bIsLeftChildDefeated = EnemyBTController->bIsLeftChildDefeated;
+			SaveGame->bIsRightChildDefeated = EnemyBTController->bIsRightChildDefeated;
+		} else
+		{
+			// Save the basic enemies' state
+			AEnemy* CurrentEnemy = Cast<AEnemy>(Enemies[i]);
+			SaveGame->EnemyLocations.Add(CurrentEnemy->GetActorLocation());
+			SaveGame->EnemyRotations.Add(CurrentEnemy->GetActorRotation());
+			SaveGame->EnemyCurrentHealths.Add(CurrentEnemy->CurrentHealth);
+			SaveGame->EnemyMaxHealths.Add(CurrentEnemy->MaxHealth);
+			if (CurrentEnemy->GetMesh()->GetCollisionProfileName() == "Ragdoll")
+			{
+				SaveGame->EnemyRagdollStates.Add(true);
+			}
+			else
+			{
+				SaveGame->EnemyRagdollStates.Add(false);
+			}
+			SaveGame->EnemyMeshLocations.Add(CurrentEnemy->GetMesh()->GetComponentLocation());
+			SaveGame->EnemyMeshVelocities.Add(CurrentEnemy->GetMesh()->GetComponentVelocity());
+			AEnemyBTController* EnemyBTController = Cast<AEnemyBTController>(CurrentEnemy->GetController());
+			SaveGame->EnemyAmmo.Add(EnemyBTController->Ammo);
 		}
 	}
 
