@@ -36,7 +36,7 @@ public:
 		ABeatEmUpCharacter* Owner;
 
 	UFUNCTION()
-		void OnButtonWasClicked(UInventoryTile* Tile);
+		void OnButtonWasClicked(int32 Index);
 
 	void RefreshInventory(TArray<AWeapon*> Weapons);
 

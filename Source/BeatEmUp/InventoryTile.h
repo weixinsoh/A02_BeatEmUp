@@ -15,8 +15,6 @@
  * 
  */
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FUInventoryTileOnClicked, class UInventoryTile*, Tile);
-
 UCLASS()
 class BEATEMUP_API UInventoryTile : public UUserWidget
 {
@@ -30,22 +28,20 @@ public:
 	UPROPERTY(meta = (BindWidget))
 		UButton* TileButton;
 
+	UPROPERTY(meta = (BindWidget))
+		UBorder* TileBorder;
+
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<UInventoryDescriptionUI> InventoryDescriptionClass;
 
 	UPROPERTY(EditAnywhere)
 		UInventoryDescriptionUI* InventoryDescriptionUI;
 	
-	FUInventoryTileOnClicked OnClickedDelegate;
-
 	void SetTile(UTexture2D* Icon, AWeapon* Weapon);
 
 	virtual void NativeConstruct() override;
 
 	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
-	
-	UFUNCTION()
-		void OnClicked();
 
 	UFUNCTION()
 		void OnHovered();

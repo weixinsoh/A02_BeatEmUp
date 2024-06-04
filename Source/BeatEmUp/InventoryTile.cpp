@@ -30,7 +30,6 @@ void UInventoryTile::NativeConstruct()
 {
 	Super::NativeConstruct();
 
-	TileButton->OnClicked.AddUniqueDynamic(this, &UInventoryTile::OnClicked);
 	TileButton->OnHovered.AddUniqueDynamic(this,&UInventoryTile::OnHovered);
 	TileButton->OnUnhovered.AddUniqueDynamic(this, &UInventoryTile::OnUnHovered);
 	
@@ -51,15 +50,6 @@ void UInventoryTile::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
 		InventoryDescriptionUI->SetPositionInViewport(CursorPosition);
 	}
 	
-}
-
-/**
- * This function broadcast the OnClicked event,
- * indicating that this object has been clicked.
- */
-void UInventoryTile::OnClicked()
-{
-	OnClickedDelegate.Broadcast(this);
 }
 
 /**

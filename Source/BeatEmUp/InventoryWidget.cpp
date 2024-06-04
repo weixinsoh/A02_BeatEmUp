@@ -9,23 +9,29 @@
 /**
  * This function is used to changed the equipping weapon
  * to the clicked weapon in the inventory for the player. 
- * @param Tile The tile being clicked. 
+ * @param Index the index of the weapon located in the inventory.
  */
-void UInventoryWidget::OnButtonWasClicked(UInventoryTile* Tile)
+void UInventoryWidget::OnButtonWasClicked(int32 Index)
 {
-	int32 Index = TileList.Find(Tile);
-	AWeapon* SelectedWeapon = Owner->GetWeaponAtIndex(Index);
-	if(!SelectedWeapon)
+	if (Index - 1 >= 0)
 	{
-		return;
+		TileList[Index - 1]->TileBorder->SetBrushColor(FLinearColor::White);
+	} else
+	{
+		TileList[TileList.Num() - 1]->TileBorder->SetBrushColor(FLinearColor::White);
 	}
-	
+	TileList[Index]->TileBorder->SetBrushColor(FLinearColor::Red);
 	if (Owner->EquippingWeapon)
 	{
 		Owner->EquippingWeapon->SetActorHiddenInGame(true);
 		Owner->EquippingWeapon->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 	}
 	
+	AWeapon* SelectedWeapon = Owner->GetWeaponAtIndex(Index);
+	if(!SelectedWeapon)
+	{
+		return;
+	}
 	Owner->EquippingWeapon = SelectedWeapon;
 	Owner->EquippingWeapon->SetActorHiddenInGame(false);
 	if (Cast<AFlail>(Owner->EquippingWeapon))
@@ -73,7 +79,6 @@ void UInventoryWidget::NativeConstruct()
 		UInventoryTile* Tile = Cast<UInventoryTile>(CreateWidget(GetGameInstance(), BPInventoryTile));
 
 		TileList.Add(Tile);
-		Tile->OnClickedDelegate.AddDynamic(this, &UInventoryWidget::OnButtonWasClicked);
 		InventoryGrid->AddChildToGrid(Tile, 0, Y);
 	}
 
