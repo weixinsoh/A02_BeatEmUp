@@ -4,6 +4,8 @@
 #include "BossEnemy.h"
 #include "BrainComponent.h"
 #include "BossBTController.h"
+#include "NiagaraComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 ABossEnemy::ABossEnemy()
 {
@@ -59,8 +61,11 @@ void ABossEnemy::SpawnEnemy()
 	FVector LeftLocation = GetActorLocation() + GetActorForwardVector() * 100 - GetActorRightVector() * 100;
 	FVector RightLocation = GetActorLocation() + GetActorForwardVector() * 100 + GetActorRightVector() * 100;
 	FRotator Rotation = GetActorRotation();
-	GetWorld()->SpawnActor(EnemyClass, &LeftLocation, &Rotation);
-	GetWorld()->SpawnActor(EnemyClass, &RightLocation, &Rotation);
+	ABossBTController* BossBTController = Cast<ABossBTController>(GetController());
+	BossBTController->LeftEnemyChild = GetWorld()->SpawnActor(EnemyClass, &LeftLocation, &Rotation);
+	BossBTController->RightEnemyChild = GetWorld()->SpawnActor(EnemyClass, &RightLocation, &Rotation);
+	BossBTController->bIsLeftChildDefeated = false;
+	BossBTController->bIsRightChildDefeated = false;
 }
 
 void ABossEnemy::Attack()

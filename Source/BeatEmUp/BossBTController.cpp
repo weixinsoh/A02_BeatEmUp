@@ -8,6 +8,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 
 ABossBTController::ABossBTController()
@@ -22,6 +23,7 @@ void ABossBTController::BeginPlay()
 	UseBlackboard(AIBlackboard, BlackboardComponent);
 	RunBehaviorTree(BehaviourTree);
 	TargetPlayer = GetWorld()->GetFirstPlayerController()->GetPawn();
+	BlackboardComponent->SetValueAsBool("SpawnEnemy", true);
 }
 
 void ABossBTController::Tick(float DeltaSeconds)
@@ -30,6 +32,25 @@ void ABossBTController::Tick(float DeltaSeconds)
 	if (TargetPlayer)
 	{
 		BlackboardComponent->SetValueAsVector("PlayerPosition", TargetPlayer->GetActorLocation());
+	}
+	
+	if (AEnemy* LeftChild = Cast<AEnemy>(LeftEnemyChild))
+	{
+		if (LeftChild->CurrentHealth <= 0)
+		{
+			bIsLeftChildDefeated = true;
+		}
+	}
+	if (AEnemy* RightChild = Cast<AEnemy>(RightEnemyChild))
+	{
+		if (RightChild->CurrentHealth <= 0)
+		{
+			bIsRightChildDefeated = true;
+		}
+	}
+	if (bIsLeftChildDefeated && bIsRightChildDefeated)
+	{
+		BlackboardComponent->SetValueAsBool("SpawnEnemy", true);
 	}
 }
 
@@ -93,6 +114,7 @@ void ABossBTController::SpawnEnemy()
 	{
 		ABossEnemy* BossEnemy = Cast<ABossEnemy>(GetPawn());
 		BossEnemy->SpawnEnemy();
+		BlackboardComponent->SetValueAsBool("SpawnEnemy", false);
 	}
 }
 

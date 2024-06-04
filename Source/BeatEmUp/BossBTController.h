@@ -60,6 +60,15 @@ public:
 	UPROPERTY()
 	APawn* TargetPlayer;
 
+	UPROPERTY()
+	AActor* LeftEnemyChild;
+
+	UPROPERTY()
+	AActor* RightEnemyChild;
+
+	bool bIsLeftChildDefeated;
+	bool bIsRightChildDefeated;
+
 	UFUNCTION()
 	void Teleport();
 

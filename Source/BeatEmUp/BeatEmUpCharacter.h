@@ -145,7 +145,10 @@ public:
 		UInputAction* UseWeaponAction;
 
 	UPROPERTY(EditAnywhere)
-		UInputAction* ShowCursorAction;
+		UInputAction* SelectWeaponAction;
+
+	UPROPERTY(EditAnywhere)
+		int32 SelectedIndex;
 
 	UPROPERTY(EditAnywhere)
 		AWeapon* EquippingWeapon;
@@ -163,7 +166,7 @@ public:
 		void UseWeapon();
 
 	UFUNCTION()
-		void ShowCursor();
+		void SelectWeapon();
 
 	// To Boss World
 	UPROPERTY(EditAnywhere)

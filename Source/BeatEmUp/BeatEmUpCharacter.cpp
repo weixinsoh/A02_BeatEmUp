@@ -61,6 +61,9 @@ ABeatEmUpCharacter::ABeatEmUpCharacter()
 	// Initialise the boolean of grabbing an enemy
 	IsGrabbingEnemy = false;
 
+	// Initialise the selected index in the inventory
+	SelectedIndex = -1;
+
 	// Initialise the number of enemies defeated as 0
 	NumEnemiesDefeated = 0;
 
@@ -112,10 +115,12 @@ void ABeatEmUpCharacter::Tick(float DeltaTime)
 	{
 		InGameUI->UpdateValues();
 	}
-	if (!bPortalIsSpawned && NumEnemiesDefeated >= NumEnemiesToDefeat)
+	FString LevelName = GetWorld()->GetMapName();
+	LevelName.RemoveFromStart(GetWorld()->StreamingLevelsPrefix);
+	if (!bPortalIsSpawned && NumEnemiesDefeated >= NumEnemiesToDefeat && !LevelName.Equals("BossWorld"))
 	{
 		FVector SpawnLocation = FVector(GetActorLocation() + GetActorForwardVector() * 500);
-		SpawnLocation.Z = 0;
+		SpawnLocation.Z = 5;
 		FRotator SpawnRotation = GetActorRotation();
 		FActorSpawnParameters SpawnParams;
 		SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
@@ -159,8 +164,8 @@ void ABeatEmUpCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 		// Use Weapon
 		EnhancedInputComponent->BindAction(UseWeaponAction, ETriggerEvent::Triggered, this, &ABeatEmUpCharacter::UseWeapon);
 
-		// Show Mouse Cursor
-		EnhancedInputComponent->BindAction(ShowCursorAction, ETriggerEvent::Started, this, &ABeatEmUpCharacter::ShowCursor);
+		// Select Weapon
+		EnhancedInputComponent->BindAction(SelectWeaponAction, ETriggerEvent::Triggered, this, &ABeatEmUpCharacter::SelectWeapon);
 
 		// Pause Game
 		EnhancedInputComponent->BindAction(PauseAction, ETriggerEvent::Started, this, &ABeatEmUpCharacter::PauseGame);
@@ -403,24 +408,10 @@ void ABeatEmUpCharacter::UseWeapon()
 	}
 }
 
-/**
- * This function is used to show/hide the mouse cursor.
- */
-void ABeatEmUpCharacter::ShowCursor()
+void ABeatEmUpCharacter::SelectWeapon()
 {
-	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
-	{
-		if (PlayerController->bShowMouseCursor)
-		{
-			PlayerController->SetInputMode(FInputModeGameOnly());
-			PlayerController->bShowMouseCursor = false;
-		}
-		else
-		{
-			PlayerController->SetInputMode(FInputModeGameAndUI());
-			PlayerController->bShowMouseCursor = true;
-		}
-	}
+	SelectedIndex = (SelectedIndex + 1) % InventorySize;
+	InventoryWidget->OnButtonWasClicked(SelectedIndex);
 }
 
 void ABeatEmUpCharacter::AddEXP(int EXPToAdd)

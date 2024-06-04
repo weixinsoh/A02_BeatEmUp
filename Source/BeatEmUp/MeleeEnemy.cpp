@@ -65,11 +65,19 @@ void AMeleeEnemy::Ragdoll()
  */
 void AMeleeEnemy::StopRagdoll()
 {
-	Super::StopRagdoll();
 	if (AEnemyWeaponBTController* MeleeEnemyController = Cast<AEnemyWeaponBTController>(GetController()))
 	{
 		MeleeEnemyController->BrainComponent->ResumeLogic("Moving Again!");
 	}
+	if (CurrentHealth <= 0)
+	{
+		if (LeftWeapon)
+			LeftWeapon->Destroy();
+		if (RightWeapon)
+			RightWeapon->Destroy();
+	}
+	Super::StopRagdoll();
+
 }
 
 /**
