@@ -36,12 +36,12 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		UInventoryDescriptionUI* InventoryDescriptionUI;
+
+	FTimerHandle ShowTimeHandle;
+
+	float ShowTime = 2;
 	
 	void SetTile(UTexture2D* Icon, AWeapon* Weapon);
-
-	virtual void NativeConstruct() override;
-
-	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
 
 	UFUNCTION()
 		void OnHovered();

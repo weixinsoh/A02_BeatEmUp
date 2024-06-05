@@ -23,38 +23,8 @@ void UInventoryTile::SetTile(UTexture2D* Icon, AWeapon* Weapon)
 }
 
 /**
- * This function dynamically delegate functions
- * once the tile is clicked or hovered/unhovered.
- */
-void UInventoryTile::NativeConstruct()
-{
-	Super::NativeConstruct();
-
-	TileButton->OnHovered.AddUniqueDynamic(this,&UInventoryTile::OnHovered);
-	TileButton->OnUnhovered.AddUniqueDynamic(this, &UInventoryTile::OnUnHovered);
-	
-}
-
-/**
- * This function update the position of the weapon information widget
- * to follow the mouse cursor.
- */
-void UInventoryTile::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
-{
-	Super::NativeTick(MyGeometry, InDeltaTime);
-
-	if (bIsHovered)
-	{
-		FVector2D CursorPosition;
-		GetOwningPlayer()->GetMousePosition(CursorPosition.X, CursorPosition.Y);
-		InventoryDescriptionUI->SetPositionInViewport(CursorPosition);
-	}
-	
-}
-
-/**
  * This function set the weapon information widget to be visible
- * when the mouse is hovering over the tile.
+ * when the mouse wheel is focusing the tile.
  */
 void UInventoryTile::OnHovered()
 {
@@ -62,12 +32,13 @@ void UInventoryTile::OnHovered()
 	{
 		bIsHovered = true;
 		InventoryDescriptionUI->SetVisibility(ESlateVisibility::Visible);
+		GetWorld()->GetTimerManager().SetTimer(ShowTimeHandle, this, &UInventoryTile::OnUnHovered, ShowTime, false); 
 	}
 }
 
 /**
  * This function set the weapon information widget to be hidden
- * when the mouse no longer hovering over the tile.
+ * when the mouse wheel no longer focusing the tile.
  */
 void UInventoryTile::OnUnHovered()
 {

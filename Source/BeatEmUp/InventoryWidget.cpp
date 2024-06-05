@@ -13,33 +13,37 @@
  */
 void UInventoryWidget::OnButtonWasClicked(int32 Index)
 {
+	// Unhighlight the previous selected weapon
 	if (Index - 1 >= 0)
 	{
 		TileList[Index - 1]->TileBorder->SetBrushColor(FLinearColor::White);
+		TileList[Index - 1]->OnUnHovered();
 	} else
 	{
 		TileList[TileList.Num() - 1]->TileBorder->SetBrushColor(FLinearColor::White);
+		TileList[TileList.Num() - 1]->OnUnHovered();
 	}
+	// Highlight the selected weapon
 	TileList[Index]->TileBorder->SetBrushColor(FLinearColor::Red);
+
+	// Hide the previous equipping weapon
 	if (Owner->EquippingWeapon)
 	{
 		Owner->EquippingWeapon->SetActorHiddenInGame(true);
 		Owner->EquippingWeapon->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 	}
-	
+
+	// Equip the selected weapon
 	AWeapon* SelectedWeapon = Owner->GetWeaponAtIndex(Index);
-	if(!SelectedWeapon)
-	{
-		return;
-	}
+	if(!SelectedWeapon) return;
 	Owner->EquippingWeapon = SelectedWeapon;
 	Owner->EquippingWeapon->SetActorHiddenInGame(false);
-	if (Cast<AFlail>(Owner->EquippingWeapon))
-	{
-		return;
-	}
+	if (Cast<AFlail>(Owner->EquippingWeapon)) return;
 	FName WeaponSocket = FName("WeaponSocket");
 	Owner->EquippingWeapon->AttachToComponent(Owner->GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, WeaponSocket);
+
+	// Show weapon description
+	TileList[Index]->OnHovered();
 }
 
 /**
