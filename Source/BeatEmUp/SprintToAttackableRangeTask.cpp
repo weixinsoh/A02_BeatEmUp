@@ -5,6 +5,9 @@
 
 #include "EnemyWeaponBTController.h"
 
+/**
+ * This function is used to execute the task to sprint to the enemy attackable range. 
+ */
 EBTNodeResult::Type USprintToAttackableRangeTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
 	UBehaviorTreeComponent* BTComp = &OwnerComp;

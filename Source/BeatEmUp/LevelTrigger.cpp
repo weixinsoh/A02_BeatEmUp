@@ -27,6 +27,8 @@ void ALevelTrigger::StartLevelStreaming(UPrimitiveComponent* HitComp, AActor* Ot
 		{
 			Player->bLevelLoaded = true;
 			UGameplayStatics::LoadStreamLevel(this, LevelToLoad, true, true, FLatentActionInfo());
+
+			// Spawn boss enemy when boss level is loaded
 			FVector Location = Player->GetActorLocation() + Player->GetActorForwardVector() * 1000;
 			FRotator Rotation = Player->GetActorRotation();
 			Rotation.Yaw += 180;

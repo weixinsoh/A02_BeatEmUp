@@ -22,14 +22,18 @@ ARotatingSpotLight::ARotatingSpotLight()
 	
 }
 
-// Called when the game starts or when spawned
+/**
+ * This function is called when game starts to keep track the boss enemy. 
+ */
 void ARotatingSpotLight::BeginPlay()
 {
 	Super::BeginPlay();
 	BossEnemy = Cast<ABossEnemy>(UGameplayStatics::GetActorOfClass(GetWorld(), ABossEnemy::StaticClass()));
 }
 
-// Called every frame
+/**
+ * This function is used to update the flickering frequency and the color of the spotlight based on the current health of the boss enemy. 
+ */
 void ARotatingSpotLight::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);

@@ -22,9 +22,12 @@ public:
 	UPROPERTY()
 		uint32 UserIndex;
 
+	// Save streaming level
 	UPROPERTY()
 		bool bBossLevelLoaded;
+
 	
+	// Save player state
 	UPROPERTY()
 		FVector PlayerPosition;
 	
@@ -55,6 +58,7 @@ public:
 	UPROPERTY()
 		float PlayerNumOfEnemiesDefeated;
 
+	// Save enemy state
 	UPROPERTY()
 		TArray<FVector> EnemyLocations;
 	
@@ -82,6 +86,8 @@ public:
 	UPROPERTY()
 		TArray<bool> EnemyIsBossChild;
 
+	
+	// Save melee enemy state
 	UPROPERTY()
 		TArray<FVector> MeleeEnemyLocations;
 	
@@ -118,21 +124,29 @@ public:
 	UPROPERTY()
 		TArray<FVector> MeleeEnemyLeftWeaponVelocities;
 
+	
+	// Save launched bullet state
 	UPROPERTY()
 		TArray<FVector> BulletLocations;
 
 	UPROPERTY()
 		TArray<FRotator> BulletRotations;
 
+	
+	// Save launched bomb state
 	UPROPERTY()
 		TArray<FVector> BombLocations;
 
 	UPROPERTY()
 		TArray<FVector> BombVelocities;
 
+	
+	// Save dynamic color floor state
 	UPROPERTY()
 		TArray<FLinearColor> DynamicFloorColors;
 
+	
+	// Save launched stick state
 	UPROPERTY()
 		TArray<FVector> StickLocations;
 
@@ -141,7 +155,7 @@ public:
 
 	UPROPERTY()
 		TArray<bool> DestroyedSticks;
-
+	
 	UPROPERTY()
 		TArray<FVector> StickVelocities;
 
@@ -156,7 +170,9 @@ public:
 
 	UPROPERTY()
 		TArray<float> StickProjectTimes;
-	
+
+
+	// Save boss enemy state
 	UPROPERTY()
 		FVector BossEnemyLocation;
 	

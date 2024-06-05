@@ -6,6 +6,9 @@
 #include "EnemyBTController.h"
 #include "EnemyWeaponBTController.h"
 
+/**
+ * This function is used to execute the task to check the target player is within the attackable range. 
+ */
 EBTNodeResult::Type URangeCheckTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
 	UBehaviorTreeComponent* BTComp = &OwnerComp;

@@ -40,6 +40,9 @@ void ABullet::BeginPlay()
 
 }
 
+/**
+ * This function is used to update the particle emitter position on every tick to follow the bullet move. 
+ */
 void ABullet::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
@@ -50,6 +53,9 @@ void ABullet::Tick(float DeltaTime)
 	}
 }
 
+/**
+ * This function is used to deal damage to the hit character. 
+ */
 void ABullet::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector Normal,
                     const FHitResult& Hit)
 {

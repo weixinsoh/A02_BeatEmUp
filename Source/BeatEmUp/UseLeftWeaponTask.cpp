@@ -5,6 +5,9 @@
 
 #include "EnemyWeaponBTController.h"
 
+/**
+ * This function is used to execute the attack task using left weapon. 
+ */
 EBTNodeResult::Type UUseLeftWeaponTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
 	UBehaviorTreeComponent* BTComp = &OwnerComp;

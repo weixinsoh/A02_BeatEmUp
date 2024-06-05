@@ -21,8 +21,11 @@ AStick::AStick()
 	MovementComponent->SetActive(false);
 }
 
+/**
+ * This function is used to deal damage to the target player using collision sphere when the stick hit something. 
+ */
 void AStick::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector Normal,
-	const FHitResult& Hit)
+                   const FHitResult& Hit)
 {
 	MovementComponent->SetActive(false);
 	bDestroy = true;
@@ -47,12 +50,18 @@ void AStick::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveC
 	}
 }
 
+/**
+ * This function is used to make a delay before launching the stick. 
+ */
 void AStick::DelayProject()
 {
 	bToBeProject = true;
 	GetWorld()->GetTimerManager().SetTimer(ProjectTimerHandle, this, &AStick::Project, ProjectTime, false); 
 }
 
+/**
+ * This function is used to launch the stick towards the target player. 
+ */
 void AStick::Project()
 {
 	bToBeProject = false;
@@ -72,16 +81,21 @@ void AStick::BeginPlay()
 {
 	Super::BeginPlay();
 
+	// Set the material of the stick
 	if (MaterialClass)
 	{
 		MaterialInstance = UMaterialInstanceDynamic::Create(MaterialClass, this);
 		Mesh->SetMaterial(0, MaterialInstance);
 	}
-	
+
+	// Set the target player
 	TargetPlayer = GetWorld()->GetFirstPlayerController()->GetPawn();
+
+	// Keep track of the component on hitting
 	Mesh->OnComponentHit.AddDynamic(this, &AStick::OnHit);
 	Mesh->SetNotifyRigidBodyCollision(true);
-	
+
+	// Rotate the stick to be horizontal
 	FRotator Rotation = GetActorRotation();
 	Rotation.Pitch = Rotation.Pitch - 270;
 	SetActorRotation(Rotation);
@@ -91,7 +105,8 @@ void AStick::BeginPlay()
 void AStick::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	
+
+	// Generate the fade out effect after it hit something
 	if (bDestroy)
 	{
 		CurrentOpacity = FMath::Lerp(CurrentOpacity, 0, 3 * DeltaTime);

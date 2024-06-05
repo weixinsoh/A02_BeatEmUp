@@ -4,7 +4,9 @@
 #include "TeleportEndTask.h"
 #include "BossBTController.h"
 
-
+/**
+ * This function is used to execute the task to set the boss back to the previous state after teleporting.
+ */
 EBTNodeResult::Type UTeleportEndTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
 	UBehaviorTreeComponent* BTComp = &OwnerComp;

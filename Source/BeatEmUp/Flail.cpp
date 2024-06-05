@@ -85,14 +85,13 @@ void AFlail::UseWeapon(ACharacter* Character)
 
 	// Set collision settings
 	BallMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-	BallMesh->SetCollisionResponseToChannel(ECC_WorldDynamic, ECR_Block);
-	BallMesh->SetCollisionResponseToChannel(ECC_WorldStatic, ECR_Block);
+	BallMesh->SetCollisionResponseToChannel(ECC_Pawn, ECR_Block);
 
 	// Launch the flail ball
 	BallMesh->SetSimulatePhysics(true);
 	BallMesh->SetEnableGravity(true);
 	BallMesh->SetNotifyRigidBodyCollision(true);
-	BallMesh->SetPhysicsLinearVelocity(LaunchDirection * HitForce);
+	BallMesh->AddImpulse(LaunchDirection * HitForce);
 }
 
 /**
@@ -133,4 +132,7 @@ void AFlail::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveC
 			HitEnemy->DealDamage(Damage);
 		}
 	}
+	
+	// Set collision settings to overlap with pawn
+	BallMesh->SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);
 }

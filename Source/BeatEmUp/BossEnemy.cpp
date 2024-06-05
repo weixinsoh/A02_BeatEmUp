@@ -11,6 +11,9 @@ ABossEnemy::ABossEnemy()
 {
 }
 
+/**
+ * This function is called when game starts to set the target player and create the health bar widget. 
+ */
 void ABossEnemy::BeginPlay()
 {
 	Super::BeginPlay();
@@ -27,6 +30,9 @@ void ABossEnemy::BeginPlay()
 	}
 }
 
+/**
+ * This function is used to ragdoll the boss enemy before adding impulse on it. 
+ */
 void ABossEnemy::Ragdoll()
 {
 	if (ABossBTController* BossBTController = Cast<ABossBTController>(GetController()))
@@ -36,6 +42,9 @@ void ABossEnemy::Ragdoll()
 	Super::Ragdoll();
 }
 
+/**
+ * This function is used to stop the ragdolling. 
+ */
 void ABossEnemy::StopRagdoll()
 {
 	if (ABossBTController* BossBTController = Cast<ABossBTController>(GetController()))
@@ -45,17 +54,27 @@ void ABossEnemy::StopRagdoll()
 	Super::StopRagdoll();
 }
 
+/**
+ * This function is overrides the onhit() method to prevent boss enemy from destroying itself. 
+ */
 void ABossEnemy::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector Normal,
                        const FHitResult& Hit)
 {
 }
 
+/**
+ * This function is used to deal damage to the boss enemy and update its health bar. 
+ * @param Damage the damage value dealt to the boss enemy
+ */
 void ABossEnemy::DealDamage(float Damage)
 {
 	Super::DealDamage(Damage);
 	BossUI->UpdateValues();
 }
 
+/**
+ * This function is used to spawn two child enemies on its both sides. 
+ */
 void ABossEnemy::SpawnEnemy()
 {
 	FVector LeftLocation = GetActorLocation() + GetActorForwardVector() * 100 - GetActorRightVector() * 100;
@@ -72,6 +91,9 @@ void ABossEnemy::SpawnEnemy()
 	RightEnemyChild->bIsBossChild = true;
 }
 
+/**
+ * This function is used to launched the sticks to attack the target player. 
+ */
 void ABossEnemy::Attack()
 {
 	FVector MiddleLocation = GetActorLocation() + FVector::UpVector * 150;

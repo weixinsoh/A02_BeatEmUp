@@ -18,8 +18,11 @@ ADynamicColorFloor::ADynamicColorFloor()
 	WidgetTrigger->SetupAttachment(RootComponent);
 }
 
+/**
+ * This function is used to make the floor glowing in random color once player begin overlaps with it. 
+ */
 void ADynamicColorFloor::OnPlayerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-	UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+                                         UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	ABeatEmUpCharacter* Player = Cast<ABeatEmUpCharacter>(OtherActor);
 	if (EmissiveMaterialInstance && Player)
@@ -29,8 +32,11 @@ void ADynamicColorFloor::OnPlayerOverlap(UPrimitiveComponent* OverlappedComponen
 	}
 }
 
+/**
+ * This function is used to remove the glowing once player ends overlaps with it. 
+ */
 void ADynamicColorFloor::OnPlayerEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-	UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex)
+                                            UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex)
 {
 	ABeatEmUpCharacter* Player = Cast<ABeatEmUpCharacter>(OtherActor);
 	if (EmissiveMaterialInstance && Player)
@@ -52,6 +58,5 @@ void ADynamicColorFloor::BeginPlay()
 		EmissiveMaterialInstance = UMaterialInstanceDynamic::Create(EmissiveMaterialClass, this);
 		Mesh->SetMaterial(0, EmissiveMaterialInstance);
 	}
-	
 }
 

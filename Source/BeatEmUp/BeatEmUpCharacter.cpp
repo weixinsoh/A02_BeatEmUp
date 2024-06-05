@@ -397,6 +397,9 @@ void ABeatEmUpCharacter::UseWeapon()
 	}
 }
 
+/**
+ * This function is used to switch weapon in the inventory.
+ */
 void ABeatEmUpCharacter::SelectWeapon()
 {
 	SelectedIndex = (SelectedIndex + 1) % InventorySize;

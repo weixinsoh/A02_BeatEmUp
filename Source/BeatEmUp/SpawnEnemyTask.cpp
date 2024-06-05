@@ -5,6 +5,9 @@
 
 #include "BossBTController.h"
 
+/**
+ * This function is used to execute the task to spawn child enemies. 
+ */
 EBTNodeResult::Type USpawnEnemyTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
 	UBehaviorTreeComponent* BTComp = &OwnerComp;
