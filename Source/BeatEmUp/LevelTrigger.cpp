@@ -50,10 +50,3 @@ void ALevelTrigger::BeginPlay()
 
 }
 
-// Called every frame
-void ALevelTrigger::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
-

@@ -149,4 +149,3 @@ void AMeleeEnemy::SetMovementSpeed(float Speed)
 {
 	GetCharacterMovement()->MaxWalkSpeed = Speed;
 }
-// folder organise

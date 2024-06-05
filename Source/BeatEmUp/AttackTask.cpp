@@ -5,6 +5,9 @@
 
 #include "BossBTController.h"
 
+/**
+ * This function is used to execute the attack task. 
+ */
 EBTNodeResult::Type UAttackTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
 	UBehaviorTreeComponent* BTComp = &OwnerComp;
