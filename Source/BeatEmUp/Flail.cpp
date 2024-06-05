@@ -23,6 +23,7 @@ AFlail::AFlail()
 	// Create component
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root Component"));
 	BallMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Ball"));
+	Handle = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Handle"));
 	
 	Chain1 = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Chain1"));
 	Chain2 = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Chain2"));
