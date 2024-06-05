@@ -66,8 +66,6 @@ ABeatEmUpCharacter::ABeatEmUpCharacter()
 
 	// Initialise the number of enemies defeated as 0
 	NumEnemiesDefeated = 0;
-
-	bPortalIsSpawned = false;
 	
 }
 

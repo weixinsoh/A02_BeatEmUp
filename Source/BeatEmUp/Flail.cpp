@@ -76,7 +76,7 @@ AFlail::AFlail()
 void AFlail::UseWeapon(ACharacter* Character)
 {
 	Super::UseWeapon(Character);
-
+	
 	// Calculate the launch direction
 	FVector LaunchDirection = Character->GetActorForwardVector();
 	LaunchDirection.Normalize();
@@ -111,11 +111,12 @@ void AFlail::BeginPlay()
 void AFlail::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	/*
 	if (PickedUpCharacter != nullptr)
 	{
 		FVector Distance = PickedUpCharacter->GetActorForwardVector() * 100 + FVector::LeftVector * 200;
 		SetActorLocation(PickedUpCharacter->GetActorLocation() + Distance);
-	}
+	}*/
 }
 
 /**

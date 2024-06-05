@@ -7,7 +7,6 @@
 #include "InGameUI.h"
 #include "InventoryWidget.h"
 #include "PauseMenu.h"
-#include "Portal.h"
 #include "Weapon.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
@@ -174,8 +173,6 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		int NumEnemiesDefeated;
-
-	bool bPortalIsSpawned;
 
 	// Adding progression
 	UPROPERTY(EditAnywhere)
