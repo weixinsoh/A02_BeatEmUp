@@ -73,7 +73,6 @@ public:
 	UPROPERTY(EditAnywhere)
 		float LifeTime = ParticleMinLifeTime;
 
-	float CurrentOpacity = 1;
 	bool bIsHit;
 
 	UPROPERTY()

@@ -13,9 +13,6 @@
   <component name="ChangeListManager">
     <list default="true" id="45047650-6ffc-4563-b486-015ca7512f18" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BeatEmUp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BeatEmUp/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Weapons/BP_Bullet.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Weapons/BP_Bullet.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Particles/NS_BulletTrail.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Particles/NS_BulletTrail.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/Bullet.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/Bullet.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/Bullet.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/Bullet.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -270,7 +267,7 @@
       <workItem from="1717550914699" duration="8474000" />
       <workItem from="1717561332548" duration="2767000" />
       <workItem from="1717574686985" duration="17202000" />
-      <workItem from="1717633939913" duration="14735000" />
+      <workItem from="1717633939913" duration="15768000" />
     </task>
     <servers />
   </component>
