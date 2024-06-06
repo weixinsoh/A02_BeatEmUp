@@ -64,7 +64,7 @@ Developed with Unreal Engine 5
 9. __Lighting Effect__
    - Rotating Spot Light in the Boss Level: Dynamic changing of color and flickering frequency based on current health of the boss enemy.  
 
-Generative AI Acknowledgement
+### Generative AI Acknowledgement
 1. __Main Menu__
    - I acknowledge the use of [1] DeepAI (https://deepai.org/) to generate image: Background-2.jpg in this assessment. I entered the following prompts: Combat game. It is used as the background image in the Main Menu UI.
 
