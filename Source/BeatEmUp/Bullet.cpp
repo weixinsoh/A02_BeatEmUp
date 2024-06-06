@@ -33,6 +33,7 @@ void ABullet::BeginPlay()
 	Mesh->OnComponentHit.AddDynamic(this, &ABullet::OnHit);
 	Mesh->SetNotifyRigidBodyCollision(true);
 
+	// Create bullet trail
 	if (BulletTrailSystem)
 	{
 		BulletTrailComponent = UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), BulletTrailSystem, Mesh->GetComponentLocation(), Mesh->GetComponentRotation());
@@ -50,6 +51,25 @@ void ABullet::Tick(float DeltaTime)
 	if(BulletTrailComponent)
 	{
 		BulletTrailComponent->SetWorldLocation(Mesh->GetComponentLocation());
+		if (bIsHit)
+		{
+			Velocity = FMath::Lerp(Velocity, ParticleMinVelocity, ChangeSpeed * DeltaTime);
+			BulletTrailComponent->SetFloatParameter(FName("User.MaxVelocity"), -Velocity);
+			LifeTime = FMath::Lerp(LifeTime, ParticleMinLifeTime, ChangeSpeed * DeltaTime);
+			BulletTrailComponent->SetFloatParameter(FName("User.LifeTime"), LifeTime);
+			UE_LOG(LogTemp, Warning, TEXT("velocity: %f, %f, %d"), Velocity, ParticleMinVelocity, Velocity <= ParticleMinVelocity);
+			if (FMath::Abs(Velocity - ParticleMinVelocity) <= 0.001)
+			{
+				Destroy();
+				BulletTrailComponent->DestroyComponent();
+			}
+		} else
+		{
+			Velocity = FMath::Lerp(Velocity, ParticleMaxVelocity, ChangeSpeed * DeltaTime);
+			BulletTrailComponent->SetFloatParameter(FName("User.MaxVelocity"), -Velocity);
+			LifeTime = FMath::Lerp(LifeTime, ParticleMaxLifeTime, ChangeSpeed * DeltaTime);
+			BulletTrailComponent->SetFloatParameter(FName("User.LifeTime"), LifeTime);
+		}
 	}
 }
 
@@ -76,6 +96,7 @@ void ABullet::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitive
 			BulletTrailComponent->DestroyComponent();
 		}
 	}
+	bIsHit = true;
 
 }
 

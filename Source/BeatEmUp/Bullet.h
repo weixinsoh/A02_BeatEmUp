@@ -32,7 +32,7 @@ public:
 		UStaticMeshComponent* Mesh;
 
 	UPROPERTY(EditAnywhere)
-		float MovementSpeed = 2000;
+		float MovementSpeed = 200;
 
 	UPROPERTY(EditAnywhere)
 		float Damage = 5;
@@ -45,6 +45,36 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		UNiagaraComponent* BulletTrailComponent;
+	
+	UPROPERTY(EditAnywhere)
+		UMaterialInterface* MaterialClass;
+
+	UPROPERTY()
+		UMaterialInstanceDynamic* MaterialInstance;
+
+	UPROPERTY(EditAnywhere)
+		float ChangeSpeed = 2;
+
+	UPROPERTY(EditAnywhere)
+		float ParticleMaxVelocity = 800;
+
+	UPROPERTY(EditAnywhere)
+		float ParticleMinVelocity = 0;
+
+	UPROPERTY(EditAnywhere)
+		float Velocity = ParticleMinVelocity;
+
+	UPROPERTY(EditAnywhere)
+		float ParticleMaxLifeTime = 1;
+
+	UPROPERTY(EditAnywhere)
+		float ParticleMinLifeTime = 0;
+
+	UPROPERTY(EditAnywhere)
+		float LifeTime = ParticleMinLifeTime;
+
+	float CurrentOpacity = 1;
+	bool bIsHit;
 
 	UPROPERTY()
 	UNiagaraComponent* Test;
