@@ -92,9 +92,9 @@ void ABossBTController::Teleport()
 	if (GetPawn())
 	{
 		// Destroy the particle effect after an attack
-		if (TeleportTrailComponent)
+		if (AttackTrailComponent)
 		{
-			TeleportTrailComponent->DestroyComponent();
+			AttackTrailComponent->DestroyComponent();
 		}
 
 		// Calculate the teleport position
@@ -137,7 +137,7 @@ void ABossBTController::Attack()
 	if (GetPawn())
 	{
 		ABossEnemy* BossEnemy = Cast<ABossEnemy>(GetPawn());
-		TeleportTrailComponent = UNiagaraFunctionLibrary::SpawnSystemAttached(TeleportTrailSystem, BossEnemy->GetMesh(), FName("spine_01"), FVector::ZeroVector, FRotator::ZeroRotator, EAttachLocation::KeepRelativeOffset, true);
+		AttackTrailComponent = UNiagaraFunctionLibrary::SpawnSystemAttached(AttackTrailSystem, BossEnemy->GetMesh(), FName("spine_01"), FVector::ZeroVector, FRotator::ZeroRotator, EAttachLocation::KeepRelativeOffset, true);
 		BossEnemy->Attack();
 	}
 }

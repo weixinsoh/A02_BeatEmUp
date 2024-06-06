@@ -63,10 +63,12 @@ void ADynamicColorFloor::BeginPlay()
 	}
 }
 
+/**
+ * This function is used to change the material state at each tick. 
+ */
 void ADynamicColorFloor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	UE_LOG(LogTemp, Warning, TEXT("check: %d"), bIsOverlapping);
 	if (bIsOverlapping && EmissiveMaterialInstance)
 	{
 		float Time = GetWorld()->GetTimeSeconds() * ColorChangeSpeed;

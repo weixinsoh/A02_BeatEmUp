@@ -47,26 +47,26 @@ AFlail::AFlail()
 	HingeBall = CreateDefaultSubobject<UPhysicsConstraintComponent>(TEXT("HingeBall"));
 
 	BallMesh->SetupAttachment(RootComponent);
-	Chain1->SetupAttachment(BallMesh);
-	Chain2->SetupAttachment(Chain1);
-	Chain3->SetupAttachment(Chain2);
-	Chain4->SetupAttachment(Chain3);
-	Chain5->SetupAttachment(Chain4);
-	Chain6->SetupAttachment(Chain5);
-	Chain7->SetupAttachment(Chain6);
-	Chain8->SetupAttachment(Chain7);
-	Chain9->SetupAttachment(Chain8);
-	Chain10->SetupAttachment(Chain9);
-	Hinge12->SetupAttachment(RootComponent);
-	Hinge23->SetupAttachment(RootComponent);
-	Hinge34->SetupAttachment(RootComponent);
-	Hinge45->SetupAttachment(RootComponent);
-	Hinge56->SetupAttachment(RootComponent);
-	Hinge67->SetupAttachment(RootComponent);
-	Hinge78->SetupAttachment(RootComponent);
-	Hinge89->SetupAttachment(RootComponent);
-	Hinge90->SetupAttachment(RootComponent);
-	HingeBall->SetupAttachment(RootComponent);
+	HingeBall->SetupAttachment(BallMesh);
+	Chain1->SetupAttachment(HingeBall);
+	Hinge12->SetupAttachment(Chain1);
+	Chain2->SetupAttachment(Hinge12);
+	Hinge23->SetupAttachment(Chain2);
+	Chain3->SetupAttachment(Hinge23);
+	Hinge34->SetupAttachment(Chain3);
+	Chain4->SetupAttachment(Hinge34);
+	Hinge45->SetupAttachment(Chain4);
+	Chain5->SetupAttachment(Hinge45);
+	Hinge56->SetupAttachment(Chain5);
+	Chain6->SetupAttachment(Hinge56);
+	Hinge67->SetupAttachment(Chain6);
+	Chain7->SetupAttachment(Hinge67);
+	Hinge78->SetupAttachment(Chain7);
+	Chain8->SetupAttachment(Hinge78);
+	Hinge89->SetupAttachment(Chain8);
+	Chain9->SetupAttachment(Hinge89);
+	Hinge90->SetupAttachment(Chain9);
+	Chain10->SetupAttachment(Hinge90);
 }
 
 /**
@@ -76,7 +76,8 @@ AFlail::AFlail()
 void AFlail::UseWeapon(ACharacter* Character)
 {
 	Super::UseWeapon(Character);
-	
+
+	BallMesh->SetWorldLocation(Character->GetActorLocation() + Character->GetActorForwardVector() * 100);
 	// Calculate the launch direction
 	FVector LaunchDirection = Character->GetActorForwardVector();
 	LaunchDirection.Normalize();
@@ -102,7 +103,7 @@ void AFlail::BeginPlay()
 {
 	Super::BeginPlay();
 	BallMesh->OnComponentBeginOverlap.AddDynamic(this, &AFlail::OnOverlap);
-
+	BallMesh->OnComponentHit.AddDynamic(this, &AFlail::OnHit);
 }
 
 /**
@@ -111,12 +112,7 @@ void AFlail::BeginPlay()
 void AFlail::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	
-	if (PickedUpCharacter != nullptr)
-	{
-		FVector Distance = PickedUpCharacter->GetActorForwardVector() * 100 + FVector::LeftVector * 200;
-		SetActorLocation(PickedUpCharacter->GetActorLocation() + Distance);
-	}
+
 }
 
 /**

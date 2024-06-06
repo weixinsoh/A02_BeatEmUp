@@ -38,7 +38,11 @@ void UInventoryWidget::OnButtonWasClicked(int32 Index)
 	if(!SelectedWeapon) return;
 	Owner->EquippingWeapon = SelectedWeapon;
 	Owner->EquippingWeapon->SetActorHiddenInGame(false);
-	if (Cast<AFlail>(Owner->EquippingWeapon)) return;
+	if (AFlail* Flail = Cast<AFlail>(Owner->EquippingWeapon))
+	{
+		Flail->Chain10->AttachToComponent(Owner->GetMesh(), FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("LeftWeaponSocket"));
+		Flail->BallMesh->AttachToComponent(Owner->GetMesh(), FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("RightWeaponSocket"));
+	}
 	FName WeaponSocket = FName("WeaponSocket");
 	Owner->EquippingWeapon->AttachToComponent(Owner->GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, WeaponSocket);
 

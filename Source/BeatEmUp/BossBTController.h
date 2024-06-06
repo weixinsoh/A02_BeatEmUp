@@ -59,9 +59,9 @@ public:
 	void SpawnEnemy();
 
 	UPROPERTY(EditAnywhere)
-	UNiagaraSystem* TeleportTrailSystem;
+	UNiagaraSystem* AttackTrailSystem;
 
 	UPROPERTY(EditAnywhere)
-	UNiagaraComponent* TeleportTrailComponent;
+	UNiagaraComponent* AttackTrailComponent;
 	
 };

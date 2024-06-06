@@ -5,15 +5,26 @@
     <projectFile profileName="EpicGames.AspNet">../../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Programs/Shared/EpicGames.AspNet/EpicGames.AspNet.csproj</projectFile>
     <projectFile>../../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Programs/UnrealBuildTool/UnrealBuildTool.csproj</projectFile>
     <projectFile>Intermediate/ProjectFiles/BeatEmUp.vcxproj</projectFile>
-    <projectFile>Intermediate/ProjectFiles/UE5.vcxproj</projectFile>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="45047650-6ffc-4563-b486-015ca7512f18" name="Changes" comment="">
+    <list default="true" id="89edd322-9d05-450d-a759-34e50d31e384" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BeatEmUp/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BeatEmUp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BeatEmUp/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/Bullet.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/Bullet.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Weapons/BP_Flail.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Weapons/BP_Flail.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/5/DY/ZLLVNA2PJ6GFU80QX66XBI.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpGameMode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpGameMode.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/BossBTController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/BossBTController.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/BossBTController.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/BossBTController.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/Bullet.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/Bullet.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/DynamicColorFloor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/DynamicColorFloor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/Enemy.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/Enemy.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/Flail.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/Flail.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/InventoryWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/InventoryWidget.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/LevelTrigger.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/LevelTrigger.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,56 +34,39 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Source/BeatEmUp/Axe.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpCharacter.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpCharacter.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/BeatEmUp/Bullet.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/BeatEmUp/Enemy.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/BeatEmUp/Enemy.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/BeatEmUp/GravityWell.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/BeatEmUp/HealthPack.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Dell/Documents/WeiXin/Github/a02_beatemup/Source/BeatEmUp/Stick.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Dell/Documents/WeiXin/Github/a02_beatemup/Source/BeatEmUp/Stick.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Dell/Documents/WeiXin/Github/a02_beatemup/Source/BeatEmUp/Stick.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Dell/Documents/WeiXin/Github/a02_beatemup/Source/BeatEmUp/Stick.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Dell/Documents/WeiXin/Github/a02_beatemup/Source/BeatEmUp/Stick.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/BeatEmUp/Trapdoor.cpp" root0="FORCE_HIGHLIGHTING" />
-  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: 5
-}</component>
-  <component name="ProjectId" id="2ggu9deINeXP4P9Pw4zWff35M1n" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 5
+}]]></component>
+  <component name="ProjectId" id="2hUnLqHVxElu3QN2A6KKjYC77T3" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;C++ Project.BeatEmUp.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "C++ Project.BeatEmUp.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\Dell\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\Dell\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\Dell\\AppData\\Local\\Symbols\\src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\Dell\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache",
+      "C:\\Users\\Dell\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache",
+      "C:\\Users\\Dell\\AppData\\Local\\Symbols\\src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="C++ Project.BeatEmUp">
     <configuration name="BeatEmUp" type="CppProject" factoryName="C++ Project">
       <configuration_1>
@@ -135,67 +129,6 @@
         <option name="Build" />
       </method>
     </configuration>
-    <configuration name="UE5" type="CppProject" factoryName="C++ Project">
-      <configuration_1>
-        <option name="CONFIGURATION" value="DebugGame Editor" />
-        <option name="PLATFORM" value="Win64" />
-        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/Intermediate/ProjectFiles/UE5.vcxproj" />
-        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXE_PATH" value="$(LocalDebuggerCommand)" />
-        <option name="PROGRAM_PARAMETERS" value="$(LocalDebuggerCommandArguments)" />
-        <option name="WORKING_DIRECTORY" value="$(LocalDebuggerWorkingDirectory)" />
-        <option name="PASS_PARENT_ENVS" value="1" />
-        <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      </configuration_1>
-      <configuration_2>
-        <option name="CONFIGURATION" value="Shipping" />
-        <option name="PLATFORM" value="Win64" />
-        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/Intermediate/ProjectFiles/UE5.vcxproj" />
-        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXE_PATH" value="$(LocalDebuggerCommand)" />
-        <option name="PROGRAM_PARAMETERS" value="$(LocalDebuggerCommandArguments)" />
-        <option name="WORKING_DIRECTORY" value="$(LocalDebuggerWorkingDirectory)" />
-        <option name="PASS_PARENT_ENVS" value="1" />
-        <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      </configuration_2>
-      <configuration_3>
-        <option name="CONFIGURATION" value="DebugGame" />
-        <option name="PLATFORM" value="Win64" />
-        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/Intermediate/ProjectFiles/UE5.vcxproj" />
-        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXE_PATH" value="$(LocalDebuggerCommand)" />
-        <option name="PROGRAM_PARAMETERS" value="$(LocalDebuggerCommandArguments)" />
-        <option name="WORKING_DIRECTORY" value="$(LocalDebuggerWorkingDirectory)" />
-        <option name="PASS_PARENT_ENVS" value="1" />
-        <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      </configuration_3>
-      <configuration_4>
-        <option name="CONFIGURATION" value="Development Editor" />
-        <option name="PLATFORM" value="Win64" />
-        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/Intermediate/ProjectFiles/UE5.vcxproj" />
-        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXE_PATH" value="$(LocalDebuggerCommand)" />
-        <option name="PROGRAM_PARAMETERS" value="$(LocalDebuggerCommandArguments)" />
-        <option name="WORKING_DIRECTORY" value="$(LocalDebuggerWorkingDirectory)" />
-        <option name="PASS_PARENT_ENVS" value="1" />
-        <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      </configuration_4>
-      <configuration_5>
-        <option name="CONFIGURATION" value="Development" />
-        <option name="PLATFORM" value="Win64" />
-        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/Intermediate/ProjectFiles/UE5.vcxproj" />
-        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXE_PATH" value="$(LocalDebuggerCommand)" />
-        <option name="PROGRAM_PARAMETERS" value="$(LocalDebuggerCommandArguments)" />
-        <option name="WORKING_DIRECTORY" value="$(LocalDebuggerWorkingDirectory)" />
-        <option name="PASS_PARENT_ENVS" value="1" />
-        <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      </configuration_5>
-      <option name="DEFAULT_PROJECT_PATH" value="$PROJECT_DIR$/Intermediate/ProjectFiles/UE5.vcxproj" />
-      <method v="2">
-        <option name="Build" />
-      </method>
-    </configuration>
     <configuration name="AutomationTool" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -251,30 +184,18 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="45047650-6ffc-4563-b486-015ca7512f18" name="Changes" comment="" />
-      <created>1716131398292</created>
+      <changelist id="89edd322-9d05-450d-a759-34e50d31e384" name="Changes" comment="" />
+      <created>1717657477528</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1716131398292</updated>
-      <workItem from="1716131418598" duration="605000" />
-      <workItem from="1716203640842" duration="10114000" />
-      <workItem from="1716251643506" duration="3946000" />
-      <workItem from="1716861590713" duration="24557000" />
-      <workItem from="1716981198171" duration="6898000" />
-      <workItem from="1717032446828" duration="44250000" />
-      <workItem from="1717426728273" duration="5457000" />
-      <workItem from="1717459431819" duration="53341000" />
-      <workItem from="1717550914699" duration="8474000" />
-      <workItem from="1717561332548" duration="2767000" />
-      <workItem from="1717574686985" duration="17202000" />
-      <workItem from="1717633939913" duration="15768000" />
+      <updated>1717657477528</updated>
+      <workItem from="1717657481983" duration="10590000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>

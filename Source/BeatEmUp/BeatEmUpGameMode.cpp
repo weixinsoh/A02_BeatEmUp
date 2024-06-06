@@ -259,7 +259,6 @@ void ABeatEmUpGameMode::Save(UBeatEmUpSaveGame* SaveGame)
 	// Save the player character's state
 	ABeatEmUpCharacter* PlayerCharacter = Cast<ABeatEmUpCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
 	SaveGame->bBossLevelLoaded = PlayerCharacter->bLevelLoaded;
-	UE_LOG(LogTemp, Warning, TEXT("loaded: %d"), SaveGame->bBossLevelLoaded);
 	SaveGame->PlayerPosition = PlayerCharacter->GetActorLocation();
 	SaveGame->PlayerRotation = PlayerCharacter->GetActorRotation();
 	SaveGame->PlayerCurrentHealth = PlayerCharacter->CurrentHealth;

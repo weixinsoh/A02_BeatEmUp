@@ -46,7 +46,6 @@ void ALevelTrigger::BeginPlay()
 {
 	Super::BeginPlay();
 	TriggerVolume->OnComponentBeginOverlap.AddDynamic(this, &ALevelTrigger::StartLevelStreaming);
-	UE_LOG(LogTemp, Warning, TEXT("Loadlevel"));
 
 }
 

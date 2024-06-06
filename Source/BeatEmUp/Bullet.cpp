@@ -42,7 +42,9 @@ void ABullet::BeginPlay()
 }
 
 /**
- * This function is used to update the particle emitter position on every tick to follow the bullet move. 
+ * This function is used to update the particle emitter position on every tick to follow the bullet move.
+ * When the bullet is shot, it increases the effect of the bullet trail.
+ * When the bullet hits something, it decreases the effect of the bullet trail.
  */
 void ABullet::Tick(float DeltaTime)
 {
@@ -51,19 +53,21 @@ void ABullet::Tick(float DeltaTime)
 	if(BulletTrailComponent)
 	{
 		BulletTrailComponent->SetWorldLocation(Mesh->GetComponentLocation());
+		// Decreases the effect of the bullet trail
 		if (bIsHit)
 		{
 			Velocity = FMath::Lerp(Velocity, ParticleMinVelocity, ChangeSpeed * DeltaTime);
 			BulletTrailComponent->SetFloatParameter(FName("User.MaxVelocity"), -Velocity);
 			LifeTime = FMath::Lerp(LifeTime, ParticleMinLifeTime, ChangeSpeed * DeltaTime);
 			BulletTrailComponent->SetFloatParameter(FName("User.LifeTime"), LifeTime);
-			UE_LOG(LogTemp, Warning, TEXT("velocity: %f, %f, %d"), Velocity, ParticleMinVelocity, Velocity <= ParticleMinVelocity);
 			if (FMath::Abs(Velocity - ParticleMinVelocity) <= 0.001)
 			{
 				Destroy();
 				BulletTrailComponent->DestroyComponent();
 			}
-		} else
+		}
+		// Increases the effect of the bullet trail
+		else
 		{
 			Velocity = FMath::Lerp(Velocity, ParticleMaxVelocity, ChangeSpeed * DeltaTime);
 			BulletTrailComponent->SetFloatParameter(FName("User.MaxVelocity"), -Velocity);
