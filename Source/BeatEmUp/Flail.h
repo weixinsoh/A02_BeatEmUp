@@ -66,7 +66,7 @@ public:
 		UPhysicsConstraintComponent* HingeBall;
 
 	UPROPERTY(EditAnywhere)
-		float HitForce = 100;
+		float HitForce = 50000;
 
 	virtual void UseWeapon(ACharacter* Character) override;
 

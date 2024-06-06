@@ -13,21 +13,23 @@
   <component name="ChangeListManager">
     <list default="true" id="45047650-6ffc-4563-b486-015ca7512f18" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BeatEmUp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BeatEmUp/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_Portal.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Weapons/BP_Flail.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Weapons/BP_Flail.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Materials/MI_BulletTrail.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/AIController/BossEnemyBT.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/AIController/BossEnemyBT.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/AIController/MeleeEnemyBT.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/AIController/MeleeEnemyBT.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_RotatingSpotLight.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_RotatingSpotLight.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Materials/M_BulletTrail.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Materials/M_BulletTrail.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Materials/M_EmissiveDynamic.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Materials/M_EmissiveDynamic.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Materials/M_Flickering.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Materials/M_Flickering.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Materials/M_MagicStick.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Materials/M_MagicStick.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Particles/NS_BulletTrail.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Particles/NS_BulletTrail.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/StarterContent/Architecture/Pillar_50x500.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/Architecture/Pillar_50x500.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/StarterContent/Architecture/Wall_400x400.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/Architecture/Wall_400x400.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/StarterContent/Architecture/Floor_400x400.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/Architecture/Floor_400x400.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/StarterContent/HDRI/HDRI_Epic_Courtyard_Daylight.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/HDRI/HDRI_Epic_Courtyard_Daylight.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/StarterContent/Materials/M_Basic_Floor.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/Materials/M_Basic_Floor.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/StarterContent/Materials/M_Basic_Wall.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/Materials/M_Basic_Wall.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpCharacter.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/Axe.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/Axe.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/Bomb.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/Bomb.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/Bomb.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/Bomb.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/Flail.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/Flail.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/Flail.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/Flail.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/FrostBall.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/FrostBall.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/InventoryWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/InventoryWidget.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/Portal.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/Portal.h" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -280,6 +282,7 @@
       <workItem from="1717459431819" duration="53341000" />
       <workItem from="1717550914699" duration="8474000" />
       <workItem from="1717561332548" duration="2767000" />
+      <workItem from="1717574686985" duration="17202000" />
     </task>
     <servers />
   </component>

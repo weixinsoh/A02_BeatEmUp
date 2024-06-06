@@ -16,8 +16,8 @@ AFlail::AFlail()
 	WeaponName = "Flail";
 	WeaponDescription = "A medieval melee weapon consisting of a spiked ball attached to a chain. "
 					 "When swung, the flexible chain allows for unpredictable and devastating attacks. ";
-	Damage = 10;
-	AttackDistance = 800;
+	Damage = 25;
+	AttackDistance = 500;
 	AttackSpeed = 100;
 
 	// Create component
@@ -91,7 +91,7 @@ void AFlail::UseWeapon(ACharacter* Character)
 	BallMesh->SetSimulatePhysics(true);
 	BallMesh->SetEnableGravity(true);
 	BallMesh->SetNotifyRigidBodyCollision(true);
-	BallMesh->AddImpulse(LaunchDirection * HitForce);
+	BallMesh->AddImpulse(LaunchDirection * AttackSpeed);
 }
 
 /**
@@ -130,6 +130,12 @@ void AFlail::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveC
 		AEnemy* HitEnemy = Cast<AEnemy>(OtherActor);
 		if (HitEnemy)
 		{
+			HitEnemy->Ragdoll();
+			FVector LaunchDirection = HitEnemy->GetActorLocation() - GetActorLocation();
+			LaunchDirection.Normalize();
+			LaunchDirection *= 3;
+			LaunchDirection += FVector::UpVector;
+			HitEnemy->GetMesh()->AddImpulse(LaunchDirection * HitForce);
 			HitEnemy->DealDamage(Damage);
 		}
 	}

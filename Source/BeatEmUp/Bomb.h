@@ -21,7 +21,7 @@ public:
 		UStaticMeshComponent* BombMesh;
 
 	UPROPERTY(EditAnywhere)
-		float ExplosionForce = 50000;
+		float ExplosionForce = 80000;
 
 	virtual void UseWeapon(ACharacter* Character) override;
 

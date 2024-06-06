@@ -18,7 +18,7 @@ AFrostBall::AFrostBall()
 	WeaponName = "Frost Ball";
 	WeaponDescription = "A magical projectile that freezes enemies upon impact, immobilizing them temporarily. ";
 	AttackDistance = 800;
-	AttackSpeed = 2000;
+	AttackSpeed = 200;
 	Damage = 0;
 
 	// Create component
