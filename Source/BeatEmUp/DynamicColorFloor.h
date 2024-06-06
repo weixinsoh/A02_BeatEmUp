@@ -40,9 +40,19 @@ public:
 	UPROPERTY()
 		float EmissiveStrength = 50;
 
+	UPROPERTY(EditAnywhere)
+		TArray<FLinearColor> Colors;
+
+	UPROPERTY(EditAnywhere)
+		float ColorChangeSpeed = 2;
+
+	bool bIsOverlapping;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	
 
+public:
+	virtual void Tick(float DeltaTime) override;
+	
 };

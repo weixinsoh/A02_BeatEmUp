@@ -18,7 +18,7 @@ AFlail::AFlail()
 					 "When swung, the flexible chain allows for unpredictable and devastating attacks. ";
 	Damage = 25;
 	AttackDistance = 500;
-	AttackSpeed = 100;
+	AttackSpeed = 10000;
 
 	// Create component
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root Component"));
@@ -111,12 +111,12 @@ void AFlail::BeginPlay()
 void AFlail::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	/*
+	
 	if (PickedUpCharacter != nullptr)
 	{
 		FVector Distance = PickedUpCharacter->GetActorForwardVector() * 100 + FVector::LeftVector * 200;
 		SetActorLocation(PickedUpCharacter->GetActorLocation() + Distance);
-	}*/
+	}
 }
 
 /**

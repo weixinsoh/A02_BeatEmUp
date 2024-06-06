@@ -9,13 +9,15 @@
 ADynamicColorFloor::ADynamicColorFloor()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = false;
+	PrimaryActorTick.bCanEverTick = true;
 
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 	RootComponent = Mesh;
 
 	WidgetTrigger = CreateDefaultSubobject<UBoxComponent>(TEXT("Widget Trigger"));
 	WidgetTrigger->SetupAttachment(RootComponent);
+
+	bIsOverlapping = false;
 }
 
 /**
@@ -27,7 +29,8 @@ void ADynamicColorFloor::OnPlayerOverlap(UPrimitiveComponent* OverlappedComponen
 	ABeatEmUpCharacter* Player = Cast<ABeatEmUpCharacter>(OtherActor);
 	if (EmissiveMaterialInstance && Player)
 	{
-		EmissiveMaterialInstance->SetVectorParameterValue("BaseColor", FLinearColor::MakeRandomColor());
+		bIsOverlapping = true;
+		//EmissiveMaterialInstance->SetVectorParameterValue("BaseColor", FLinearColor::MakeRandomColor());
 		EmissiveMaterialInstance->SetScalarParameterValue("EmissiveStrength", EmissiveStrength);
 	}
 }
@@ -41,6 +44,8 @@ void ADynamicColorFloor::OnPlayerEndOverlap(UPrimitiveComponent* OverlappedCompo
 	ABeatEmUpCharacter* Player = Cast<ABeatEmUpCharacter>(OtherActor);
 	if (EmissiveMaterialInstance && Player)
 	{
+		bIsOverlapping = false;
+		UE_LOG(LogTemp, Warning, TEXT("overlapped"));
 		EmissiveMaterialInstance->SetScalarParameterValue("EmissiveStrength", 0.0f);
 	}
 }
@@ -57,6 +62,29 @@ void ADynamicColorFloor::BeginPlay()
 	{
 		EmissiveMaterialInstance = UMaterialInstanceDynamic::Create(EmissiveMaterialClass, this);
 		Mesh->SetMaterial(0, EmissiveMaterialInstance);
+	}
+}
+
+void ADynamicColorFloor::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	UE_LOG(LogTemp, Warning, TEXT("check: %d"), bIsOverlapping);
+	if (bIsOverlapping && EmissiveMaterialInstance)
+	{
+		float Time = GetWorld()->GetTimeSeconds() * ColorChangeSpeed;
+
+		// Determine which two colors to interpolate between
+		int32 ColorIndex1 = FMath::FloorToInt(Time) % Colors.Num();
+		int32 ColorIndex2 = (ColorIndex1 + 1) % Colors.Num();
+
+		// Calculate the interpolation alpha
+		float Alpha = FMath::Frac(Time);
+
+		// Interpolate between the two colors
+		FLinearColor CurrentColor = FLinearColor::LerpUsingHSV(Colors[ColorIndex1], Colors[ColorIndex2], Alpha);
+
+		// Update the emissive material instance
+		EmissiveMaterialInstance->SetVectorParameterValue("BaseColor", CurrentColor);
 	}
 }
 
