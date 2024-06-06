@@ -54,15 +54,15 @@ Developed with Unreal Engine 5
 
    <br/>
 7. __Dynamic Material__
-   - Dynamic Color Floor
+   - Dynamic Color Floor: Dynamic changing of color and emissiveness when player overlaps with it. 
 
    <br/>
 8. __Niagara Particle Effect__
-   - Bullet Trail System
+   - Bullet Trail System: Gradually increases/fading out once bullet spawned/hit something. 
    
    <br/>
 9. __Lighting Effect__
-   - Rotating Spot Light in the Boss Level
+   - Rotating Spot Light in the Boss Level: Dynamic changing of color and flickering frequency based on current health of the boss enemy.  
 
 Generative AI Acknowledgement
 1. __Main Menu__

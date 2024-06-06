@@ -11,20 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="89edd322-9d05-450d-a759-34e50d31e384" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BeatEmUp/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BeatEmUp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BeatEmUp/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Weapons/BP_Flail.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Weapons/BP_Flail.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/5/DY/ZLLVNA2PJ6GFU80QX66XBI.uasset" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpGameMode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpGameMode.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/BossBTController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/BossBTController.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/BossBTController.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/BossBTController.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/Bullet.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/Bullet.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/DynamicColorFloor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/DynamicColorFloor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/Enemy.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/Enemy.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/Flail.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/Flail.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/InventoryWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/InventoryWidget.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/LevelTrigger.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/LevelTrigger.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,7 +176,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1717657477528</updated>
-      <workItem from="1717657481983" duration="10590000" />
+      <workItem from="1717657481983" duration="11159000" />
     </task>
     <servers />
   </component>
