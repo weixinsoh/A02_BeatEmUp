@@ -30,7 +30,6 @@ void ADynamicColorFloor::OnPlayerOverlap(UPrimitiveComponent* OverlappedComponen
 	if (EmissiveMaterialInstance && Player)
 	{
 		bIsOverlapping = true;
-		//EmissiveMaterialInstance->SetVectorParameterValue("BaseColor", FLinearColor::MakeRandomColor());
 		EmissiveMaterialInstance->SetScalarParameterValue("EmissiveStrength", EmissiveStrength);
 	}
 }
@@ -45,7 +44,6 @@ void ADynamicColorFloor::OnPlayerEndOverlap(UPrimitiveComponent* OverlappedCompo
 	if (EmissiveMaterialInstance && Player)
 	{
 		bIsOverlapping = false;
-		UE_LOG(LogTemp, Warning, TEXT("overlapped"));
 		EmissiveMaterialInstance->SetScalarParameterValue("EmissiveStrength", 0.0f);
 	}
 }
