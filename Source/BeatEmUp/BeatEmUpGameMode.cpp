@@ -95,9 +95,13 @@ void ABeatEmUpGameMode::Load(UBeatEmUpSaveGame* LoadedGame)
 	}
 
 	// Set the player character to equip previous equipping weapon
+	
 	if (LoadedGame->PlayerEquippingWeapon != nullptr)
 	{
 		PlayerCharacter->EquippingWeapon = LoadedGame->PlayerEquippingWeapon;
+		int32 Index = PlayerCharacter->Inventory.Find(PlayerCharacter->EquippingWeapon);
+		PlayerCharacter->InventoryWidget->OnButtonWasClicked(Index);
+		/*
 		PlayerCharacter->EquippingWeapon->SetActorHiddenInGame(false);
 		if (Cast<AFlail>(PlayerCharacter->EquippingWeapon))
 		{
@@ -105,6 +109,7 @@ void ABeatEmUpGameMode::Load(UBeatEmUpSaveGame* LoadedGame)
 		}
 		FName WeaponSocket = FName("WeaponSocket");
 		PlayerCharacter->EquippingWeapon->AttachToComponent(PlayerCharacter->GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, WeaponSocket);
+		*/
 	}
 
 	// Set the enemies to the previous saved state
@@ -201,6 +206,9 @@ void ABeatEmUpGameMode::Load(UBeatEmUpSaveGame* LoadedGame)
 		{
 			SpawnedBullet->SetActorLocation(LoadedGame->BulletLocations[i]);
 			SpawnedBullet->SetActorRotation(LoadedGame->BulletRotations[i]);
+			SpawnedBullet->bIsHit = LoadedGame->BulletIsHit[i];
+			SpawnedBullet->Velocity = LoadedGame->BulletTrailVelocities[i];
+			SpawnedBullet->LifeTime = LoadedGame->BulletTrailLifeTime[i];
 		}
 	}
 
@@ -380,6 +388,9 @@ void ABeatEmUpGameMode::Save(UBeatEmUpSaveGame* SaveGame)
 		ABullet* CurrentBullet = Cast<ABullet>(Bullets[i]);
 		SaveGame->BulletLocations.Add(CurrentBullet->GetActorLocation());
 		SaveGame->BulletRotations.Add(CurrentBullet->GetActorRotation());
+		SaveGame->BulletIsHit.Add(CurrentBullet->bIsHit);
+		SaveGame->BulletTrailVelocities.Add(CurrentBullet->Velocity);
+		SaveGame->BulletTrailLifeTime.Add(CurrentBullet->LifeTime);
 	}
 
 	// Save the state of the dynamic floors

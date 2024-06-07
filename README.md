@@ -46,11 +46,14 @@ Developed with Unreal Engine 5
    <br/>
 6. __Save Data__
    - Level streaming
-   - Bullet shot by the enemy
+   - Player's inventory
+   - Bullet shot by the enemy with its bullet trail
    - State of Melee Enemy
    - Weapon launched by the Melee Enemy
    - State of Boss Enemy
-   - State of Dynamic Color Floor
+   - Weapon launched by the Boss Enemy
+   - State of Dynamic Color Floor (color & emissiveness)
+   - State of Rotating Spot Light (color & flickering frequency)
 
    <br/>
 7. __Dynamic Material__

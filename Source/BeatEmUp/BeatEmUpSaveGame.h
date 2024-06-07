@@ -132,6 +132,15 @@ public:
 	UPROPERTY()
 		TArray<FRotator> BulletRotations;
 
+	UPROPERTY()
+		TArray<bool> BulletIsHit;
+
+	UPROPERTY()
+		TArray<float> BulletTrailVelocities;
+
+	UPROPERTY()
+		TArray<float> BulletTrailLifeTime;
+
 	
 	// Save launched bomb state
 	UPROPERTY()
