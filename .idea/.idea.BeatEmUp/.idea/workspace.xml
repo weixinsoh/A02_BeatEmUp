@@ -10,12 +10,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89edd322-9d05-450d-a759-34e50d31e384" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BeatEmUp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BeatEmUp/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpGameMode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpGameMode.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpSaveGame.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BeatEmUp/BeatEmUpSaveGame.h" afterDir="false" />
-    </list>
+    <list default="true" id="89edd322-9d05-450d-a759-34e50d31e384" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -180,7 +175,7 @@
       <option name="presentableId" value="Default" />
       <updated>1717657477528</updated>
       <workItem from="1717657481983" duration="11638000" />
-      <workItem from="1717721853185" duration="2061000" />
+      <workItem from="1717721853185" duration="2405000" />
     </task>
     <servers />
   </component>
